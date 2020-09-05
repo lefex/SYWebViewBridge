@@ -1,0 +1,16 @@
+PODS:
+  - SYWebViewBridge (0.1.0)
+
+DEPENDENCIES:
+  - SYWebViewBridge (from `../`)
+
+EXTERNAL SOURCES:
+  SYWebViewBridge:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SYWebViewBridge: d32b3586461f765d1096e3ec13458e4cf4e6803d
+
+PODFILE CHECKSUM: 2f6343b10047f2d4a09857ded8261fad8d29e706
+
+COCOAPODS: 1.9.1
