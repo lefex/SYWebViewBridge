@@ -33,13 +33,30 @@
 }
 
 - (void)setup {
-    WKPreferences *perferences = [[WKPreferences alloc] init];
-    perferences.javaEnabled = YES;
-    self.configuration.preferences = perferences;
+    self.configuration.preferences = [WKPreferences new];
     self.navigationDelegate = self;
     self.UIDelegate = self;
     self.msgHandler = [[SYMessageHandler alloc] init];
     [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
+}
+
+- (void)setSourceUrl:(NSString *)sourceUrl {
+    if (![_sourceUrl isEqualToString:sourceUrl]) {
+        _sourceUrl = sourceUrl;
+        [self syReload];
+    }
+}
+
+- (void)syReload {
+    if (!_sourceUrl) {
+        return;
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_sourceUrl]];
+    [self loadRequest:request];
+}
+
+- (void)syEvaluateJS:(NSString *)jsCode completionHandler:(void(^)(id msg, NSError *error))handler {
+    [self evaluateJavaScript:jsCode completionHandler:handler];
 }
 
 #pragma mark - WKUIDelegate

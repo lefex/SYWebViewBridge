@@ -7,23 +7,26 @@
 //
 
 #import "SYViewController.h"
+#import <SYHybridWebView.h>
 
 @interface SYViewController ()
+
+@property (nonatomic, strong) SYHybridWebView *webview;
 
 @end
 
 @implementation SYViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.title = @"SYWebViewBridge";
+    
+    WKWebViewConfiguration *conf = [[WKWebViewConfiguration alloc] init];
+    _webview = [[SYHybridWebView alloc] initWithFrame:self.view.bounds configuration:conf];
+    [self.view addSubview:_webview];
+    
+    _webview.sourceUrl = @"http://localhost:9000/home.html";
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

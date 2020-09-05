@@ -11,6 +11,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SYHybridWebView : WKWebView
 
+@property (nonatomic, copy) NSString *sourceUrl;
+
+- (void)syReload;
+
+- (void)syEvaluateJS:(NSString *)jsCode completionHandler:(void(^)(id msg, NSError *error))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,15 +1,18 @@
 <template>
     <div id="app">
         <Header></Header>
+        <SyncMsg></SyncMsg>
     </div>
 </template>
 
 <script>
 import Header from './components/header.vue';
+import SyncMsg from './components/syncMsg.vue';
 
 export default {
     components: {
-        Header
+        Header,
+        SyncMsg
     },
     data() {
         return {
