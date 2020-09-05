@@ -41,3 +41,7 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 # Pods/
+
+# FE
+*/node_modules/*
+node_modules/*

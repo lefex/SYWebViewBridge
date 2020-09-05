@@ -10,6 +10,9 @@
 #endif
 #endif
 
+#import "SYConstant.h"
+#import "SYHybridWebView.h"
+#import "SYMessageHandler.h"
 
 FOUNDATION_EXPORT double SYWebViewBridgeVersionNumber;
 FOUNDATION_EXPORT const unsigned char SYWebViewBridgeVersionString[];
