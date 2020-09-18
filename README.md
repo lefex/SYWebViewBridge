@@ -18,7 +18,7 @@ If you have any questions, you can pay attention to my wechat official account ç
 
 ## Contribution
 
-Please make sure to read the [Contributing Guide](https://github.com/lefex/SYWebViewBridge/blob/.github/CONTRIBUTING.md) before making a pull request.
+Please make sure to read the [Contributing Guide](https://github.com/lefex/SYWebViewBridge/blob/master/.github/contributing.md) before making a pull request.
 
 ## License
 
