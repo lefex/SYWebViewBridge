@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { sendMsg } from '../../../packages/FE/sy-webview-bridge/src/index.js';
+import { sendMsg, callIframe, callLocation } from '../../../packages/FE/sy-webview-bridge/src/index.js';
 
 export default {
     data() {
@@ -24,15 +24,13 @@ export default {
     methods: {
         getAppVersion() {
             console.log('get app version');
-            const msg = {
-                type: 'sync',
-                method: 'getAppVersion',
-                body: {
-                    from: 'home'
-                },
-                callback: 'getAppVersionCallback'
-            };
-            sendMsg(msg);
+            var msg = {"title": "suyan", "content":"webview bridge"};
+            var msgJson = JSON.stringify(msg);
+            console.log(msgJson);
+            sendMsg("suyan://gzh.fe/sydebug/alert?params=" + msgJson + "&callback=jscb&upgrade=1");
+            // callIframe('suyan-iframe');
+            // callLocation('suyan-location');
+            // console.log(add(10, 11));
         }
     }
 }

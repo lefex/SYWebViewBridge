@@ -7,8 +7,37 @@
 
 #import "SYMessageHandler.h"
 #import "SYConstant.h"
+#import "SYBridgeMessage.h"
+#import "SYMsgDispatcherCenter.h"
+
+@interface SYMessageHandler ()
+@property (nonatomic, strong) SYMsgDispatcherCenter *dispatcher;
+@end
 
 @implementation SYMessageHandler
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup {
+    
+}
+
+- (SYMsgDispatcherCenter *)dispatcher {
+    if (!_dispatcher) {
+        _dispatcher = [[SYMsgDispatcherCenter alloc] init];
+    }
+    return _dispatcher;
+}
+/*
+ suyan://gzh.fe/debug:submodule/showAlert?param={key: value}&callback=js_callback
+ [scheme]://[bundle id] / [module] / [action] ? [参数] & [回调函数]
+ **/
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
@@ -20,8 +49,10 @@
     if ([message.body isKindOfClass:[NSString class]]) {
         if ([message.name isEqualToString:kSYScriptMsgName]) {
             // 保存图片
-            NSDictionary *msgInfo = [NSJSONSerialization JSONObjectWithData:[message.body dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"reveive msg: %@", msgInfo);
+            NSString *router = message.body;
+            SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
+            [self.dispatcher dispatchMsg:syMsg];
+            NSLog(@"reveive msg: %@", router);
         }
     }
 }

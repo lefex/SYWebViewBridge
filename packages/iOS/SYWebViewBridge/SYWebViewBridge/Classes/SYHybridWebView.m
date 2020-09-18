@@ -59,6 +59,11 @@
     [self evaluateJavaScript:jsCode completionHandler:handler];
 }
 
+- (void)syAddScript:(NSString *)code {
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:code injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+    [self.configuration.userContentController addUserScript:script];
+}
+
 #pragma mark - WKUIDelegate
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
@@ -77,6 +82,53 @@
     completionHandler(@"OC input");
 }
 
+
 #pragma mark - WKNavigationDelegate
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+// error
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    if ([navigationAction.request.URL.absoluteString containsString:@"suyan"]) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }
+    else {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    decisionHandler(WKNavigationResponsePolicyAllow);
+}
+
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
 
 @end

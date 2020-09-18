@@ -23,6 +23,7 @@
     
     WKWebViewConfiguration *conf = [[WKWebViewConfiguration alloc] init];
     _webview = [[SYHybridWebView alloc] initWithFrame:self.view.bounds configuration:conf];
+    [_webview syAddScript: @"function add(a, b) { return a + b; }"];
     [self.view addSubview:_webview];
     
     _webview.sourceUrl = @"http://localhost:9000/home.html";

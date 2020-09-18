@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)syEvaluateJS:(NSString *)jsCode completionHandler:(void(^)(id msg, NSError *error))handler;
 
+- (void)syAddScript:(NSString *)code;
+
 @end
 
 NS_ASSUME_NONNULL_END

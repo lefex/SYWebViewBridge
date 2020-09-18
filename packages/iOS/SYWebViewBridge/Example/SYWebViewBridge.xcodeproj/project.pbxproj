@@ -21,6 +21,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		625A718A2512EADA0067DCEA /* SYDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625A71892512EADA0067DCEA /* SYDebugViewController.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		C235C1C154B599518152DB6A /* Pods_SYWebViewBridge_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C638658305BFB42B0E37C7 /* Pods_SYWebViewBridge_Tests.framework */; };
@@ -39,7 +40,7 @@
 /* Begin PBXFileReference section */
 		325084C62087D5C93B2E171E /* SYWebViewBridge.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SYWebViewBridge.podspec; path = ../SYWebViewBridge.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5456F912573C2F77E4CCE574 /* Pods-SYWebViewBridge_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYWebViewBridge_Example.release.xcconfig"; path = "Target Support Files/Pods-SYWebViewBridge_Example/Pods-SYWebViewBridge_Example.release.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* SYWebViewBridge_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYWebViewBridge_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* 公众号素燕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "公众号素燕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -58,6 +59,8 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		625A71882512EADA0067DCEA /* SYDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYDebugViewController.h; sourceTree = "<group>"; };
+		625A71892512EADA0067DCEA /* SYDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYDebugViewController.m; sourceTree = "<group>"; };
 		658221E26C0611A5321657E5 /* Pods_SYWebViewBridge_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76C638658305BFB42B0E37C7 /* Pods_SYWebViewBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +113,7 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* SYWebViewBridge_Example.app */,
+				6003F58A195388D20070C39A /* 公众号素燕.app */,
 				6003F5AE195388D20070C39A /* SYWebViewBridge_Tests.xctest */,
 			);
 			name = Products;
@@ -140,6 +143,8 @@
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				625A71882512EADA0067DCEA /* SYDebugViewController.h */,
+				625A71892512EADA0067DCEA /* SYDebugViewController.m */,
 			);
 			name = "Example for SYWebViewBridge";
 			path = SYWebViewBridge;
@@ -215,7 +220,7 @@
 			);
 			name = SYWebViewBridge_Example;
 			productName = SYWebViewBridge;
-			productReference = 6003F58A195388D20070C39A /* SYWebViewBridge_Example.app */;
+			productReference = 6003F58A195388D20070C39A /* 公众号素燕.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* SYWebViewBridge_Tests */ = {
@@ -364,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625A718A2512EADA0067DCEA /* SYDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SYViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
@@ -498,8 +504,8 @@
 				GCC_PREFIX_HEADER = "SYWebViewBridge/SYWebViewBridge-Prefix.pch";
 				INFOPLIST_FILE = "SYWebViewBridge/SYWebViewBridge-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.suyan.gzh;
+				PRODUCT_NAME = "公众号素燕";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -514,8 +520,8 @@
 				GCC_PREFIX_HEADER = "SYWebViewBridge/SYWebViewBridge-Prefix.pch";
 				INFOPLIST_FILE = "SYWebViewBridge/SYWebViewBridge-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.suyan.gzh;
+				PRODUCT_NAME = "公众号素燕";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};

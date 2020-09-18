@@ -10,9 +10,16 @@
 #endif
 #endif
 
+#import "NSInvocation+SYBridge.h"
+#import "SYBridgeBasePlugin.h"
+#import "SYBridgeDebugPlugin.h"
+#import "SYBridgeLifeCyclePlugin.h"
+#import "SYBridgeMessage.h"
+#import "SYBridgeSystemPlugin.h"
 #import "SYConstant.h"
 #import "SYHybridWebView.h"
 #import "SYMessageHandler.h"
+#import "SYMsgDispatcherCenter.h"
 
 FOUNDATION_EXPORT double SYWebViewBridgeVersionNumber;
 FOUNDATION_EXPORT const unsigned char SYWebViewBridgeVersionString[];
