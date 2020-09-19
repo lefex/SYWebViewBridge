@@ -1,21 +1,31 @@
-const sendMsg = function (msg) {
-    console.log('send msg:', msg);
-    window.webkit.messageHandlers.SYJSBridge.postMessage(msg);
-};
+class SYBridge {
+    constructor() {
+        // init
+    }
+    sendMsg(router, params) {
+        const paramJson = JSON.stringify(params);
+        let jumpRouter = `${router}&params=${paramJson}`;
+        this.callPostMessage(jumpRouter);
+    }
+    callPostMessage(router) {
+        window.webkit.messageHandlers.SYJSBridge.postMessage(router);
+    }
+    callIframe(router) {
+        var iframe = document.createElement('iframe');
+        iframe.src = router;
+        document.body.appendChild(iframe);
+        document.body.removeChild(iframe);
+    }
+    callLocation(router) {
+        window.location.href = router;
+    }
+    showModal(options) {
 
-const callIframe = function(url) {
-    var iframe = document.createElement('iframe');
-    iframe.src = url;
-    document.body.appendChild(iframe);
-    document.body.removeChild(iframe);
+    }
 }
 
-const callLocation = function (url) {
-    window.location.href = url;
-}
+const sy = new SYBridge();
 
 module.exports = {
-    sendMsg,
-    callIframe,
-    callLocation
+    sy
 };

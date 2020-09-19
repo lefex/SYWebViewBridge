@@ -6,12 +6,12 @@
             <p>get result:</p>
             <p>{{ result }}</p>
         </div>
-        <div class="button" v-on:click="getAppVersion">Get App Version</div>
+        <div class="button" v-on:click="alert">Get App Version</div>
     </div>
 </template>
 
 <script>
-import { sendMsg, callIframe, callLocation } from '../../../packages/FE/sy-webview-bridge/src/index.js';
+import { sy, callIframe, callLocation } from '../../../packages/FE/sy-webview-bridge/src/index.js';
 
 export default {
     data() {
@@ -22,15 +22,41 @@ export default {
         }
     },
     methods: {
-        getAppVersion() {
-            console.log('get app version');
-            var msg = {"title": "suyan", "content":"webview bridge"};
-            var msgJson = JSON.stringify(msg);
-            console.log(msgJson);
-            sendMsg("suyan://gzh.fe/sydebug/alert?params=" + msgJson + "&callback=jscb&upgrade=1");
-            // callIframe('suyan-iframe');
-            // callLocation('suyan-location');
-            // console.log(add(10, 11));
+        alert() {
+            const param = {
+                title: "suyan",
+                content: "webview bridge"
+            };
+            const router = 'suyan://gzh.fe/sydebug/alert?callback=jscb';
+            sy.sendMsg({
+                router: router,
+                params: param
+            });
+        },
+        showAlert() {
+            sy.showModal({
+                title: 'SYWebViewBridge',
+                content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
+                showCancel: true,
+                cancelText: 'Cancel',
+                cancelColor: '#000000',
+                confirmText: 'OK',
+                confirmColor: '#576b95',
+                success: function(res) {
+                    if (res.confirm) {
+                        console.log('Click OK button');
+                    }
+                    else {
+                        console.log('click Cancel button');
+                    }
+                },
+                fail: function(err) {
+                    console.log(err);
+                },
+                complete: function(res) {
+                    console.log(res);
+                }
+            });
         }
     }
 }

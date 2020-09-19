@@ -49,3 +49,7 @@ Unit tests are collocated with the code being tested in each package, inside dir
 ## Credits
 
 Thank you to all the people who have already contributed to SYWebViewBridge.js!
+
+## Public Docs
+
+`npm run docs:build`
