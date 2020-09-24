@@ -51,7 +51,10 @@
             // 保存图片
             NSString *router = message.body;
             SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
-            [self.dispatcher dispatchMsg:syMsg];
+            if (!syMsg) {
+                return;
+            }
+            [self.dispatcher dispatchMsg:syMsg callback:self.actionComplete];
             NSLog(@"reveive msg: %@", router);
         }
     }

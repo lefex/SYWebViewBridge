@@ -6,12 +6,14 @@
             <p>get result:</p>
             <p>{{ result }}</p>
         </div>
-        <div class="button" v-on:click="alert">Get App Version</div>
+        <div class="button" v-on:click="alert">Send Debug Alert</div>
+        <h1 class="title">Use showModal</h1>
+        <p class="des">the demo of showModal</p>
+        <div class="button" v-on:click="showModal">showModal</div>
     </div>
 </template>
 
 <script>
-import { sy, callIframe, callLocation } from '../../../packages/FE/sy-webview-bridge/src/index.js';
 
 export default {
     data() {
@@ -23,31 +25,23 @@ export default {
     },
     methods: {
         alert() {
-            const param = {
-                title: "suyan",
-                content: "webview bridge"
-            };
-            const router = 'suyan://gzh.fe/sydebug/alert?callback=jscb';
-            sy.sendMsg({
-                router: router,
-                params: param
-            });
+            sy.debug.alert('receive a debug msg');
         },
-        showAlert() {
-            sy.showModal({
+        showModal() {
+            sy.system.showModal({
                 title: 'SYWebViewBridge',
                 content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
                 showCancel: true,
                 cancelText: 'Cancel',
-                cancelColor: '#000000',
                 confirmText: 'OK',
-                confirmColor: '#576b95',
                 success: function(res) {
                     if (res.confirm) {
-                        console.log('Click OK button');
+                        console.log('click OK button');
+                        sy.debug.alert('click OK button');
                     }
                     else {
                         console.log('click Cancel button');
+                        sy.debug.alert('click Cancel button');
                     }
                 },
                 fail: function(err) {

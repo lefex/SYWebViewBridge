@@ -8,6 +8,7 @@
 <script>
 import Header from './components/header.vue';
 import SyncMsg from './components/syncMsg.vue';
+import SYBridge from '../../packages/FE/sy-webview-bridge/src/index.js';
 
 export default {
     components: {
@@ -18,6 +19,11 @@ export default {
         return {
             title: 'SYWebViewBridge1'
         }
+    },
+    mounted() {
+        // add sy object to window
+        const sy = new SYBridge();
+        window['sy'] = sy;
     }
 }
 </script>

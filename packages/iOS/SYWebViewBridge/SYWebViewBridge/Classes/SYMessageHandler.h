@@ -7,11 +7,12 @@
 
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
+#import "SYConstant.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class SYBridgeMessage;
 
 @interface SYMessageHandler : NSObject<WKScriptMessageHandler>
 
-@end
+@property (nonatomic, copy) SYPluginMsgCallBack actionComplete;
 
-NS_ASSUME_NONNULL_END
+@end

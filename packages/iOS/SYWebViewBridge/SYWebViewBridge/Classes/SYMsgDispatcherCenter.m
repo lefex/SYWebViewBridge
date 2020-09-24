@@ -8,6 +8,7 @@
 #import "SYMsgDispatcherCenter.h"
 #import "SYBridgeDebugPlugin.h"
 #import "SYBridgeLifeCyclePlugin.h"
+#import "SYBridgeSystemPlugin.h"
 #import "NSInvocation+SYBridge.h"
 #import "SYBridgeMessage.h"
 
@@ -28,19 +29,21 @@
 - (void)setup {
     SYBridgeDebugPlugin *debugPlugin = [[SYBridgeDebugPlugin alloc] init];
     SYBridgeLifeCyclePlugin *lifeCyclePlugin = [[SYBridgeLifeCyclePlugin alloc] init];
+    SYBridgeSystemPlugin *systemPlugin = [[SYBridgeSystemPlugin alloc] init];
     _pluginDict = @{
         @"sydebug": debugPlugin,
-        @"sylifeCycle": lifeCyclePlugin
+        @"sylifeCycle": lifeCyclePlugin,
+        @"sysystem": systemPlugin
     }.mutableCopy;
 }
 
 
-- (BOOL)dispatchMsg:(SYBridgeMessage *)msg {
+- (BOOL)dispatchMsg:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
     SYBridgeBasePlugin *plugin = _pluginDict[msg.module];
     if (!plugin || ![plugin isKindOfClass:[SYBridgeBasePlugin class]]) {
         return NO;
     }
-    BOOL ret = [plugin invoke:msg];
+    BOOL ret = [plugin invoke:msg callback:callback];
     return ret;
 }
 

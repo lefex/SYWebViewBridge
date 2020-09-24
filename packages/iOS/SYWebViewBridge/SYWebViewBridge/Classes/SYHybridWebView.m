@@ -8,6 +8,8 @@
 #import "SYHybridWebView.h"
 #import "SYMessageHandler.h"
 #import "SYConstant.h"
+#import "SYBridgeMessage.h"
+#import "NSObject+SYBridge.h"
 
 @interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate>
 @property (nonatomic, strong) SYMessageHandler *msgHandler;
@@ -37,6 +39,24 @@
     self.navigationDelegate = self;
     self.UIDelegate = self;
     self.msgHandler = [[SYMessageHandler alloc] init];
+    __weak __typeof(self) weakSelf = self;
+    self.msgHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        NSMutableDictionary *jsInfoDict = [info mutableCopy];
+        jsInfoDict[@"callbackId"] = msg.paramDict[@"callbackId"];
+        NSString *jsonInfo = [NSObject sy_dicionaryToJson:jsInfoDict];
+        NSString *jscode;
+        if (msg.jsCallBack) { // contain callback function
+            jscode = [NSString stringWithFormat:@"%@(%@)", msg.jsCallBack, jsonInfo];
+        }
+        else {
+            // use default callback function
+            jscode = [NSString stringWithFormat:@"%@(%@)", kSYDefaultCallback, jsonInfo];
+        }
+        [strongSelf syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
+            NSLog(@"evalute callbakc error: %@", error);
+        }];
+    };
     [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
 }
 

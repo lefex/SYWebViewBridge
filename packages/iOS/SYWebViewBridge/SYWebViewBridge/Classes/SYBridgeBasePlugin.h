@@ -6,15 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class SYBridgeMessage;
-
-NS_ASSUME_NONNULL_BEGIN
+#import "SYBridgeMessage.h"
+#import "SYConstant.h"
 
 @interface SYBridgeBasePlugin : NSObject
 
-- (BOOL)invoke:(SYBridgeMessage *)msg;
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback;
 
 @end
 
-NS_ASSUME_NONNULL_END

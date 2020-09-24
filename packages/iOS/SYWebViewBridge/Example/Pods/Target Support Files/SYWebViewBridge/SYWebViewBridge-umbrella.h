@@ -11,6 +11,7 @@
 #endif
 
 #import "NSInvocation+SYBridge.h"
+#import "NSObject+SYBridge.h"
 #import "SYBridgeBasePlugin.h"
 #import "SYBridgeDebugPlugin.h"
 #import "SYBridgeLifeCyclePlugin.h"

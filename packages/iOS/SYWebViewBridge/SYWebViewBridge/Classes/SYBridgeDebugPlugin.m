@@ -6,19 +6,18 @@
 //
 
 #import "SYBridgeDebugPlugin.h"
-#import "SYBridgeMessage.h"
 
 @implementation SYBridgeDebugPlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg {
-    BOOL isValid = [super invoke:msg];
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+    BOOL isValid = [super invoke:msg callback:callback];
     if (isValid) {
-        [self alert:msg];
+        [self alert:msg callback:callback];
     }
     return YES;
 }
 
-- (void)alert:(SYBridgeMessage *)msg {
+- (void)alert:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
     NSString *title = @"SYBridge debug";
     if (msg.paramDict[@"title"]) {
         title = msg.paramDict[@"title"];

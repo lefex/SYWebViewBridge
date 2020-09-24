@@ -7,13 +7,11 @@
 
 #import "SYBridgeBasePlugin.h"
 
-@class SYBridgeMessage;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SYBridgeDebugPlugin : SYBridgeBasePlugin
 
-- (void)alert:(SYBridgeMessage *)msg;
+- (void)alert:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback;
 
 @end
 

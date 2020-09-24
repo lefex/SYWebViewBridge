@@ -6,15 +6,15 @@
 //
 
 #import "SYBridgeBasePlugin.h"
-#import "SYBridgeMessage.h"
 
 @implementation SYBridgeBasePlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg {
-    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:", msg.action]);
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback; {
+    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:callback:", msg.action]);
     if ([self respondsToSelector:sel]) {
         return YES;
     }
+    NSLog(@"have no bridge method");
     // subclass must implement
     return NO;
 }
