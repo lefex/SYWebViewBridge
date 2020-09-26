@@ -9,14 +9,6 @@
 
 @implementation SYBridgeDebugPlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
-    BOOL isValid = [super invoke:msg callback:callback];
-    if (isValid) {
-        [self alert:msg callback:callback];
-    }
-    return YES;
-}
-
 - (void)alert:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
     NSString *title = @"SYBridge debug";
     if (msg.paramDict[@"title"]) {
@@ -24,6 +16,11 @@
     }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg.paramDict[@"content"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+}
+
+- (void)log:(SYBridgeMessage *)msg {
+    NSString *logMsg = msg.paramDict[@"msg"];
+    NSLog(@"[SYBridge] - %@", logMsg);
 }
 
 @end

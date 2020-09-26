@@ -10,15 +10,16 @@
 #endif
 #endif
 
-#import "NSInvocation+SYBridge.h"
 #import "NSObject+SYBridge.h"
 #import "SYBridgeBasePlugin.h"
 #import "SYBridgeDebugPlugin.h"
+#import "SYBridgeDebugViewController.h"
 #import "SYBridgeLifeCyclePlugin.h"
 #import "SYBridgeMessage.h"
 #import "SYBridgeSystemPlugin.h"
 #import "SYConstant.h"
 #import "SYHybridWebView.h"
+#import "SYHybridWebViewController.h"
 #import "SYMessageHandler.h"
 #import "SYMsgDispatcherCenter.h"
 

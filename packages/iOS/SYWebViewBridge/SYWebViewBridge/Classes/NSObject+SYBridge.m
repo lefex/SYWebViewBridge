@@ -30,8 +30,7 @@
 
 + (NSString *)sy_dicionaryToJson:(NSDictionary *)dict {
     NSString *jsonString = nil;
-    if ([NSJSONSerialization isValidJSONObject:dict])
-    {
+    if ([NSJSONSerialization isValidJSONObject:dict]) {
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];

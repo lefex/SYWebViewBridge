@@ -9,9 +9,23 @@
 
 @implementation SYBridgeBasePlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback; {
-    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:callback:", msg.action]);
-    if ([self respondsToSelector:sel]) {
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+    // have a callback function
+    NSString *selName = [NSString stringWithFormat:@"%@:callback:", msg.action];
+    if ([self respondsToSelector:NSSelectorFromString(selName)]) {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:NSSelectorFromString(selName) withObject:msg withObject:callback];
+        #pragma clang diagnostic pop
+        return YES;
+    }
+    // have no callback
+    selName = [NSString stringWithFormat:@"%@:", msg.action];
+    if ([self respondsToSelector:NSSelectorFromString(selName)]) {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:NSSelectorFromString(selName) withObject:msg];
+        #pragma clang diagnostic pop
         return YES;
     }
     NSLog(@"have no bridge method");

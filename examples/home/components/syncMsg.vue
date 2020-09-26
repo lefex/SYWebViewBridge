@@ -1,15 +1,17 @@
 <template>
     <div class="sync-msg-wrap">
-        <h1 class="title">{{ title }}</h1>
-        <p class="des">{{ description }}</p>
-        <div v-if="result" class="result">
-            <p>get result:</p>
-            <p>{{ result }}</p>
-        </div>
-        <div class="button" v-on:click="alert">Send Debug Alert</div>
+        <!-- showModal -->
         <h1 class="title">Use showModal</h1>
         <p class="des">the demo of showModal</p>
-        <div class="button" v-on:click="showModal">showModal</div>
+        <div class="button" v-on:click="showModal">ShowModal</div>
+        <!-- lifeCycle -->
+        <h1 class="title">LifeCycle message</h1>
+        <p class="des">the webview lifecycle</p>
+        <!-- debug -->
+        <h1 class="title">Debug</h1>
+        <p class="des">send debug msg between app and webview</p>
+        <div class="button" v-on:click="alert">Send Debug Alert</div>
+        <div class="button" v-on:click="log">Log msg in app</div>
     </div>
 </template>
 
@@ -26,6 +28,9 @@ export default {
     methods: {
         alert() {
             sy.debug.alert('receive a debug msg');
+        },
+        log() {
+            sy.debug.log('I am log msg from webview');
         },
         showModal() {
             sy.system.showModal({
@@ -82,5 +87,9 @@ export default {
     font-weight: 700;
     border-radius: 8px;
     margin: 16px 0;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #1191FF;
 }
 </style>

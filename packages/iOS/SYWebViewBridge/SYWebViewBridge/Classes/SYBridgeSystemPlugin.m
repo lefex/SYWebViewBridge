@@ -10,14 +10,6 @@
 
 @implementation SYBridgeSystemPlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
-    BOOL isValid = [super invoke:msg callback:callback];
-    if (isValid) {
-        [self showModal:msg callback:callback];
-    }
-    return YES;
-}
-
 - (void)showModal:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
     NSString *title = @"SYBridge debug";
     if (msg.paramDict[@"title"]) {

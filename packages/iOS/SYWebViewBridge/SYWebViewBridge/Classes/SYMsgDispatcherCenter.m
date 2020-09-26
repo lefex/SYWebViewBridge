@@ -9,7 +9,6 @@
 #import "SYBridgeDebugPlugin.h"
 #import "SYBridgeLifeCyclePlugin.h"
 #import "SYBridgeSystemPlugin.h"
-#import "NSInvocation+SYBridge.h"
 #import "SYBridgeMessage.h"
 
 @interface SYMsgDispatcherCenter ()
