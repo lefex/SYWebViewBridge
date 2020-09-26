@@ -21,9 +21,28 @@ export default {
         }
     },
     mounted() {
-        // add sy object to window
-        const sy = new SYBridge();
-        window['sy'] = sy;
+        // set the namespace sy
+        const namespace = 'sy';
+        // add bride object to window
+        window[namespace] = new SYBridge();
+        // tell app that my namespace is sy
+        sy.env.setEnvironment({
+            namespace
+        });
+        sy.lifecycle = {
+            onLoad() {
+                console.log('on load');
+            },
+            onShow() {
+                console.log('on show');
+            },
+            onHide() {
+                console.log('on hide');
+            },
+            onUnload() {
+                console.log('on unload');
+            }
+        };
     }
 }
 </script>

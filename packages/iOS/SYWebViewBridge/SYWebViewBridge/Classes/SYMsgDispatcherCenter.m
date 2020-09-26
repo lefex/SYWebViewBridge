@@ -7,7 +7,6 @@
 
 #import "SYMsgDispatcherCenter.h"
 #import "SYBridgeDebugPlugin.h"
-#import "SYBridgeLifeCyclePlugin.h"
 #import "SYBridgeSystemPlugin.h"
 #import "SYBridgeMessage.h"
 
@@ -27,11 +26,9 @@
 
 - (void)setup {
     SYBridgeDebugPlugin *debugPlugin = [[SYBridgeDebugPlugin alloc] init];
-    SYBridgeLifeCyclePlugin *lifeCyclePlugin = [[SYBridgeLifeCyclePlugin alloc] init];
     SYBridgeSystemPlugin *systemPlugin = [[SYBridgeSystemPlugin alloc] init];
     _pluginDict = @{
         @"sydebug": debugPlugin,
-        @"sylifeCycle": lifeCyclePlugin,
         @"sysystem": systemPlugin
     }.mutableCopy;
 }

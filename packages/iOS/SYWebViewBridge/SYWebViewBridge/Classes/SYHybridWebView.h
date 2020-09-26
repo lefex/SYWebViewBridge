@@ -7,18 +7,19 @@
 
 #import <WebKit/WebKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class SYBridgeMessage;
 
 @interface SYHybridWebView : WKWebView
 
 @property (nonatomic, copy) NSString *sourceUrl;
 
+@property (nonatomic, copy) NSString *scheme;
+@property (nonatomic, copy) NSString *identifier;
+
 - (void)syReload;
 
-- (void)syEvaluateJS:(NSString *)jsCode completionHandler:(void(^)(id msg, NSError *error))handler;
+- (void)sySendMessage:(SYBridgeMessage *)msg
+    completionHandler:(void(^)(id msg, NSError *error))handler;
 
-- (void)syAddScript:(NSString *)code;
 
 @end
-
-NS_ASSUME_NONNULL_END

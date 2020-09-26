@@ -1,5 +1,9 @@
 <template>
     <div class="sync-msg-wrap">
+        <!-- lifeCycle -->
+        <h1 class="title">Set Environment</h1>
+        <p class="des">send some messages to app before bridge work</p>
+        <div class="button" v-on:click="setEnvironment">Set Environment</div>
         <!-- showModal -->
         <h1 class="title">Use showModal</h1>
         <p class="des">the demo of showModal</p>
@@ -26,6 +30,11 @@ export default {
         }
     },
     methods: {
+        setEnvironment() {
+            sy.env.setEnvironment({
+                namespace: 'wsy'
+            });
+        },
         alert() {
             sy.debug.alert('receive a debug msg');
         },

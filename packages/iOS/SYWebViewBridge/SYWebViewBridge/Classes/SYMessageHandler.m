@@ -35,7 +35,7 @@
     return _dispatcher;
 }
 /*
- suyan://gzh.fe/debug:submodule/showAlert?param={key: value}&callback=js_callback
+ suyan://com.sy.bridge/debug:submodule/showAlert?param={key: value}&callback=js_callback
  [scheme]://[bundle id] / [module] / [action] ? [参数] & [回调函数]
  **/
 

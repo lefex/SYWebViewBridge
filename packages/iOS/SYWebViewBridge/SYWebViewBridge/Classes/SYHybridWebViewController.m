@@ -7,7 +7,7 @@
 
 #import "SYHybridWebViewController.h"
 #import "SYHybridWebView.h"
-
+#import "SYHybridWebView+LifeCycle.h"
 
 @interface SYHybridWebViewController ()
 @property (nonatomic, strong) SYHybridWebView *webview;
@@ -19,13 +19,35 @@
     self = [super init];
     if (self) {
         [self.view addSubview:self.webview];
+        [self.webview syOnLoad];
     }
     return self;
+}
+
+#pragma mark - LifeCycle
+- (void)dealloc {
+    [_webview syOnUnload];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStyleDone target:self action:@selector(onShow)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.webview syOnShow];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.webview syOnHide];
 }
 
 - (void)loadUrl:(NSString *)url {
@@ -38,6 +60,10 @@
         _webview = [[SYHybridWebView alloc] initWithFrame:self.view.bounds configuration:conf];
     }
     return _webview;
+}
+
+- (void)onShow {
+    [self.webview syOnShow];
 }
 
 @end

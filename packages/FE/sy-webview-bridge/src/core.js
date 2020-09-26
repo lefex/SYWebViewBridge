@@ -13,6 +13,7 @@ export default class SYCore {
         // isIOS\isAndroid\isNA
         this.env = env;
     }
+    // suyan://gzh.fe/debug/showAlert?param={key: value}&callback=js_callback
     sendMsg(router, options) {
         const params = this.generateParams(options);
         // all param neeed to be a json string
@@ -25,13 +26,18 @@ export default class SYCore {
         }
         else {
              // use postMessage to send message in iOS
-            this.callPostMessage(jumpRouter);
+            this.callPostMessage(jumpRouter, params['bridgeName']);
         }
         // need to change callback id(due to not repeat)
         this.curId += 1;
     }
-    callPostMessage(router) {
-        window.webkit.messageHandlers.SYJSBridge.postMessage(router);
+    callPostMessage(router, bridgeName) {
+        if (bridgeName === 'SYJSBridgeEnv') {
+            window.webkit.messageHandlers.SYJSBridgeEnv.postMessage(router);
+        }
+        else {
+            window.webkit.messageHandlers.SYJSBridge.postMessage(router);
+        }
     }
     callIframe(router) {
         var iframe = document.createElement('iframe');

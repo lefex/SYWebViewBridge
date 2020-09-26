@@ -6,6 +6,8 @@
 //
 
 #import "SYBridgeMessage.h"
+#import "NSObject+SYBridge.h"
+#import "SYConstant.h"
 
 @implementation SYBridgeMessage
 
@@ -20,7 +22,7 @@
     return self;
 }
 
-// suyan://gzh.fe/debug/showAlert?param={key: value}&callback=js_callback
+// suyan://com.sy.bridge/debug/showAlert?param={key: value}&callback=js_callback
 - (void)parserRouter:(NSString *)router {
     NSArray *components = [router componentsSeparatedByString:@"?"];
     if ([components count] == 0 || [components count] > 2) {
@@ -36,7 +38,7 @@
     NSString *hostPath = [firstPath substringFromIndex:schemeRange.location + schemeRange.length];
     NSArray *firstComponents = [hostPath componentsSeparatedByString:@"/"];
     if ([firstComponents count] != 3) {
-        // router must contain bundleId、module and action
+        // router must contain identifier、module and action
         return;
     }
     self.scheme = scheme;
@@ -74,6 +76,19 @@
         
     }];
     self.extInfo = extInfo;
+}
+
+// suyan://com.sy.bridge/debug/showAlert?param={key: value}&callback=js_callback
+- (NSString *)router {
+    if (_router.length > 0) {
+        return _router;
+    }
+    NSString *aRouter = [NSString stringWithFormat:@"%@://%@/%@/%@", self.scheme.length > 0 ? self.scheme : kSYDefaultScheme, self.identifier.length > 0 ? self.identifier : kSYDefaultIdentifier, self.module, self.action];
+    if ([self.paramDict count] > 0) {
+        NSString *paramJson = [NSObject sy_dicionaryToJson:self.paramDict];
+        aRouter = [NSString stringWithFormat:@"%@?param=%@", aRouter, paramJson];
+    }
+    return aRouter;
 }
 
 @end

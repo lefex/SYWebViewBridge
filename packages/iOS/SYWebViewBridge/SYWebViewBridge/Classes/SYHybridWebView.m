@@ -11,14 +11,14 @@
 #import "SYBridgeMessage.h"
 #import "NSObject+SYBridge.h"
 
-@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate>
+@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 @property (nonatomic, strong) SYMessageHandler *msgHandler;
+@property (nonatomic, copy) NSString *namespace;
 @end
 
 @implementation SYHybridWebView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {
         [self setup];
@@ -35,6 +35,12 @@
 }
 
 - (void)setup {
+    // the default namespace is sy in webview window
+    self.namespace = kSYDefaultNameSpace;
+    // set default scheme
+    self.scheme = kSYDefaultScheme;
+    // set unique id, can use app bundle id
+    self.identifier = kSYDefaultIdentifier;
     self.configuration.preferences = [WKPreferences new];
     self.navigationDelegate = self;
     self.UIDelegate = self;
@@ -51,12 +57,14 @@
         }
         else {
             // use default callback function
-            jscode = [NSString stringWithFormat:@"%@(%@)", kSYDefaultCallback, jsonInfo];
+            // namespace.core.callback(code)
+            jscode = [NSString stringWithFormat:@"%@.%@(%@)", self.namespace, kSYDefaultCallback, jsonInfo];
         }
         [strongSelf syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
             NSLog(@"evalute callbakc error: %@", error);
         }];
     };
+    [self.configuration.userContentController addScriptMessageHandler:self name:kSYScriptEnvMsgName];
     [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
 }
 
@@ -84,6 +92,41 @@
     [self.configuration.userContentController addUserScript:script];
 }
 
+- (void)sySendMessage:(SYBridgeMessage *)msg completionHandler:(void(^)(id msg, NSError *error))handler {
+    // namespace.core.callback(code)
+    NSString *jsCode = [NSString stringWithFormat:@"%@.%@(\"%@\")", self.namespace, kSYDefaultWebViewBridgeMsg, msg.router];
+    [self evaluateJavaScript:jsCode completionHandler:^(id msg, NSError *error) {
+        
+    }];
+}
+
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.body isKindOfClass:[NSString class]]) {
+        if ([message.name isEqualToString:kSYScriptEnvMsgName]) {
+            NSString *router = message.body;
+            SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
+            if (!syMsg) {
+                return;
+            }
+            NSString *selName = [NSString stringWithFormat:@"%@:", syMsg.action];
+            if ([self respondsToSelector:NSSelectorFromString(selName)]) {
+               #pragma clang diagnostic push
+               #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+               [self performSelector:NSSelectorFromString(selName) withObject:syMsg];
+               #pragma clang diagnostic pop;
+            }
+        }
+    }
+}
+
+- (void)setEnv:(SYBridgeMessage *)msg {
+    // set the webview`s object on the window
+    if (msg.paramDict[@"namespace"]) {
+        self.namespace = msg.paramDict[@"namespace"];
+    }
+}
+
 #pragma mark - WKUIDelegate
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
@@ -104,11 +147,6 @@
 
 
 #pragma mark - WKNavigationDelegate
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"%@", NSStringFromSelector(_cmd));
 }
@@ -149,6 +187,11 @@
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
     NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+// 白屏会触发的逻辑
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+
 }
 
 @end
