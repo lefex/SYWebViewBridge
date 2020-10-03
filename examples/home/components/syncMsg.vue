@@ -42,29 +42,29 @@ export default {
             sy.debug.log('I am log msg from webview');
         },
         showModal() {
-            sy.system.showModal({
-                title: 'SYWebViewBridge',
-                content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
-                showCancel: true,
-                cancelText: 'Cancel',
-                confirmText: 'OK',
-                success: function(res) {
-                    if (res.confirm) {
-                        console.log('click OK button');
-                        sy.debug.alert('click OK button');
-                    }
-                    else {
-                        console.log('click Cancel button');
-                        sy.debug.alert('click Cancel button');
-                    }
-                },
-                fail: function(err) {
-                    console.log(err);
-                },
-                complete: function(res) {
-                    console.log(res);
+        sy.system.showModal({
+            title: 'SYWebViewBridge',
+            content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
+            showCancel: true,
+            cancelText: 'Cancel',
+            confirmText: 'OK',
+            success: function(res) {
+                if (res.confirm) {
+                    console.log('click OK button');
+                    sy.debug.alert('click OK button');
                 }
-            });
+                else {
+                    console.log('click Cancel button');
+                    sy.debug.alert('click Cancel button');
+                }
+            },
+            fail: function(err) {
+                console.log(err);
+            },
+            complete: function(res) {
+                console.log(res);
+            }
+        });
         }
     }
 }

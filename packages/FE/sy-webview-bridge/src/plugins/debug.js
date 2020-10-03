@@ -26,7 +26,8 @@ export default class SYDebug extends SYPlugin {
         else {
             try {
                 logInfo = JSON.stringify(msg);
-            } catch (error) {
+            }
+            catch (error) {
                 logInfo = 'the msg invalid, can not use';
             }
         }

@@ -4,6 +4,7 @@
  * @author suyan
 */
 
+/* global __DEV__*/
 export default class SYCore {
     constructor(env) {
         // save callback id and function
@@ -40,7 +41,7 @@ export default class SYCore {
         }
     }
     callIframe(router) {
-        var iframe = document.createElement('iframe');
+        let iframe = document.createElement('iframe');
         iframe.src = router;
         document.body.appendChild(iframe);
         document.body.removeChild(iframe);
@@ -66,7 +67,7 @@ export default class SYCore {
                 params[key] = options[key];
             }
         });
-        params['callbackId'] = callbackId;
+        params.callbackId = callbackId;
         return params;
     }
     // the default callback function, app will call this

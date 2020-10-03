@@ -1,31 +1,54 @@
 /**
+ * @file index.js
  * @description main
  * @author suyan
 */
 
+/* global __DEV__ */
+
+// send message between webview and app
 import SYCore from './core';
+// system plugin
 import SYSystem from './plugins/system';
+// debug plugin
 import SYDebug from './plugins/debug';
+// lifecycle plugin
 import SYLifeCycle from './plugins/lifecycle';
+// environment plugin
 import SYEnv from './plugins/env';
 
+// change router to SYMessage Class
 export class SYMessage {
     constructor(router) {
+        // orgin router like suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb
         this.router = router;
+        // eg. router is: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb
+        // router scheme, eg: suyann
         this.scheme = null;
+        // can you app bundle id, eg: com.sy.bridge
         this.identifier = null;
+        // bridge in which module, eg: debug
         this.module = null;
+        // bridge in which action, eg: showModal
         this.action = null;
+        // the action method param
         this.param = null;
-        this.parseRouter(router);
+        // parse router to SYMessage Object
+        let isValid = this.parseRouter(router);
+        if (!isValid) {
+            if (__DEV__) {
+                console.log('right router such as: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb');
+            }
+            throw 'the router is invalid: ' + router;
+        }
     }
-    // suyan://com.sy.bridge/debug/showAlert?param={key: value}&callback=js_callback
+    // suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_callback
     parseRouter(router) {
         try {
             let components = router.split('?');
             if (components.length > 2) {
                 // router can only have one ?
-                return;
+                return false;
             }
             let first = components[0];
             let hostComponents = first.split('://');
@@ -35,7 +58,8 @@ export class SYMessage {
             this.module = pathComponents[1];
             this.action = pathComponents[2];
             if (components.length < 2) {
-                return;
+                // have no query
+                return true;
             }
             let second = components[1];
             let queryComponents = second.split('&');
@@ -51,8 +75,10 @@ export class SYMessage {
                 }
             });
             this.param = params;
-        } catch (error) {
-            return;
+            return true;
+        }
+        catch (error) {
+            return false;
         }
     }
 }
@@ -90,9 +116,11 @@ export default class SYBridge {
     }
     set lifecycle(value) {
         if (value) {
+            // set the lifecycle proxy to receive message
             this._lifecycle.proxy = value;
         }
     }
+    // add a custom plugin to SYBridge
     registerPlugin(plugin, options = {}) {
         if (!plugin) {
             if (__DEV__) {
@@ -102,22 +130,29 @@ export default class SYBridge {
         }
         let pluginName = options.name;
         if (!pluginName) {
+            // use plguin name when provide
             pluginName = plugin.name;
         }
+        // add the plugin to bridge instance
         this[pluginName] = plugin;
     }
+    // app send message to webview through this method
     syBridgeMessage(router) {
-        // the router like below:
+        // the router like below (the webview lifecycle method):
         // suyan://com.sy.bridge/_lifecycle/onShow
-        console.log('receive action: ');
-        console.log(router);
         let message = new SYMessage(router);
-        if (!message) {
+        if (!message || !message.module || !message.action) {
             return;
         }
+        // get the bridge method
         let actionFn = this[message.module][message.action];
-        if (actionFn) {
+        if (actionFn && typeof actionFn === 'function') {
             actionFn.call(this[message.module], message);
+        }
+        else {
+            if (__DEV__) {
+                console.log('can not get action function: ', actionFn);
+            }
         }
     }
 

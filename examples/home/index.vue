@@ -6,6 +6,7 @@
 </template>
 
 <script>
+/* global sy */
 import Header from './components/header.vue';
 import SyncMsg from './components/syncMsg.vue';
 import SYBridge from '../../packages/FE/sy-webview-bridge/src/index.js';
@@ -18,13 +19,14 @@ export default {
     data() {
         return {
             title: 'SYWebViewBridge1'
-        }
+        };
     },
     mounted() {
         // set the namespace sy
         const namespace = 'sy';
         // add bride object to window
-        window[namespace] = new SYBridge();
+        const sy = new SYBridge();
+        window[namespace] = sy;
         // tell app that my namespace is sy
         sy.env.setEnvironment({
             namespace
@@ -44,7 +46,7 @@ export default {
             }
         };
     }
-}
+};
 </script>
 
 <style scoped>
