@@ -8,6 +8,7 @@
 
 #import "SYViewController.h"
 #import <SYHybridWebViewController.h>
+#import "SYNetworkPlugin.h"
 
 @interface SYViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -56,6 +57,8 @@
 
 - (void)toHrbridViewControll {
     SYHybridWebViewController *viewController = [[SYHybridWebViewController alloc] init];
+    SYNetworkPlugin *networkPlugin = [[SYNetworkPlugin alloc] init];
+    [viewController.webview syRegisterPlugin:networkPlugin forModuleName:@"network"];
     [viewController loadUrl:@"http://localhost:9000/home.html"];
     [self.navigationController pushViewController:viewController animated:YES];
 }

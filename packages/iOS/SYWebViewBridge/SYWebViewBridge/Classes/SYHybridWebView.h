@@ -8,6 +8,7 @@
 #import <WebKit/WebKit.h>
 
 @class SYBridgeMessage;
+@class SYBridgeBasePlugin;
 
 @interface SYHybridWebView : WKWebView
 
@@ -20,6 +21,8 @@
 
 - (void)sySendMessage:(SYBridgeMessage *)msg
     completionHandler:(void(^)(id msg, NSError *error))handler;
+
+- (void)syRegisterPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName;
 
 
 @end

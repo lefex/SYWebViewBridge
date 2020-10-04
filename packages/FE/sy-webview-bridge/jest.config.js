@@ -1,7 +1,7 @@
 module.exports = {
     rootDir: __dirname,
     globals: {
-      __DEV__: true
+      __SYDEV__: true
     },
     moduleNameMapper: {
       '^@/(.*)$': '<rootDir>/src/$1',

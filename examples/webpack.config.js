@@ -9,7 +9,7 @@ const entry = {
 
 // generate html plugins
 const plugins = [];
-!(function(){
+!(function () {
     let keys = Object.keys(entry);
     keys.map(key => {
         let htmlPlugin = new HtmlWebpackPlugin({
@@ -18,11 +18,11 @@ const plugins = [];
             chunks: [key],
             filename: `${key}.html`,
             meta: {
-                charset: { charset: 'utf-8' },
+                charset: {charset: 'utf-8'},
                 viewport: 'width=device-width, initial-scale=1'
             },
-            inject: "body",
-            favicon: 'favicon.png',
+            inject: 'body',
+            favicon: 'favicon.png'
         });
         plugins.push(htmlPlugin);
     });
@@ -57,4 +57,5 @@ module.exports = {
         compress: true,
         port: 9000
     }
-}
+};
+

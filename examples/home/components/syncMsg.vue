@@ -11,6 +11,10 @@
         <!-- lifeCycle -->
         <h1 class="title">LifeCycle message</h1>
         <p class="des">the webview lifecycle</p>
+        <!-- network request -->
+        <h1 class="title">Network Request</h1>
+        <p class="des">send network request in app</p>
+        <div class="button" v-on:click="sendRequest">Send Network Request</div>
         <!-- debug -->
         <h1 class="title">Debug</h1>
         <p class="des">send debug msg between app and webview</p>
@@ -20,14 +24,14 @@
 </template>
 
 <script>
-
+/* global sy */
 export default {
     data() {
         return {
             title: 'Sync msg to Obj-C',
             description: 'WebView send msg to Obj-C and get a return value.',
             result: ''
-        }
+        };
     },
     methods: {
         setEnvironment() {
@@ -42,32 +46,55 @@ export default {
             sy.debug.log('I am log msg from webview');
         },
         showModal() {
-        sy.system.showModal({
-            title: 'SYWebViewBridge',
-            content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
-            showCancel: true,
-            cancelText: 'Cancel',
-            confirmText: 'OK',
-            success: function(res) {
-                if (res.confirm) {
-                    console.log('click OK button');
-                    sy.debug.alert('click OK button');
+            sy.system.showModal({
+                title: 'SYWebViewBridge',
+                content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
+                showCancel: true,
+                cancelText: 'Cancel',
+                confirmText: 'OK',
+                success(res) {
+                    if (res.confirm) {
+                        console.log('click OK button');
+                        sy.debug.alert('click OK button');
+                    }
+                    else {
+                        console.log('click Cancel button');
+                        sy.debug.alert('click Cancel button');
+                    }
+                },
+                fail(err) {
+                    console.log(err);
+                },
+                complete(res) {
+                    console.log(res);
                 }
-                else {
-                    console.log('click Cancel button');
-                    sy.debug.alert('click Cancel button');
+            });
+        },
+        sendRequest() {
+            sy.network.request({
+                url: 'https://www.igetget.com/api/wap/footer',
+                method: 'get',
+                data: {
+                    from: 'SYWebViewBridge'
+                },
+                header: {
+                    'content-type': 'application/json'
+                },
+                success(res) {
+                    console.log('get request result: ', res.data);
+                    sy.debug.alert(res.data);
+                },
+                fail(err) {
+                    console.error('request error');
+                    sy.debug.alert('network error');
+                },
+                complete(res) {
+                    console.log('request complete');
                 }
-            },
-            fail: function(err) {
-                console.log(err);
-            },
-            complete: function(res) {
-                console.log(res);
-            }
-        });
+            });
         }
     }
-}
+};
 </script>
 
 <style scoped>

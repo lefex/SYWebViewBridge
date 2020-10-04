@@ -4,7 +4,7 @@
  * @author suyan
 */
 
-/* global __DEV__ */
+/* global __SYDEV__ */
 
 // send message between webview and app
 import SYCore from './core';
@@ -16,6 +16,9 @@ import SYDebug from './plugins/debug';
 import SYLifeCycle from './plugins/lifecycle';
 // environment plugin
 import SYEnv from './plugins/env';
+import {SYDefaultScheme, SYDefaultIdentifier} from './constant';
+// bridge will log some useful messages when in devlopment environment
+window.__SYDEV__ = true;
 
 // change router to SYMessage Class
 export class SYMessage {
@@ -27,8 +30,8 @@ export class SYMessage {
         this.scheme = null;
         // can you app bundle id, eg: com.sy.bridge
         this.identifier = null;
-        // bridge in which module, eg: debug
-        this.module = null;
+        // bridge in which moduleName, eg: debug
+        this.moduleName = null;
         // bridge in which action, eg: showModal
         this.action = null;
         // the action method param
@@ -36,7 +39,7 @@ export class SYMessage {
         // parse router to SYMessage Object
         let isValid = this.parseRouter(router);
         if (!isValid) {
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.log('right router such as: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb');
             }
             throw 'the router is invalid: ' + router;
@@ -55,7 +58,7 @@ export class SYMessage {
             this.scheme = hostComponents[0];
             let pathComponents = hostComponents[1].split('/');
             this.identifier = pathComponents[0];
-            this.module = pathComponents[1];
+            this.moduleName = pathComponents[1];
             this.action = pathComponents[2];
             if (components.length < 2) {
                 // have no query
@@ -66,8 +69,9 @@ export class SYMessage {
             let params = {};
             queryComponents.forEach(element => {
                 let es = element.split('=');
-                if (es[0] === 'param') {
-                    let jsonObj = JSON.parse(es[1]);
+                if (es[0] === 'params') {
+                    let decodeStr = decodeURIComponent(es[1]);
+                    let jsonObj = JSON.parse(decodeStr);
                     params[es[0]] = jsonObj;
                 }
                 else {
@@ -83,18 +87,25 @@ export class SYMessage {
     }
 }
 
+// The main class to deal with bridge message
 export default class SYBridge {
     constructor(options = {}) {
-        this.env = this.initEnv(null, options);
-        this.core = new SYCore(this.env);
-        this.system = new SYSystem(this.core, 'sysystem');
-        this.debug = new SYDebug(this.core, 'sydebug');
-        this.env = new SYEnv(this.core, 'syenv');
+        // init webview context
+        this.context = this.initContext(null, options);
+        // send message core
+        this.core = new SYCore(this.context);
+        // system plugin, the module moduleName is system
+        this.system = new SYSystem(this.core, 'system');
+        // debug plugin
+        this.debug = new SYDebug(this.core, 'debug');
+        // environment plugin
+        this.env = new SYEnv(this.core, 'env');
+        // lifecycle object to receive lifecycle message
         this.lifecycle = null;
         // private
-        this._lifecycle = new SYLifeCycle(this.core, '_sylifecycle', this.lifecycle);
+        this._lifecycle = new SYLifeCycle(this.core, '_lifecycle', this.lifecycle);
     }
-    initEnv(ua, options) {
+    initContext(ua, options) {
         if (!ua) {
             ua = navigator && navigator.userAgent;
         }
@@ -102,8 +113,8 @@ export default class SYBridge {
             return;
         }
         const {
-            scheme = 'suyan',
-            bundleId = 'com.sy.bridge'
+            scheme = SYDefaultScheme,
+            bundleId = SYDefaultIdentifier
         } = options;
         const env = {
             isAndroid: /(Android);?[\s/]+([\d.]+)?/.test(ua),
@@ -123,15 +134,15 @@ export default class SYBridge {
     // add a custom plugin to SYBridge
     registerPlugin(plugin, options = {}) {
         if (!plugin) {
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.error('[sybridge] plugin can not be undefined');
             }
             return;
         }
-        let pluginName = options.name;
+        let pluginName = options.moduleName;
         if (!pluginName) {
-            // use plguin name when provide
-            pluginName = plugin.name;
+            // use plguin moduleName when provide
+            pluginName = plugin.moduleName;
         }
         // add the plugin to bridge instance
         this[pluginName] = plugin;
@@ -141,16 +152,16 @@ export default class SYBridge {
         // the router like below (the webview lifecycle method):
         // suyan://com.sy.bridge/_lifecycle/onShow
         let message = new SYMessage(router);
-        if (!message || !message.module || !message.action) {
+        if (!message || !message.moduleName || !message.action) {
             return;
         }
         // get the bridge method
-        let actionFn = this[message.module][message.action];
+        let actionFn = this[message.moduleName][message.action];
         if (actionFn && typeof actionFn === 'function') {
-            actionFn.call(this[message.module], message);
+            actionFn.call(this[message.moduleName], message);
         }
         else {
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.log('can not get action function: ', actionFn);
             }
         }

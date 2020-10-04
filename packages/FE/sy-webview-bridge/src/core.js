@@ -4,15 +4,16 @@
  * @author suyan
 */
 
-/* global __DEV__*/
+/* global __SYDEV__*/
+import {SYEnvBridgeName} from './constant';
 export default class SYCore {
-    constructor(env) {
+    constructor(context) {
         // save callback id and function
         this.callbackMap = {};
         // current callback id
         this.curId = 1;
         // isIOS\isAndroid\isNA
-        this.env = env;
+        this.context = context;
     }
     // suyan://gzh.fe/debug/showAlert?param={key: value}&callback=js_callback
     sendMsg(router, options) {
@@ -20,20 +21,26 @@ export default class SYCore {
         // all param neeed to be a json string
         const paramJson = JSON.stringify(params);
         // generate a router
-        let jumpRouter = `${router}?params=${paramJson}`;
-        if (this.env.isAndroid) {
+        let jumpRouter = `${router}?params=${encodeURIComponent(paramJson)}`;
+        if (this.context.isAndroid) {
              // use prompt to send message in Android
             prompt(jumpRouter);
         }
         else {
              // use postMessage to send message in iOS
-            this.callPostMessage(jumpRouter, params['bridgeName']);
+            this.callPostMessage(jumpRouter, params.bridgeName);
         }
         // need to change callback id(due to not repeat)
         this.curId += 1;
     }
     callPostMessage(router, bridgeName) {
-        if (bridgeName === 'SYJSBridgeEnv') {
+        if (!window.webkit || !window.webkit.messageHandlers) {
+            if (__SYDEV__) {
+                console.warn('window.webkit.messageHandlers can not nil');
+            }
+            return;
+        }
+        if (bridgeName === SYEnvBridgeName) {
             window.webkit.messageHandlers.SYJSBridgeEnv.postMessage(router);
         }
         else {
@@ -73,7 +80,7 @@ export default class SYCore {
     // the default callback function, app will call this
     sendCallback(options) {
         if (!options || !options.callbackId) {
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.error('[sybridge] options must contain a callbackId');
             }
             return;
@@ -82,14 +89,14 @@ export default class SYCore {
         const callbackObj = this.callbackMap[callbackId];
         if (!callbackObj) {
             // can not found callback fun
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.error('[sybridge] callbackId invalid');
             }
             return;
         }
         const cbIsValid = ['success', 'fail', 'complete'].indexOf(options.cbtype) !== -1;
         if (!options.cbtype || !cbIsValid) {
-            if (__DEV__) {
+            if (__SYDEV__) {
                 console.error('[sybridge] cbtype only support success、fail and complete');
             }
         }

@@ -6,7 +6,6 @@
 //
 
 #import "SYHybridWebViewController.h"
-#import "SYHybridWebView.h"
 #import "SYHybridWebView+LifeCycle.h"
 
 @interface SYHybridWebViewController ()

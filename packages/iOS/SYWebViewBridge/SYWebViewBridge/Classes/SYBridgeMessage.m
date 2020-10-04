@@ -22,7 +22,7 @@
     return self;
 }
 
-// suyan://com.sy.bridge/debug/showAlert?param={key: value}&callback=js_callback
+// suyan://com.sy.bridge/debug/showAlert?params={key: value}&callback=js_callback
 - (void)parserRouter:(NSString *)router {
     NSArray *components = [router componentsSeparatedByString:@"?"];
     if ([components count] == 0 || [components count] > 2) {
@@ -56,7 +56,8 @@
         NSArray *paths = [obj componentsSeparatedByString:@"="];
         if ([paths count] == 2) {
             if ([(NSString *)[paths firstObject] isEqualToString:@"params"]) {
-                NSData *data = [(NSString *)[paths lastObject] dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *decodeStr = [(NSString *)[paths lastObject] stringByRemovingPercentEncoding];
+                NSData *data = [decodeStr dataUsingEncoding:NSUTF8StringEncoding];
                 if (data) {
                     NSError *error;
                     NSDictionary *parmDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingFragmentsAllowed error:&error];
@@ -78,7 +79,7 @@
     self.extInfo = extInfo;
 }
 
-// suyan://com.sy.bridge/debug/showAlert?param={key: value}&callback=js_callback
+// suyan://com.sy.bridge/debug/showAlert?params={key: value}&callback=js_callback
 - (NSString *)router {
     if (_router.length > 0) {
         return _router;
@@ -86,7 +87,7 @@
     NSString *aRouter = [NSString stringWithFormat:@"%@://%@/%@/%@", self.scheme.length > 0 ? self.scheme : kSYDefaultScheme, self.identifier.length > 0 ? self.identifier : kSYDefaultIdentifier, self.module, self.action];
     if ([self.paramDict count] > 0) {
         NSString *paramJson = [NSObject sy_dicionaryToJson:self.paramDict];
-        aRouter = [NSString stringWithFormat:@"%@?param=%@", aRouter, paramJson];
+        aRouter = [NSString stringWithFormat:@"%@?params=%@", aRouter, [paramJson stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return aRouter;
 }

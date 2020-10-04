@@ -100,6 +100,10 @@
     }];
 }
 
+- (void)syRegisterPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
+    [self.msgHandler registerPlugin:plugin forModuleName:moduleName];
+}
+
 #pragma mark - WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.body isKindOfClass:[NSString class]]) {

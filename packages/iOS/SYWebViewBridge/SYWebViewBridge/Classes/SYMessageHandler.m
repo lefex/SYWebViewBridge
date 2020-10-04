@@ -9,6 +9,7 @@
 #import "SYConstant.h"
 #import "SYBridgeMessage.h"
 #import "SYMsgDispatcherCenter.h"
+#import "SYBridgeBasePlugin.h"
 
 @interface SYMessageHandler ()
 @property (nonatomic, strong) SYMsgDispatcherCenter *dispatcher;
@@ -28,6 +29,13 @@
     
 }
 
+- (void)registerPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
+    if (!plugin || !moduleName) {
+        return;
+    }
+    [self.dispatcher setPlugin:plugin forModuleName:moduleName];
+}
+
 - (SYMsgDispatcherCenter *)dispatcher {
     if (!_dispatcher) {
         _dispatcher = [[SYMsgDispatcherCenter alloc] init];
@@ -35,7 +43,7 @@
     return _dispatcher;
 }
 /*
- suyan://com.sy.bridge/debug:submodule/showAlert?param={key: value}&callback=js_callback
+ suyan://com.sy.bridge/debug:submodule/showAlert?params={key: value}&callback=js_callback
  [scheme]://[bundle id] / [module] / [action] ? [参数] & [回调函数]
  **/
 

@@ -20,6 +20,12 @@
 
 - (void)log:(SYBridgeMessage *)msg {
     NSString *logMsg = msg.paramDict[@"msg"];
+    if ([NSJSONSerialization isValidJSONObject:logMsg]) {
+        NSData *data = [logMsg dataUsingEncoding:NSUTF8StringEncoding];
+        if (data) {
+            logMsg = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        }
+    }
     NSLog(@"[SYBridge] - %@", logMsg);
 }
 

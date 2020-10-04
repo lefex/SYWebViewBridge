@@ -6,8 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class SYHybridWebView;
+#import "SYHybridWebView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

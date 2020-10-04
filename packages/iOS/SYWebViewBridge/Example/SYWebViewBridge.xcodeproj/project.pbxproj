@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		235FC4262529CC6F008AD408 /* SYNetworkPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 235FC4252529CC6F008AD408 /* SYNetworkPlugin.m */; };
 		2F84D8CE19B8AA83B7EE9E3F /* Pods_SYWebViewBridge_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658221E26C0611A5321657E5 /* Pods_SYWebViewBridge_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		235FC4242529CC6F008AD408 /* SYNetworkPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNetworkPlugin.h; sourceTree = "<group>"; };
+		235FC4252529CC6F008AD408 /* SYNetworkPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYNetworkPlugin.m; sourceTree = "<group>"; };
 		325084C62087D5C93B2E171E /* SYWebViewBridge.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SYWebViewBridge.podspec; path = ../SYWebViewBridge.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5456F912573C2F77E4CCE574 /* Pods-SYWebViewBridge_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYWebViewBridge_Example.release.xcconfig"; path = "Target Support Files/Pods-SYWebViewBridge_Example/Pods-SYWebViewBridge_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* 公众号素燕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "公众号素燕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +148,8 @@
 				6003F594195388D20070C39A /* Supporting Files */,
 				625A71882512EADA0067DCEA /* SYDebugViewController.h */,
 				625A71892512EADA0067DCEA /* SYDebugViewController.m */,
+				235FC4242529CC6F008AD408 /* SYNetworkPlugin.h */,
+				235FC4252529CC6F008AD408 /* SYNetworkPlugin.m */,
 			);
 			name = "Example for SYWebViewBridge";
 			path = SYWebViewBridge;
@@ -369,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				235FC4262529CC6F008AD408 /* SYNetworkPlugin.m in Sources */,
 				625A718A2512EADA0067DCEA /* SYDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SYViewController.m in Sources */,

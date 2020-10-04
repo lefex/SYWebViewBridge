@@ -28,9 +28,17 @@
     SYBridgeDebugPlugin *debugPlugin = [[SYBridgeDebugPlugin alloc] init];
     SYBridgeSystemPlugin *systemPlugin = [[SYBridgeSystemPlugin alloc] init];
     _pluginDict = @{
-        @"sydebug": debugPlugin,
-        @"sysystem": systemPlugin
+        @"debug": debugPlugin,
+        @"system": systemPlugin
     }.mutableCopy;
+}
+
+- (void)setPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
+    if ([plugin isKindOfClass:[SYBridgeBasePlugin class]]) {
+        if (moduleName && moduleName.length > 0) {
+            [_pluginDict setObject:plugin forKey:moduleName];
+        }
+    }
 }
 
 

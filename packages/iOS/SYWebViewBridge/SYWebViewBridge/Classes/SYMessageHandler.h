@@ -10,9 +10,12 @@
 #import "SYConstant.h"
 
 @class SYBridgeMessage;
+@class SYBridgeBasePlugin;
 
 @interface SYMessageHandler : NSObject<WKScriptMessageHandler>
 
 @property (nonatomic, copy) SYPluginMsgCallBack actionComplete;
+
+- (void)registerPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName;
 
 @end

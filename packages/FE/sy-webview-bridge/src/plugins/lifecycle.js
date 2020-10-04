@@ -7,8 +7,8 @@
 import SYPlugin from './plugin';
 
 export default class SYLifeCycle extends SYPlugin {
-    constructor(core, module, proxy) {
-        super(core, module);
+    constructor(core, moduleName, proxy) {
+        super(core, moduleName);
         this.proxy = proxy;
     }
     // page on load, before onShow (viewDidLoad in iOS)
