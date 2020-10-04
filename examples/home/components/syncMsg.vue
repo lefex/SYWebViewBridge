@@ -40,7 +40,8 @@ export default {
             });
         },
         alert() {
-            sy.debug.alert('receive a debug msg');
+            // sy.debug.alert('receive a debug msg');
+            alert('webview alert');
         },
         log() {
             sy.debug.log('I am log msg from webview');

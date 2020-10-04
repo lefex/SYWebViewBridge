@@ -52,7 +52,7 @@ wx/swan.showModal({
 
 
 
-### 初始化（前端）
+### 前端使用
 
 在前端开发中，直接使用类 SYBridge 创建一个实例，并挂载到 window 上，保证一个页面中只有一个 bridge 实例，在其它子组件可以直接使用该实例。在组件使用之前，业务方保证已经把 SYBridge 挂载到了 window 上。SYBridge 默认实例名是 sy，可自行修改，这个实例名是 webview 与 app 之间通信的基石。
 
@@ -134,4 +134,26 @@ sy.debug.alert('receive a debug msg');
 ```
 
 扩展 bridge api
+业务方比较灵活多变，需要支持插件机制让不同的业务可以进行分模块处理，这样不会导致一个文件中出现过多的代码，难以维护。SYWebViewBridge 提供了强大的插件机制，任意扩展。下面我们创建一个 NetworkPlugin，利用 app 发起网络请求。定义的 bridge 名字为 request。
+
+```js
+import SYPlugin from 'sy-webview-bridge';
+
+export default class NetworkPlugin extends SYPlugin {
+    request(options) {
+        this.core.sendMsg(this.router('request'), options);
+    }
+}
+```
+插件在使用之前需要进行注册：
+
+```js
+const sy = new SYBridge();
+// 创建 plugin，第一参数为 sy 实例中的 core 属性，network 为模块名字
+let requestPlugin = new NetworkPlugin(sy.core, 'network');
+sy.registerPlugin(requestPlugin);
+```
+
+# iOS 端使用
+
 

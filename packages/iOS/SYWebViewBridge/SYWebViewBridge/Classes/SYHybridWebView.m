@@ -18,6 +18,7 @@
 
 @implementation SYHybridWebView
 
+#pragma mark - Init
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {
@@ -41,9 +42,11 @@
     self.scheme = kSYDefaultScheme;
     // set unique id, can use app bundle id
     self.identifier = kSYDefaultIdentifier;
+
     self.configuration.preferences = [WKPreferences new];
     self.navigationDelegate = self;
     self.UIDelegate = self;
+    
     self.msgHandler = [[SYMessageHandler alloc] init];
     __weak __typeof(self) weakSelf = self;
     self.msgHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
@@ -61,13 +64,16 @@
             jscode = [NSString stringWithFormat:@"%@.%@(%@)", self.namespace, kSYDefaultCallback, jsonInfo];
         }
         [strongSelf syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
-            NSLog(@"evalute callbakc error: %@", error);
+            // TODO: no use, if you have problem, give me an issue
         }];
     };
+    // deal with environment message
     [self.configuration.userContentController addScriptMessageHandler:self name:kSYScriptEnvMsgName];
+    // deal with common message
     [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
 }
 
+#pragma mark public method
 - (void)setSourceUrl:(NSString *)sourceUrl {
     if (![_sourceUrl isEqualToString:sourceUrl]) {
         _sourceUrl = sourceUrl;

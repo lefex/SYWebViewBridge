@@ -10,7 +10,7 @@
 import Header from './components/header.vue';
 import SyncMsg from './components/syncMsg.vue';
 import SYBridge from '../../packages/FE/sy-webview-bridge/src/index.js';
-import RequestPlugin from './requestPlugin';
+import NetworkPlugin from './networkPlugin';
 
 export default {
     components: {
@@ -33,7 +33,7 @@ export default {
             namespace
         });
         // add custom plugin
-        let requestPlugin = new RequestPlugin(sy.core, 'network');
+        let requestPlugin = new NetworkPlugin(sy.core, 'network');
         sy.registerPlugin(requestPlugin);
         // observe webview lifecycle
         sy.lifecycle = {
