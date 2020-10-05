@@ -16,16 +16,15 @@
 		22E1634A96104124D181EC0A4052CFB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		272D87F715686A61251846DCFC6DE288 /* SYWebViewBridge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C794B54FC6C25C03295EC7A44F61CDB8 /* SYWebViewBridge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E03B96F002926DA01440EC0550F2485 /* SYHybridWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A3FE7C9D8137641AB1422AD04542D3 /* SYHybridWebViewController.m */; };
-		311F9E807740FD595B86FA323B4679C2 /* SYMsgDispatcherCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FC959C0E85B89C298DBEA2C9764258E4 /* SYMsgDispatcherCenter.m */; };
+		311F9E807740FD595B86FA323B4679C2 /* SYMessageDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = FC959C0E85B89C298DBEA2C9764258E4 /* SYMessageDispatcher.m */; };
 		4349BE945027DA701E5435E3843FFAFB /* SYBridgeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E9477F8D9F29A2CDE4CAF61B6749D2 /* SYBridgeMessage.m */; };
-		479032A52C6EFFB37C89F215F6EA037B /* SYMsgDispatcherCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5ACD3F8A801B48D12E19AB7B9D600611 /* SYMsgDispatcherCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		479032A52C6EFFB37C89F215F6EA037B /* SYMessageDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 5ACD3F8A801B48D12E19AB7B9D600611 /* SYMessageDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54A9DDFA7D6661836E28282B3DD95A64 /* SYBridgeSystemPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C5A2889F00E6BB6D9FABB13439AED904 /* SYBridgeSystemPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64446ED01F3A25F148FE29CB2836F0DA /* Pods-SYWebViewBridge_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 139B9F1AF94430A715E1C1DA12667688 /* Pods-SYWebViewBridge_Tests-dummy.m */; };
 		6B6AD16D85ED6DCD8B1EF65FF9AD6AC7 /* SYWebViewBridge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8428FEDAAF1BAC67D61513FEE6FF94 /* SYWebViewBridge-dummy.m */; };
 		6EF27D42CC017FE49803CE2270CE1BC9 /* Pods-SYWebViewBridge_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 001CC38DE584EF11C9A3485028E79BAD /* Pods-SYWebViewBridge_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C68331C5ED61A3F60E4714A393A38D0 /* SYMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D54B6F08D9BD38CD6D0153A58CDEAB9 /* SYMessageHandler.m */; };
 		7ED342E527D9E73100429DBCF2FEE4E2 /* SYHybridWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 687749A460174FD9360C2A80D003572E /* SYHybridWebView.m */; };
-		81BADF884434465EBD44993AA73715D2 /* SYBridgeDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5213214FCA498C979B0238B4DA9A13 /* SYBridgeDebugViewController.m */; };
 		8B28057B2507EB0C84491AC5BDB15EF7 /* SYBridgeBasePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7066D1ADC917800149136BCE145952D6 /* SYBridgeBasePlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A580835DFA3B043BB010D3B017B616C /* SYConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = FB81311A4A232E27F2F0E613BA0EEC0D /* SYConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B44559BDD77152471C794817B79DEEDC /* Pods-SYWebViewBridge_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 206C849EC3632EC80F637D99D82C2B1E /* Pods-SYWebViewBridge_Example-dummy.m */; };
@@ -36,7 +35,6 @@
 		C74BA6BAE79198CB665459FAF55289ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		D47113BC47EFC78642360A42B670303E /* SYBridgeSystemPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55503A4BCA0A269BC4FA1B6F04521A55 /* SYBridgeSystemPlugin.m */; };
 		E27D05B6F18F823BC32BC8FF5A65C1D0 /* NSObject+SYBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 253DC8DDA15C991C261C403EBB553238 /* NSObject+SYBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E4449FAA3A38BD6F6AE0126F2674D6F7 /* SYBridgeDebugViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A96D5CCCA8ED7154E7E081DF7FA41A /* SYBridgeDebugViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED496CE1EBBC09C00BD430690E17E163 /* SYBridgeBasePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = B333782C0165DE6B887B5EF9B041C215 /* SYBridgeBasePlugin.m */; };
 		F9CDDDDAD1614710CCD6439F50132C81 /* SYBridgeMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 54FE55CBFE4218475D973427991117B5 /* SYBridgeMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -72,17 +70,17 @@
 		353879975979C80681A784DDC0360AA4 /* Pods-SYWebViewBridge_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SYWebViewBridge_Example-frameworks.sh"; sourceTree = "<group>"; };
 		3C3034698630E50599E832BF56FDFD41 /* Pods-SYWebViewBridge_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SYWebViewBridge_Tests.modulemap"; sourceTree = "<group>"; };
 		410CB70D9E9EC823644E4CC7902EC4A6 /* SYBridgeDebugPlugin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYBridgeDebugPlugin.m; path = SYWebViewBridge/Classes/SYBridgeDebugPlugin.m; sourceTree = "<group>"; };
-		44F0F1D265DEFE0A95169125E622C129 /* SYWebViewBridge.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SYWebViewBridge.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		488F2F2E329BD29CFB8C415BE36A58F9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		44F0F1D265DEFE0A95169125E622C129 /* SYWebViewBridge.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SYWebViewBridge.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		488F2F2E329BD29CFB8C415BE36A58F9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4CE38B107C38F8A5FA93EEA35992CFC9 /* Pods-SYWebViewBridge_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SYWebViewBridge_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		542C07D4E9163D4F6F18F2DF50176A0B /* SYWebViewBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SYWebViewBridge.framework; path = SYWebViewBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		542C07D4E9163D4F6F18F2DF50176A0B /* SYWebViewBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWebViewBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54FE55CBFE4218475D973427991117B5 /* SYBridgeMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYBridgeMessage.h; path = SYWebViewBridge/Classes/SYBridgeMessage.h; sourceTree = "<group>"; };
 		55503A4BCA0A269BC4FA1B6F04521A55 /* SYBridgeSystemPlugin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYBridgeSystemPlugin.m; path = SYWebViewBridge/Classes/SYBridgeSystemPlugin.m; sourceTree = "<group>"; };
-		5ACD3F8A801B48D12E19AB7B9D600611 /* SYMsgDispatcherCenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYMsgDispatcherCenter.h; path = SYWebViewBridge/Classes/SYMsgDispatcherCenter.h; sourceTree = "<group>"; };
+		5ACD3F8A801B48D12E19AB7B9D600611 /* SYMessageDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYMessageDispatcher.h; path = SYWebViewBridge/Classes/SYMessageDispatcher.h; sourceTree = "<group>"; };
 		5D54B6F08D9BD38CD6D0153A58CDEAB9 /* SYMessageHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYMessageHandler.m; path = SYWebViewBridge/Classes/SYMessageHandler.m; sourceTree = "<group>"; };
 		687749A460174FD9360C2A80D003572E /* SYHybridWebView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYHybridWebView.m; path = SYWebViewBridge/Classes/SYHybridWebView.m; sourceTree = "<group>"; };
 		6C31253576C6F2EF322FF84C5131195A /* SYWebViewBridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SYWebViewBridge.release.xcconfig; sourceTree = "<group>"; };
-		6C8673B1FE3C42F081974BE93D49FFAD /* Pods_SYWebViewBridge_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SYWebViewBridge_Example.framework; path = "Pods-SYWebViewBridge_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C8673B1FE3C42F081974BE93D49FFAD /* Pods_SYWebViewBridge_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E62B63EA1D6F07322632B669C00171B /* Pods-SYWebViewBridge_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SYWebViewBridge_Tests-Info.plist"; sourceTree = "<group>"; };
 		7066D1ADC917800149136BCE145952D6 /* SYBridgeBasePlugin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYBridgeBasePlugin.h; path = SYWebViewBridge/Classes/SYBridgeBasePlugin.h; sourceTree = "<group>"; };
 		72B41784FA44323124384D53028C3B45 /* Pods-SYWebViewBridge_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SYWebViewBridge_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -90,14 +88,12 @@
 		7A940938CD0BBC5BD9EF823496702028 /* Pods-SYWebViewBridge_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SYWebViewBridge_Example.modulemap"; sourceTree = "<group>"; };
 		8698C48343F374A9B502404CEBC64FA3 /* Pods-SYWebViewBridge_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SYWebViewBridge_Example-umbrella.h"; sourceTree = "<group>"; };
 		922C8B986B527941C804962F5AF6F08B /* Pods-SYWebViewBridge_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SYWebViewBridge_Example.release.xcconfig"; sourceTree = "<group>"; };
-		98E198F900D9CDFA16E41241370BA51B /* Pods_SYWebViewBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SYWebViewBridge_Tests.framework; path = "Pods-SYWebViewBridge_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		98E198F900D9CDFA16E41241370BA51B /* Pods_SYWebViewBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F7730C2B86871656A3889FE95980465 /* Pods-SYWebViewBridge_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SYWebViewBridge_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A3A96D5CCCA8ED7154E7E081DF7FA41A /* SYBridgeDebugViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYBridgeDebugViewController.h; path = SYWebViewBridge/Classes/SYBridgeDebugViewController.h; sourceTree = "<group>"; };
 		A6F7175A89EA4B953245E348481012D0 /* SYWebViewBridge-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SYWebViewBridge-Info.plist"; sourceTree = "<group>"; };
 		ACDE0FB458D3E51AE8BA104E03694AD0 /* SYBridgeDebugPlugin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYBridgeDebugPlugin.h; path = SYWebViewBridge/Classes/SYBridgeDebugPlugin.h; sourceTree = "<group>"; };
 		AF4D285D7300FA77BF8B23F6728C2FD2 /* Pods-SYWebViewBridge_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SYWebViewBridge_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		AF5213214FCA498C979B0238B4DA9A13 /* SYBridgeDebugViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYBridgeDebugViewController.m; path = SYWebViewBridge/Classes/SYBridgeDebugViewController.m; sourceTree = "<group>"; };
 		B333782C0165DE6B887B5EF9B041C215 /* SYBridgeBasePlugin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYBridgeBasePlugin.m; path = SYWebViewBridge/Classes/SYBridgeBasePlugin.m; sourceTree = "<group>"; };
 		C031A6101AF84EB3E877D55158E24750 /* SYWebViewBridge-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWebViewBridge-prefix.pch"; sourceTree = "<group>"; };
 		C5A2889F00E6BB6D9FABB13439AED904 /* SYBridgeSystemPlugin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYBridgeSystemPlugin.h; path = SYWebViewBridge/Classes/SYBridgeSystemPlugin.h; sourceTree = "<group>"; };
@@ -110,10 +106,10 @@
 		F2AB651CD9AB1C045DBE1B8B66955734 /* SYMessageHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYMessageHandler.h; path = SYWebViewBridge/Classes/SYMessageHandler.h; sourceTree = "<group>"; };
 		F3A3FE7C9D8137641AB1422AD04542D3 /* SYHybridWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYHybridWebViewController.m; path = SYWebViewBridge/Classes/SYHybridWebViewController.m; sourceTree = "<group>"; };
 		FB81311A4A232E27F2F0E613BA0EEC0D /* SYConstant.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYConstant.h; path = SYWebViewBridge/Classes/SYConstant.h; sourceTree = "<group>"; };
-		FC959C0E85B89C298DBEA2C9764258E4 /* SYMsgDispatcherCenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYMsgDispatcherCenter.m; path = SYWebViewBridge/Classes/SYMsgDispatcherCenter.m; sourceTree = "<group>"; };
+		FC959C0E85B89C298DBEA2C9764258E4 /* SYMessageDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYMessageDispatcher.m; path = SYWebViewBridge/Classes/SYMessageDispatcher.m; sourceTree = "<group>"; };
 		FD426DA3CE04DC3451D88B0529888FEB /* Pods-SYWebViewBridge_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SYWebViewBridge_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FD5D0799FB9F13E70A278BE69E7E31D6 /* SYHybridWebView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYHybridWebView.h; path = SYWebViewBridge/Classes/SYHybridWebView.h; sourceTree = "<group>"; };
-		FE831D1B1539979154EFE5FA5DC54755 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		FE831D1B1539979154EFE5FA5DC54755 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,18 +177,14 @@
 		724DA1E87ED6E9D2B0EC4F2ED298C677 /* SYWebViewBridge */ = {
 			isa = PBXGroup;
 			children = (
-				253DC8DDA15C991C261C403EBB553238 /* NSObject+SYBridge.h */,
-				2C383EDDAFAD1D80C8D5FAE1B0C7F02A /* NSObject+SYBridge.m */,
 				7066D1ADC917800149136BCE145952D6 /* SYBridgeBasePlugin.h */,
 				B333782C0165DE6B887B5EF9B041C215 /* SYBridgeBasePlugin.m */,
 				ACDE0FB458D3E51AE8BA104E03694AD0 /* SYBridgeDebugPlugin.h */,
 				410CB70D9E9EC823644E4CC7902EC4A6 /* SYBridgeDebugPlugin.m */,
-				A3A96D5CCCA8ED7154E7E081DF7FA41A /* SYBridgeDebugViewController.h */,
-				AF5213214FCA498C979B0238B4DA9A13 /* SYBridgeDebugViewController.m */,
-				54FE55CBFE4218475D973427991117B5 /* SYBridgeMessage.h */,
-				F0E9477F8D9F29A2CDE4CAF61B6749D2 /* SYBridgeMessage.m */,
 				C5A2889F00E6BB6D9FABB13439AED904 /* SYBridgeSystemPlugin.h */,
 				55503A4BCA0A269BC4FA1B6F04521A55 /* SYBridgeSystemPlugin.m */,
+				54FE55CBFE4218475D973427991117B5 /* SYBridgeMessage.h */,
+				F0E9477F8D9F29A2CDE4CAF61B6749D2 /* SYBridgeMessage.m */,
 				FB81311A4A232E27F2F0E613BA0EEC0D /* SYConstant.h */,
 				FD5D0799FB9F13E70A278BE69E7E31D6 /* SYHybridWebView.h */,
 				687749A460174FD9360C2A80D003572E /* SYHybridWebView.m */,
@@ -202,8 +194,10 @@
 				F3A3FE7C9D8137641AB1422AD04542D3 /* SYHybridWebViewController.m */,
 				F2AB651CD9AB1C045DBE1B8B66955734 /* SYMessageHandler.h */,
 				5D54B6F08D9BD38CD6D0153A58CDEAB9 /* SYMessageHandler.m */,
-				5ACD3F8A801B48D12E19AB7B9D600611 /* SYMsgDispatcherCenter.h */,
-				FC959C0E85B89C298DBEA2C9764258E4 /* SYMsgDispatcherCenter.m */,
+				5ACD3F8A801B48D12E19AB7B9D600611 /* SYMessageDispatcher.h */,
+				FC959C0E85B89C298DBEA2C9764258E4 /* SYMessageDispatcher.m */,
+				253DC8DDA15C991C261C403EBB553238 /* NSObject+SYBridge.h */,
+				2C383EDDAFAD1D80C8D5FAE1B0C7F02A /* NSObject+SYBridge.m */,
 				35E4C17858BEBBCE3B14B690CBEED5F4 /* Pod */,
 				44EA54080C2013E85EC7E7928A3F1A20 /* Support Files */,
 			);
@@ -299,7 +293,6 @@
 				E27D05B6F18F823BC32BC8FF5A65C1D0 /* NSObject+SYBridge.h in Headers */,
 				8B28057B2507EB0C84491AC5BDB15EF7 /* SYBridgeBasePlugin.h in Headers */,
 				0522F500BBB0159E22F94454D1A9A320 /* SYBridgeDebugPlugin.h in Headers */,
-				E4449FAA3A38BD6F6AE0126F2674D6F7 /* SYBridgeDebugViewController.h in Headers */,
 				F9CDDDDAD1614710CCD6439F50132C81 /* SYBridgeMessage.h in Headers */,
 				54A9DDFA7D6661836E28282B3DD95A64 /* SYBridgeSystemPlugin.h in Headers */,
 				9A580835DFA3B043BB010D3B017B616C /* SYConstant.h in Headers */,
@@ -307,7 +300,7 @@
 				C3216E271E1DC5FE6BD24D89B0CDDAA9 /* SYHybridWebView.h in Headers */,
 				0C229FAD431287F0EC8B7E4FEC7C2BB6 /* SYHybridWebViewController.h in Headers */,
 				16E54F5F76B78DC3066B91B92BFE264F /* SYMessageHandler.h in Headers */,
-				479032A52C6EFFB37C89F215F6EA037B /* SYMsgDispatcherCenter.h in Headers */,
+				479032A52C6EFFB37C89F215F6EA037B /* SYMessageDispatcher.h in Headers */,
 				272D87F715686A61251846DCFC6DE288 /* SYWebViewBridge-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,14 +441,13 @@
 				C74A48EF1D77A7B4033BFF857DA51ED6 /* NSObject+SYBridge.m in Sources */,
 				ED496CE1EBBC09C00BD430690E17E163 /* SYBridgeBasePlugin.m in Sources */,
 				0239B34F972CAE4843F2420C3DAC24DA /* SYBridgeDebugPlugin.m in Sources */,
-				81BADF884434465EBD44993AA73715D2 /* SYBridgeDebugViewController.m in Sources */,
 				4349BE945027DA701E5435E3843FFAFB /* SYBridgeMessage.m in Sources */,
 				D47113BC47EFC78642360A42B670303E /* SYBridgeSystemPlugin.m in Sources */,
 				1A803DFF9AB2FCC011FA512915E2C5A3 /* SYHybridWebView+LifeCycle.m in Sources */,
 				7ED342E527D9E73100429DBCF2FEE4E2 /* SYHybridWebView.m in Sources */,
 				2E03B96F002926DA01440EC0550F2485 /* SYHybridWebViewController.m in Sources */,
 				7C68331C5ED61A3F60E4714A393A38D0 /* SYMessageHandler.m in Sources */,
-				311F9E807740FD595B86FA323B4679C2 /* SYMsgDispatcherCenter.m in Sources */,
+				311F9E807740FD595B86FA323B4679C2 /* SYMessageDispatcher.m in Sources */,
 				6B6AD16D85ED6DCD8B1EF65FF9AD6AC7 /* SYWebViewBridge-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,8 +640,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -9,13 +9,18 @@
 
 @implementation SYBridgeDebugPlugin
 
-- (void)alert:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+- (void)alert:(SYBridgeMessage *)msg {
     NSString *title = @"SYBridge debug";
     if (msg.paramDict[@"title"]) {
         title = msg.paramDict[@"title"];
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg.paramDict[@"content"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
-    [alert show];
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    UIViewController *rootVC = [window rootViewController];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg.paramDict[@"content"] preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // click ok
+    }]];
+    [rootVC presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)log:(SYBridgeMessage *)msg {

@@ -10,7 +10,7 @@
 
 @implementation SYBridgeSystemPlugin
 
-- (void)showModal:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+- (void)showModal:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
     NSString *title = @"SYBridge debug";
     if (msg.paramDict[@"title"]) {
         title = msg.paramDict[@"title"];
@@ -20,7 +20,7 @@
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:msg.paramDict[@"cancelText"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             if (callback) {
                 callback(@{
-                    @"cbtype": @"success",
+                    kSYCallbackType: kSYCallbackSuccess,
                     @"confirm": @(0)
                 }, msg);
             }
@@ -30,7 +30,7 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:msg.paramDict[@"confirmText"] ?: @"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (callback) {
             callback(@{
-                @"cbtype": @"success",
+                kSYCallbackType: kSYCallbackSuccess,
                 @"confirm": @(1)
             }, msg);
         }

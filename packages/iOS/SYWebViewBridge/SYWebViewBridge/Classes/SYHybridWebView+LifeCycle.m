@@ -42,7 +42,7 @@ static NSString *kSYLifeCycle = @"_lifecycle";
 
 - (SYBridgeMessage *)messageForAction:(NSString *)action {
     SYBridgeMessage *msg = [[SYBridgeMessage alloc] init];
-    msg.module = kSYLifeCycle;
+    msg.moduleName = kSYLifeCycle;
     msg.action = action;
     return msg;
 }

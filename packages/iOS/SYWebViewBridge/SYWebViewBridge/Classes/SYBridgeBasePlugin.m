@@ -9,7 +9,11 @@
 
 @implementation SYBridgeBasePlugin
 
-- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
+    if (![msg isValidMessage]) {
+        // the message invalid
+        return NO;
+    }
     // have a callback function
     NSString *selName = [NSString stringWithFormat:@"%@:callback:", msg.action];
     if ([self respondsToSelector:NSSelectorFromString(selName)]) {
@@ -28,8 +32,6 @@
         #pragma clang diagnostic pop
         return YES;
     }
-    NSLog(@"have no bridge method");
-    // subclass must implement
     return NO;
 }
 

@@ -5,16 +5,16 @@
 //  Created by SuYan Wang on 2020/9/16.
 //
 
-#import "SYMsgDispatcherCenter.h"
+#import "SYMessageDispatcher.h"
 #import "SYBridgeDebugPlugin.h"
 #import "SYBridgeSystemPlugin.h"
 #import "SYBridgeMessage.h"
 
-@interface SYMsgDispatcherCenter ()
+@interface SYMessageDispatcher ()
 @property (nonatomic, strong) NSMutableDictionary *pluginDict;
 @end
 
-@implementation SYMsgDispatcherCenter
+@implementation SYMessageDispatcher
 
 - (instancetype)init {
     self = [super init];
@@ -33,17 +33,20 @@
     }.mutableCopy;
 }
 
-- (void)setPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
-    if ([plugin isKindOfClass:[SYBridgeBasePlugin class]]) {
-        if (moduleName && moduleName.length > 0) {
-            [_pluginDict setObject:plugin forKey:moduleName];
-        }
+- (BOOL)setPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
+    if ([plugin isKindOfClass:[SYBridgeBasePlugin class]] && moduleName.length > 0) {
+        [_pluginDict setObject:plugin forKey:moduleName];
+        return YES;
     }
+    return NO;
 }
 
-
-- (BOOL)dispatchMsg:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
-    SYBridgeBasePlugin *plugin = _pluginDict[msg.module];
+- (BOOL)dispatchMessage:(SYBridgeMessage *)msg
+               callback:(SYPluginMessageCallBack)callback {
+    if (!msg.moduleName || msg.moduleName.length <= 0) {
+        return NO;
+    }
+    SYBridgeBasePlugin *plugin = _pluginDict[msg.moduleName];
     if (!plugin || ![plugin isKindOfClass:[SYBridgeBasePlugin class]]) {
         return NO;
     }

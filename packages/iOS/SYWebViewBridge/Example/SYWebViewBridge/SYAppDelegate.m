@@ -7,7 +7,6 @@
 //
 
 #import "SYAppDelegate.h"
-#import "SYDebugViewController.h"
 
 @implementation SYAppDelegate
 
@@ -42,16 +41,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"openURL" message:url.absoluteString delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-    [alert show];
-    
-    SYDebugViewController *debugVC = [[SYDebugViewController alloc] init];
-    [self.window.rootViewController.navigationController pushViewController:debugVC animated:YES];
-    
-    return YES;
 }
 
 @end

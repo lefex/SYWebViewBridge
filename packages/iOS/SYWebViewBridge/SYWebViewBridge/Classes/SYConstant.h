@@ -24,9 +24,12 @@ static NSString *kSYDefaultScheme = @"suyan";
 static NSString *kSYDefaultIdentifier = @"com.sy.bridge";
 // the webview bridge receive message function
 static NSString *kSYDefaultWebViewBridgeMsg = @"syBridgeMessage";
+// callback type to webview
+static NSString *kSYCallbackType = @"cbtype";
+static NSString *kSYCallbackSuccess = @"success";
+static NSString *kSYCallbackFail = @"fail";
+static NSString *kSYCallbackComplete = @"complete";
 
-
-
-typedef void(^SYPluginMsgCallBack)(NSDictionary *info, SYBridgeMessage *msg);
+typedef void(^SYPluginMessageCallBack)(NSDictionary *info, SYBridgeMessage *msg);
 
 #endif /* SYConstant_h */

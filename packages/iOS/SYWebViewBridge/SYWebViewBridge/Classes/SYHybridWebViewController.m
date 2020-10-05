@@ -31,8 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStyleDone target:self action:@selector(onShow)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,10 +57,6 @@
         _webview = [[SYHybridWebView alloc] initWithFrame:self.view.bounds configuration:conf];
     }
     return _webview;
-}
-
-- (void)onShow {
-    [self.webview syOnShow];
 }
 
 @end

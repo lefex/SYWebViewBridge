@@ -9,9 +9,16 @@
 #import "SYBridgeMessage.h"
 #import "SYConstant.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SYBridgeBasePlugin : NSObject
 
-- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback;
+/// invoke plugin method
+/// @param msg webview message
+/// @param callback excute result
+- (BOOL)invoke:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback;
 
 @end
+
+NS_ASSUME_NONNULL_END
 

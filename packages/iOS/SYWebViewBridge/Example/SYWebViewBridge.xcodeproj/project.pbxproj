@@ -22,7 +22,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		625A718A2512EADA0067DCEA /* SYDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625A71892512EADA0067DCEA /* SYDebugViewController.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		C235C1C154B599518152DB6A /* Pods_SYWebViewBridge_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C638658305BFB42B0E37C7 /* Pods_SYWebViewBridge_Tests.framework */; };
@@ -62,8 +61,6 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		625A71882512EADA0067DCEA /* SYDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYDebugViewController.h; sourceTree = "<group>"; };
-		625A71892512EADA0067DCEA /* SYDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYDebugViewController.m; sourceTree = "<group>"; };
 		658221E26C0611A5321657E5 /* Pods_SYWebViewBridge_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76C638658305BFB42B0E37C7 /* Pods_SYWebViewBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SYWebViewBridge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,13 +140,11 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* SYViewController.h */,
 				6003F5A6195388D20070C39A /* SYViewController.m */,
+				235FC4242529CC6F008AD408 /* SYNetworkPlugin.h */,
+				235FC4252529CC6F008AD408 /* SYNetworkPlugin.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
-				625A71882512EADA0067DCEA /* SYDebugViewController.h */,
-				625A71892512EADA0067DCEA /* SYDebugViewController.m */,
-				235FC4242529CC6F008AD408 /* SYNetworkPlugin.h */,
-				235FC4252529CC6F008AD408 /* SYNetworkPlugin.m */,
 			);
 			name = "Example for SYWebViewBridge";
 			path = SYWebViewBridge;
@@ -375,7 +370,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				235FC4262529CC6F008AD408 /* SYNetworkPlugin.m in Sources */,
-				625A718A2512EADA0067DCEA /* SYDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SYViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

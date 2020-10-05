@@ -14,6 +14,7 @@
 @interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 @property (nonatomic, strong) SYMessageHandler *msgHandler;
 @property (nonatomic, copy) NSString *namespace;
+@property (nonatomic, assign) NSInteger retryCount;
 @end
 
 @implementation SYHybridWebView
@@ -101,13 +102,11 @@
 - (void)sySendMessage:(SYBridgeMessage *)msg completionHandler:(void(^)(id msg, NSError *error))handler {
     // namespace.core.callback(code)
     NSString *jsCode = [NSString stringWithFormat:@"%@.%@(\"%@\")", self.namespace, kSYDefaultWebViewBridgeMsg, msg.router];
-    [self evaluateJavaScript:jsCode completionHandler:^(id msg, NSError *error) {
-        
-    }];
+    [self evaluateJavaScript:jsCode completionHandler:handler];
 }
 
-- (void)syRegisterPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
-    [self.msgHandler registerPlugin:plugin forModuleName:moduleName];
+- (BOOL)syRegisterPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
+    return [self.msgHandler registerPlugin:plugin forModuleName:moduleName];
 }
 
 #pragma mark - WKScriptMessageHandler
@@ -138,70 +137,23 @@
 }
 
 #pragma mark - WKUIDelegate
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
-{
-
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    UIViewController *rootVC = [window rootViewController];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // click ok
+    }]];
+    [rootVC presentViewController:alert animated:YES completion:nil];
+    completionHandler();
 }
-
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler
-{
-    NSLog(@"runJavaScriptConfirmPanelWithMessage");
-    completionHandler(YES);
-}
-
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler
-{
-    NSLog(@"runJavaScriptTextInputPanelWithPrompt");
-    completionHandler(@"OC input");
-}
-
 
 #pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-// error
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    if ([navigationAction.request.URL.absoluteString containsString:@"suyan"]) {
-        decisionHandler(WKNavigationActionPolicyCancel);
-    }
-    else {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-}
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    decisionHandler(WKNavigationResponsePolicyAllow);
-}
-
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-// 白屏会触发的逻辑
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-
+    if (_retryWhenTerminate && _retryCount <= 0) {
+        [self syReload];
+        _retryCount += 1;
+    }
 }
 
 @end

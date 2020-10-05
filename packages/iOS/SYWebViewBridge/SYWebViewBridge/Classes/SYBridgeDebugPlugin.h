@@ -11,7 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SYBridgeDebugPlugin : SYBridgeBasePlugin
 
-- (void)alert:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback;
+/// show a debug alert
+/// @param msg router to message
+- (void)alert:(SYBridgeMessage *)msg;
+
+/// log a message in debug area
+/// @param msg router to message
+- (void)log:(SYBridgeMessage *)msg;
 
 @end
 

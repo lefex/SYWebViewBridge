@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (SYBridge)
 
-+ (NSDictionary *)sy_dictionaryWithJSON:(id)json;
 + (NSString *)sy_dicionaryToJson:(NSDictionary *)dict;
 
 @end

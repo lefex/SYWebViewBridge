@@ -9,13 +9,16 @@
 #import <WebKit/WebKit.h>
 #import "SYConstant.h"
 
-@class SYBridgeMessage;
 @class SYBridgeBasePlugin;
 
 @interface SYMessageHandler : NSObject<WKScriptMessageHandler>
 
-@property (nonatomic, copy) SYPluginMsgCallBack actionComplete;
+// the action send a callback
+@property (nonatomic, copy) SYPluginMessageCallBack actionComplete;
 
-- (void)registerPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName;
+/// register a custom plugin
+/// @param plugin the plugin must be subclass SYBridgeBasePlugin
+/// @param moduleName the module name, must be unique in plugin system
+- (BOOL)registerPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName;
 
 @end

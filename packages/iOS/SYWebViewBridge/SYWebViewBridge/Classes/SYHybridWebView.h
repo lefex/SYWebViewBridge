@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *scheme;
 // router identifier, you can use app bundle id, such as com.sy.fe
 @property (nonatomic, copy, nullable) NSString *identifier;
+// retry load web content when terminate action
+@property (nonatomic, assign) BOOL retryWhenTerminate;
 
 // reload webview
 - (void)syReload;
@@ -34,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// reginter a plugin to deal with message when receive from web page
 /// @param plugin a plugin must subclass of SYBridgeBasePlugin
 /// @param moduleName the module name to help find which module to deal with message
-- (void)syRegisterPlugin:(SYBridgeBasePlugin *)plugin
+- (BOOL)syRegisterPlugin:(SYBridgeBasePlugin *)plugin
            forModuleName:(NSString *)moduleName;
 
 

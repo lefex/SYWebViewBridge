@@ -43,7 +43,7 @@
     }
     self.scheme = scheme;
     self.identifier = firstComponents[0];
-    self.module = firstComponents[1];
+    self.moduleName = firstComponents[1];
     self.action = firstComponents[2];
     if ([components count] == 1) {
         // have no params
@@ -56,6 +56,7 @@
         NSArray *paths = [obj componentsSeparatedByString:@"="];
         if ([paths count] == 2) {
             if ([(NSString *)[paths firstObject] isEqualToString:@"params"]) {
+                // params are encoded, need to decoded
                 NSString *decodeStr = [(NSString *)[paths lastObject] stringByRemovingPercentEncoding];
                 NSData *data = [decodeStr dataUsingEncoding:NSUTF8StringEncoding];
                 if (data) {
@@ -84,12 +85,22 @@
     if (_router.length > 0) {
         return _router;
     }
-    NSString *aRouter = [NSString stringWithFormat:@"%@://%@/%@/%@", self.scheme.length > 0 ? self.scheme : kSYDefaultScheme, self.identifier.length > 0 ? self.identifier : kSYDefaultIdentifier, self.module, self.action];
+    NSString *aRouter = [NSString stringWithFormat:@"%@://%@/%@/%@", self.scheme.length > 0 ? self.scheme : kSYDefaultScheme, self.identifier.length > 0 ? self.identifier : kSYDefaultIdentifier, self.moduleName, self.action];
     if ([self.paramDict count] > 0) {
         NSString *paramJson = [NSObject sy_dicionaryToJson:self.paramDict];
         aRouter = [NSString stringWithFormat:@"%@?params=%@", aRouter, [paramJson stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return aRouter;
+}
+
+- (BOOL)isValidMessage {
+    if (self.scheme.length > 0
+        && self.identifier.length > 0
+        && self.moduleName.length > 0
+        && self.action.length > 0) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

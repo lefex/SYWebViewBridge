@@ -11,29 +11,22 @@
 
 @implementation SYNetworkPlugin
 
-- (void)request:(SYBridgeMessage *)msg callback:(SYPluginMsgCallBack)callback {
+- (void)request:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSString *url = msg.paramDict[@"url"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (data) {
+            if (!error && data) {
                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                if (dict) {
-                    callback(@{
-                        @"cbtype": @"success",
-                        @"data": dict
-                    }, msg);
-                }
-                else {
-                    callback(@{
-                        @"cbtype": @"fail"
-                    }, msg);
-                }
+                callback(@{
+                    kSYCallbackType: kSYCallbackSuccess,
+                    @"data": dict ?: @{}
+                }, msg);
             }
             else {
                 callback(@{
-                    @"cbtype": @"fail"
+                    kSYCallbackType: kSYCallbackFail
                 }, msg);
             }
         });

@@ -1,6 +1,6 @@
 在 App 开发当中，Hybrid 框架发展越来越成熟， webview 和 App 进行通信只是最基本的功能，现如今对 Hybrid 框架要求越来越高。比如小程序框架，其实也可以把它看做是一个 Hybrid 框架。我认为一个好的 Hybrid 框架需要支持下面这些特性：
 
-1、webview 与 iOS、Android App 可进行无差别通信；
+1、：： 与 iOS、Android App 可进行无差别通信；
 
 2、通信接口需要保证简单，webview 和 app 可进行任意消息发送与接收；
 
@@ -45,10 +45,6 @@ wx/swan.showModal({
 `showModal`是 js-native 交互的 api，也是 Hybrid 框架提供的端能力。如果有这样的 Hybrid 框架，用起来是不是很爽？
 
 今天介绍的 SYWebViewBridge 完全做到了类似 `showModal` 这种通信写法。它是一个更现代 Hybrid 框架，可在前端和 iOS 中使用，目前不支持 Android，不过实现 Android 端也非常简单，只需遵循它的通信标准即可。
-
-
-
-## 如何使用
 
 
 
@@ -156,4 +152,66 @@ sy.registerPlugin(requestPlugin);
 
 # iOS 端使用
 
+iOS 中提供了 `SYHybridWebViewController` 和 `SYHybridWebView`这两种方式：
+
+方式一： `SYHybridWebViewController` 
+
+```objective-c
+SYHybridWebViewController *viewController = [[SYHybridWebViewController alloc] init];
+[viewController loadUrl:@"http://localhost:9000/home.html"];
+[self.navigationController pushViewController:viewController animated:YES];
+```
+
+方式二： `SYHybridWebView`
+
+```objc
+WKWebViewConfiguration *conf = [[WKWebViewConfiguration alloc] init];
+SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.bounds configuration:conf];
+[self.view addSubview:webview];
+```
+
+目前默认有 SYBridgeDebugPlugin 和 SYBridgeSystemPlugin ，你可以添加自己的 plugin 来扩充 bridge，我们以添加 network plugin 为例，前端页面通过 app 来发起网络请求：
+
+`SYBridgeBasePlugin.h`
+
+自定义 plugin 必须继承自 `SYBridgeBasePlugin`
+
+```objc
+@interface SYNetworkPlugin : SYBridgeBasePlugin
+
+@end
+```
+
+`SYBridgeBasePlugin.m`
+
+该 plugin 中提供了一个方法`request:callback:`，当 App 接收到 webview 发来的消息后，将会自动调用该方法。在 callback block
+
+```objc
+@implementation SYNetworkPlugin
+
+- (void)request:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSString *url = msg.paramDict[@"url"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error && data) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                callback(@{
+                    @"cbtype": @"success",
+                    @"data": dict ?: @{}
+                }, msg);
+            }
+            else {
+                callback(@{
+                    @"cbtype": @"fail"
+                }, msg);
+            }
+        });
+    }];
+    [task resume];
+}
+
+@end
+```
 
