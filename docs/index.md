@@ -16,20 +16,18 @@ footer: Made by  with suyan wang❤️
 ---
 
 ```js
-sy.showModal({
+sy.system.showModal({
     title: 'SYWebViewBridge',
     content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
     showCancel: true,
     cancelText: 'Cancel',
-    cancelColor: '#000000',
     confirmText: 'OK',
-    confirmColor: '#576b95',
     success: function(res) {
         if (res.confirm) {
             console.log('Click OK button');
         }
         else {
-            console.log('click Cancel button');
+            console.log('Click Cancel button');
         }
     },
     fail: function(err) {
