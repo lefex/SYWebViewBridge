@@ -21,7 +21,7 @@ sy.env.setEnvironment({
 });
 ```
 
-## lifeCycle
+## LifeCycle
 
 You can observe the H5 page lifecycle.
 
@@ -42,7 +42,7 @@ sy.lifecycle = {
 };
 ```
 
-## a bridge api
+## A bridge api
 
 `sy-webview-bridge` provide a system plugin that can show a modal alert in App. This code to show a modal alert and will receive a success callback when user click OK or Cancel button.
 
@@ -73,7 +73,7 @@ sy.system.showModal({
 });
 ```
 
-## debug in webview
+## Debug in webview
 
 You can console log a message in app:
 
@@ -87,7 +87,7 @@ You can show a alert in app:
 sy.debug.alert('receive a debug msg');
 ```
 
-## plugin system
+## Plugin system
 
 `sy-webview-bridge` provide a powerful plugin system. You can write own bridge api through plugin system. We can write a `NetworkPlugin` to send a request in app and get a response from app.
 
@@ -105,7 +105,7 @@ export default class NetworkPlugin extends SYPlugin {
 }
 ```
 
-2. registe
+2. register
 
 ```js
 const sy = new SYBridge();

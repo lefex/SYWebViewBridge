@@ -39,10 +39,6 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'Config',
-        link: '/config/'
-      },
-      {
         text: 'GitHub',
         link: 'https://github.com/lefex/SYWebViewBridge'
       }

@@ -1,6 +1,6 @@
-在 App 开发当中，Hybrid 框架发展越来越成熟， webview 和 App 进行通信只是最基本的功能，现如今对 Hybrid 框架要求越来越高。比如小程序框架，其实也可以把它看做是一个 Hybrid 框架。我认为一个好的 Hybrid 框架需要支持下面这些特性：
+在 App 开发当中，Hybrid 框架发展越来越成熟， webview 和 App 进行通信只是最基本的功能，现如今对 Hybrid 框架要求越来越高。比如小程序框架，它是一个非常复杂 Hybrid 框架。我认为一个好的 Hybrid 框架需要支持下面这些特性：
 
-1、：： 与 iOS、Android App 可进行无差别通信；
+1、与 iOS、Android App 可进行无差别通信；
 
 2、通信接口需要保证简单，webview 和 app 可进行任意消息发送与接收；
 
@@ -42,15 +42,16 @@ wx/swan.showModal({
 });
 ```
 
-`showModal`是 js-native 交互的 api，也是 Hybrid 框架提供的端能力。如果有这样的 Hybrid 框架，用起来是不是很爽？
+`showModal`是 js-native 交互的 api，也可以说是 Hybrid 框架提供的端能力。如果有这样的 Hybrid 框架，用起来是不是很爽？
 
 今天介绍的 SYWebViewBridge 完全做到了类似 `showModal` 这种通信写法。它是一个更现代 Hybrid 框架，可在前端和 iOS 中使用，目前不支持 Android，不过实现 Android 端也非常简单，只需遵循它的通信标准即可。
 
 
-
 ### 前端使用
 
-在前端开发中，直接使用类 SYBridge 创建一个实例，并挂载到 window 上，保证一个页面中只有一个 bridge 实例，在其它子组件可以直接使用该实例。在组件使用之前，业务方保证已经把 SYBridge 挂载到了 window 上。SYBridge 默认实例名是 sy，可自行修改，这个实例名是 webview 与 app 之间通信的基石。
+#### 创建 SYBridge
+
+在前端开发中，直接使用类 SYBridge 创建一个实例，并挂载到 window 上，保证一个页面中只有一个 bridge 实例，在其它子组件可以直接使用该实例。SYBridge 默认实例名是 sy，可自行修改，这个实例名是 webview 与 app 之间通信的基石。**本文提到的 sy 指的就是 SYBridge 实例**
 
 ```js
 // 设置 SYBridge 在 window 上挂载的实例名
@@ -65,8 +66,9 @@ sy.env.setEnvironment({
 ```
 
 
+#### 监听 webview 页面生命周期
 
-监听 webview 页面生命周期。在 SYBridge 实例下有一个对象 lifecycle 负责处理 webview 的生命周期，这些生命周期方法名必须是下面这些。
+在 SYBridge 实例下有一个对象 lifecycle 负责处理 webview 的生命周期。如果你需要处理 web page 的生命周期，可以直接覆盖 `sy` 的 lifecycle 对象，并提供对应的函数即可。需要注意点的是，生命周期在 web 页面中只能监听一次，如果其它组件需要监听，可以利用组件之间通信来实现监听页面生命周期。
 
 ```js
 sy.lifecycle = {
@@ -89,9 +91,17 @@ sy.lifecycle = {
 };
 ```
 
+#### 插件
 
+`SYHybridWebView` 是一个轻量级的 js-native 通信框架，其内部工作主要依赖于插件系统，默认提供了 `system`、`debug` 和 `lifecycle` 这 3 个插件。在 js 调用中需要通过下面这种方式调用：
 
-使用默认提供的 api 在 app 内显示一个弹窗：
+```js
+sy.xxx-plugin.action({ options });
+// 举例
+sy.system.showModal({ options })
+```
+
+比如，我们使用默认提供 system 插件在 app 内显示一个弹窗，可以这样写：
 
 ```js
 sy.system.showModal({
@@ -120,17 +130,9 @@ sy.system.showModal({
 });
 ```
 
-调试，可以在 app 内进行打印日志，弹窗
+#### 扩展插件
 
-```js
-// 在 app 内打印日志
-sy.debug.log('I am log msg from webview');
-// 在 app 内显示一个提示弹窗
-sy.debug.alert('receive a debug msg');
-```
-
-扩展 bridge api
-业务方比较灵活多变，需要支持插件机制让不同的业务可以进行分模块处理，这样不会导致一个文件中出现过多的代码，难以维护。SYWebViewBridge 提供了强大的插件机制，任意扩展。下面我们创建一个 NetworkPlugin，利用 app 发起网络请求。定义的 bridge 名字为 request。
+业务方变幻莫测，`SYHybridWebView`通过插件机制让扩展 bridge api 变得非常简单，同时对代码进行模块化管理。下面我们创建一个 NetworkPlugin，利用 app 发起网络请求。定义的 bridge 名字为 request。
 
 ```js
 import SYPlugin from 'sy-webview-bridge';
@@ -145,9 +147,46 @@ export default class NetworkPlugin extends SYPlugin {
 
 ```js
 const sy = new SYBridge();
-// 创建 plugin，第一参数为 sy 实例中的 core 属性，network 为模块名字
+// 创建 plugin，第一参数为 sy 实例中的 core 属性，network 为插件名字
 let requestPlugin = new NetworkPlugin(sy.core, 'network');
 sy.registerPlugin(requestPlugin);
+```
+
+当 web 页面需要进行网络请求时：
+
+```js
+sendRequest() {
+    sy.network.request({
+        url: 'https://www.igetget.com/api/wap/footer',
+        method: 'get',
+        data: {
+            from: 'SYWebViewBridge'
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        success(res) {
+            sy.debug.alert(res.data);
+        },
+        fail(err) {
+            sy.debug.alert('network error');
+        },
+        complete(res) {
+            console.log('request complete');
+        }
+    });
+}
+```
+
+#### 调试
+
+在 H5 页面中可以通过 debug 插件在 app 内进行打印日志，弹窗。
+
+```js
+// 在 app 内打印日志
+sy.debug.log('I am log msg from webview');
+// 在 app 内显示一个提示弹窗
+sy.debug.alert('receive a debug msg');
 ```
 
 # iOS 端使用
@@ -214,4 +253,8 @@ SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.boun
 
 @end
 ```
+
+## 原理说明
+
+
 
