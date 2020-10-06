@@ -14,13 +14,8 @@
     if (msg.paramDict[@"title"]) {
         title = msg.paramDict[@"title"];
     }
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    UIViewController *rootVC = [window rootViewController];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg.paramDict[@"content"] preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // click ok
-    }]];
-    [rootVC presentViewController:alert animated:YES completion:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg.paramDict[@"content"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 - (void)log:(SYBridgeMessage *)msg {

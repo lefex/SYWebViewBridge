@@ -18,7 +18,7 @@ import SYLifeCycle from './plugins/lifecycle';
 import SYEnv from './plugins/env';
 import {SYDefaultScheme, SYDefaultIdentifier} from './constant';
 // bridge will log some useful messages when in devlopment environment
-window.__SYDEV__ = true;
+window.__SYDEV__ = false;
 
 // change router to SYMessage Class
 export class SYMessage {

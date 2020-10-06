@@ -7,6 +7,7 @@
 
 #import "SYBridgeSystemPlugin.h"
 #import "SYBridgeMessage.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @implementation SYBridgeSystemPlugin
 
@@ -39,6 +40,14 @@
     
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     [rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)setStorageSync:(SYBridgeMessage *)msg {
+    
+}
+
+- (NSString *)getStorageSync:(SYBridgeMessage *)msg {
+    return @"";
 }
 
 @end

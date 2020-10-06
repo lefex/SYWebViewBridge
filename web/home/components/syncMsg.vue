@@ -20,6 +20,7 @@
         <p class="des">send debug msg between app and webview</p>
         <div class="button" v-on:click="alert">Send Debug Alert</div>
         <div class="button" v-on:click="log">Log msg in app</div>
+        <div class="button" v-on:click="webAlert">Use Web Alert</div>
     </div>
 </template>
 
@@ -40,7 +41,9 @@ export default {
             });
         },
         alert() {
-            // sy.debug.alert('receive a debug msg');
+            sy.debug.alert('receive a debug msg');
+        },
+        webAlert() {
             alert('webview alert');
         },
         log() {
@@ -55,11 +58,9 @@ export default {
                 confirmText: 'OK',
                 success(res) {
                     if (res.confirm) {
-                        console.log('click OK button');
                         sy.debug.alert('click OK button');
                     }
                     else {
-                        console.log('click Cancel button');
                         sy.debug.alert('click Cancel button');
                     }
                 },
@@ -82,11 +83,9 @@ export default {
                     'content-type': 'application/json'
                 },
                 success(res) {
-                    console.log('get request result: ', res.data);
                     sy.debug.alert(res.data);
                 },
                 fail(err) {
-                    console.error('request error');
                     sy.debug.alert('network error');
                 },
                 complete(res) {

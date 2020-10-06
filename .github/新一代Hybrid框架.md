@@ -184,7 +184,7 @@ SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.boun
 
 `SYBridgeBasePlugin.m`
 
-该 plugin 中提供了一个方法`request:callback:`，当 App 接收到 webview 发来的消息后，将会自动调用该方法。在 callback block
+该 plugin 中提供了一个方法`request:callback:`，当 App 接收到 webview 发来的消息后，将会自动调用该方法。在 callback 中指定回调类型和回调成功或失败。
 
 ```objc
 @implementation SYNetworkPlugin
@@ -198,13 +198,13 @@ SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.boun
             if (!error && data) {
                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                 callback(@{
-                    @"cbtype": @"success",
+                    kSYCallbackType: kSYCallbackSuccess,
                     @"data": dict ?: @{}
                 }, msg);
             }
             else {
                 callback(@{
-                    @"cbtype": @"fail"
+                    kSYCallbackType: kSYCallbackFail
                 }, msg);
             }
         });
