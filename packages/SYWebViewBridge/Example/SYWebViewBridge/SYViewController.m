@@ -28,7 +28,8 @@
     [self.view addSubview:self.tableView];
     
     _datas = @[
-        @{@"title": @"SYHybridWebViewController", @"sel": @"toHrbridViewControll"}
+        @{@"title": @"SYHybridWebViewController", @"sel": @"toHrbridViewControll"},
+        @{@"title": @"Test", @"sel": @"toTestViewControll"}
     ];
 }
 
@@ -56,10 +57,18 @@
 }
 
 - (void)toHrbridViewControll {
+    [self toHybridControllerForSrc:@"http://localhost:9000/home.html"];
+}
+
+- (void)toTestViewControll {
+    [self toHybridControllerForSrc:@"http://localhost:9000/test.html"];
+}
+
+- (void)toHybridControllerForSrc:(NSString *)src {
     SYHybridWebViewController *viewController = [[SYHybridWebViewController alloc] init];
     SYNetworkPlugin *networkPlugin = [[SYNetworkPlugin alloc] init];
     [viewController.webview syRegisterPlugin:networkPlugin forModuleName:@"network"];
-    [viewController loadUrl:@"http://localhost:9000/home.html"];
+    [viewController loadUrl:src];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

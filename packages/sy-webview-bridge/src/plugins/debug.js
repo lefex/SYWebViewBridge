@@ -4,7 +4,7 @@
  * @author suyan
 */
 
-import SYPlugin from './plugin';
+import {SYPlugin} from './plugin';
 
 // debug plugin
 export default class SYDebug extends SYPlugin {

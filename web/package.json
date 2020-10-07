@@ -7,6 +7,7 @@
     "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --open",
     "start:home": "webpack-dev-server --open-page home.html",
+    "start:test": "webpack-dev-server --open-page test.html",
     "watch": "webpack --config webpack.config.js --watch"
   },
   "keywords": [

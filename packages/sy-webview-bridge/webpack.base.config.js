@@ -10,26 +10,26 @@ module.exports = {
     },
     output: {
         path: __dirname + '/dist',
-        filename: '[name]/index.js',
+        filename: 'index.js',
         libraryTarget: 'umd'
     },
     module: {
-        rules: [{
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['env'],
-                    plugins: [
-                        'transform-class-properties',
-                        ['transform-object-rest-spread', {
-                            useBuiltIns: true
-                        }],
-                        'transform-decorators-legacy',
-                        'transform-object-assign'
-                    ]
-                }
-            }]
+        // rules: [{
+        //         test: /\.js$/,
+        //         exclude: /node_modules/,
+        //         loader: 'babel-loader',
+        //         query: {
+        //             presets: ['env'],
+        //             plugins: [
+        //                 'transform-class-properties',
+        //                 ['transform-object-rest-spread', {
+        //                     useBuiltIns: true
+        //                 }],
+        //                 'transform-decorators-legacy',
+        //                 'transform-object-assign'
+        //             ]
+        //         }
+        //     }]
     }
 };
 

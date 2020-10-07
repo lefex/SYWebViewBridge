@@ -1,8 +1,8 @@
 {
   "name": "sy-webview-bridge",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "dev": "webpack --config webpack.dev.config.js",
     "dev:watch": "webpack --config webpack.dev.config.js --watch",

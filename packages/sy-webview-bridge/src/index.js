@@ -21,7 +21,7 @@ import {SYDefaultScheme, SYDefaultIdentifier} from './constant';
 window.__SYDEV__ = false;
 
 // change router to SYMessage Class
-export class SYMessage {
+class SYMessage {
     constructor(router) {
         // orgin router like suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb
         this.router = router;
@@ -166,5 +166,8 @@ export default class SYBridge {
             }
         }
     }
-
 }
+
+export {
+    SYPlugin
+} from './plugins/plugin';

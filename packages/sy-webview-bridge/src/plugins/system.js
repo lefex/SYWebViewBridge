@@ -4,7 +4,7 @@
  * @author suyan
 */
 
-import SYPlugin from './plugin';
+import {SYPlugin} from './plugin';
 
 export default class SYSystem extends SYPlugin {
     showModal(options) {

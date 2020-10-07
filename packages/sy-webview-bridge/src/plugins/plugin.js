@@ -5,7 +5,7 @@
 */
 
 // plugin base class
-export default class SYPlugin {
+export class SYPlugin {
     constructor(core, moduleName) {
         this.core = core;
         this.moduleName = moduleName;

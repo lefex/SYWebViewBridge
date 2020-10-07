@@ -4,7 +4,7 @@
  * @author suyan
 */
 
-import SYPlugin from './plugin';
+import {SYPlugin} from './plugin';
 import {SYEnvBridgeName} from '../constant';
 
 export default class SYEnv extends SYPlugin {

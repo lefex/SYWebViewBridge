@@ -4,7 +4,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // entry
 const entry = {
-    home: './home/index.js'
+    home: './home/index.js',
+    test: './test/index.js'
 };
 
 // generate html plugins
