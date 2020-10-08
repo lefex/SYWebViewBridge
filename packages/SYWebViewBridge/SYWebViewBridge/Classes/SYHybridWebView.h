@@ -6,6 +6,7 @@
 //
 
 #import <WebKit/WebKit.h>
+#import "SYConstant.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *identifier;
 // retry load web content when terminate action
 @property (nonatomic, assign) BOOL retryWhenTerminate;
+// check router is valid
+@property (nonatomic, copy, nullable) SYCheckRouteBlock routerIsValidBlock;
 
 // reload webview
 - (void)syReload;

@@ -9,7 +9,7 @@
 export default {
     data() {
         return {
-            title: 'SYWebViewBridge Test Case',
+            title: 'Test Case',
             description: 'The app and webview should be tested at same time. You must test'
                 + 'manuly'
         };

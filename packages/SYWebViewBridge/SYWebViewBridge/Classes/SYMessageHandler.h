@@ -16,6 +16,9 @@
 // the action send a callback
 @property (nonatomic, copy) SYPluginMessageCallBack actionComplete;
 
+// check router is valid
+@property (nonatomic, copy) SYCheckRouteBlock routerIsValidBlock;
+
 /// register a custom plugin
 /// @param plugin the plugin must be subclass SYBridgeBasePlugin
 /// @param moduleName the module name, must be unique in plugin system

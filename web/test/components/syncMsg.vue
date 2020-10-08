@@ -1,44 +1,67 @@
 <template>
     <div class="sync-msg-wrap">
-        <!-- lifeCycle -->
-        <h1 class="title">Set Environment</h1>
-        <p class="des">send some messages to app before bridge work</p>
+        <!-- Set Environment -->
+        <h1 class="title">Test Set Environment</h1>
+        <p class="des">send to app and get a success callback</p>
         <div class="button" v-on:click="setEnvironment">Set Environment</div>
+        <test-result :status="setEnvStatus"></test-result>
+        <div class="line"></div>
         <!-- showModal -->
-        <h1 class="title">Use showModal</h1>
-        <p class="des">the demo of showModal</p>
+        <h1 class="title">Test Use showModal</h1>
+        <p class="des">test showModal and get a callback when user click OK or Cancel button</p>
         <div class="button" v-on:click="showModal">ShowModal</div>
-        <!-- lifeCycle -->
-        <h1 class="title">LifeCycle message</h1>
-        <p class="des">the webview lifecycle</p>
+        <test-result :status="showModalStatus"></test-result>
+        <div class="line"></div>
         <!-- network request -->
-        <h1 class="title">Network Request</h1>
+        <h1 class="title">Test Network Request</h1>
         <p class="des">send network request in app</p>
         <div class="button" v-on:click="sendRequest">Send Network Request</div>
+        <test-result :status="networkStatus"></test-result>
+        <div class="line"></div>
         <!-- debug -->
-        <h1 class="title">Debug</h1>
+        <h1 class="title">Test Debug</h1>
         <p class="des">send debug msg between app and webview</p>
+        <p class="des">Make sure have a debug alert</p>
         <div class="button" v-on:click="alert">Send Debug Alert</div>
+        <p class="des">Make sure have a log message in app</p>
         <div class="button" v-on:click="log">Log msg in app</div>
+        <p class="des">Make sure have a debug alert</p>
         <div class="button" v-on:click="webAlert">Use Web Alert</div>
     </div>
 </template>
 
 <script>
 /* global sy */
+import TestResult from './testResult.vue';
+
 export default {
+    components: {
+        TestResult
+    },
     data() {
         return {
-            title: 'Sync msg to Obj-C',
-            description: 'WebView send msg to Obj-C and get a return value.',
-            result: ''
+            setEnvStatus: '0',
+            showModalStatus: '0',
+            networkStatus: '0'
         };
     },
     methods: {
         setEnvironment() {
+            this.setEnvStatus = '0';
             sy.env.setEnvironment({
-                namespace: 'wsy'
+                namespace: 'sy',
+                success: () => {
+                    this.setEnvStatus = '1';
+                },
+                fail: () => {
+                    this.setEnvStatus = '2';
+                }
             });
+            setTimeout(() => {
+                if (this.setEnvStatus === '0') {
+                    this.setEnvStatus = '2';
+                }
+            }, 1000);
         },
         alert() {
             sy.debug.alert('receive a debug msg');
@@ -50,29 +73,34 @@ export default {
             sy.debug.log('I am log msg from webview');
         },
         showModal() {
+            this.showModalStatus = '0';
             sy.system.showModal({
                 title: 'SYWebViewBridge',
                 content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
                 showCancel: true,
                 cancelText: 'Cancel',
                 confirmText: 'OK',
-                success(res) {
+                success: res => {
                     if (res.confirm) {
                         sy.debug.alert('click OK button');
                     }
                     else {
                         sy.debug.alert('click Cancel button');
                     }
+                    this.showModalStatus = '1';
                 },
-                fail(err) {
-                    console.log(err);
-                },
-                complete(res) {
-                    console.log(res);
+                fail: err => {
+                    this.showModalStatus = '2';
                 }
             });
+            setTimeout(() => {
+                if (this.showModalStatus === '0') {
+                    this.showModalStatus = '2';
+                }
+            }, 10000);
         },
         sendRequest() {
+            this.networkStatus = '0';
             sy.network.request({
                 url: 'https://www.igetget.com/api/wap/footer',
                 method: 'get',
@@ -82,22 +110,34 @@ export default {
                 header: {
                     'content-type': 'application/json'
                 },
-                success(res) {
+                success: res => {
                     sy.debug.alert(res.data);
+                    this.networkStatus = '1';
                 },
-                fail(err) {
+                fail: err => {
                     sy.debug.alert('network error');
+                    this.networkStatus = '1';
                 },
                 complete(res) {
-                    console.log('request complete');
+                    this.networkStatus = '1';
                 }
             });
+            setTimeout(() => {
+                if (this.networkStatus === '0') {
+                    this.networkStatus = '2';
+                }
+            }, 5000);
         }
     }
 };
 </script>
 
 <style scoped>
+.line {
+    height: 1px;
+    background-color: #eee;
+    margin-top: 10px;
+}
 .sync-msg-wrap {
     border-bottom: 1px solid #eee;
 }
@@ -112,6 +152,7 @@ export default {
     border: 1px solid #eee;
     padding: 8px;
 }
+
 .button {
     height: 44px;
     border: 1px solid #eee;

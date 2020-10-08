@@ -42,12 +42,4 @@
     [rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)setStorageSync:(SYBridgeMessage *)msg {
-    
-}
-
-- (NSString *)getStorageSync:(SYBridgeMessage *)msg {
-    return @"";
-}
-
 @end

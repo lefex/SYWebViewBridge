@@ -49,29 +49,34 @@
     self.UIDelegate = self;
     
     self.msgHandler = [[SYMessageHandler alloc] init];
+    self.msgHandler.routerIsValidBlock = self.routerIsValidBlock;
     __weak __typeof(self) weakSelf = self;
     self.msgHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        NSMutableDictionary *jsInfoDict = [info mutableCopy];
-        jsInfoDict[@"callbackId"] = msg.paramDict[@"callbackId"];
-        NSString *jsonInfo = [NSObject sy_dicionaryToJson:jsInfoDict];
-        NSString *jscode;
-        if (msg.jsCallBack) { // contain callback function
-            jscode = [NSString stringWithFormat:@"%@(%@)", msg.jsCallBack, jsonInfo];
-        }
-        else {
-            // use default callback function
-            // namespace.core.callback(code)
-            jscode = [NSString stringWithFormat:@"%@.%@(%@)", self.namespace, kSYDefaultCallback, jsonInfo];
-        }
-        [strongSelf syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
-            // TODO: no use, if you have problem, give me an issue
-        }];
+        [strongSelf excuteCallback:info message:msg];
     };
     // deal with environment message
     [self.configuration.userContentController addScriptMessageHandler:self name:kSYScriptEnvMsgName];
     // deal with common message
     [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
+}
+
+- (void)excuteCallback:(NSDictionary *)info message:(SYBridgeMessage *)msg {
+    NSMutableDictionary *jsInfoDict = [info mutableCopy];
+    jsInfoDict[@"_sycallbackId"] = msg.paramDict[@"_sycallbackId"];
+    NSString *jsonInfo = [NSObject sy_dicionaryToJson:jsInfoDict];
+    NSString *jscode;
+    if (msg.jsCallBack) { // contain callback function
+        jscode = [NSString stringWithFormat:@"%@(%@)", msg.jsCallBack, jsonInfo];
+    }
+    else {
+        // use default callback function
+        // namespace.core.callback(code)
+        jscode = [NSString stringWithFormat:@"%@.%@(%@)", self.namespace, kSYDefaultCallback, jsonInfo];
+    }
+    [self syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
+        // TODO: no use, if you have problem, give me an issue
+    }];
 }
 
 #pragma mark public method
@@ -114,25 +119,39 @@
     if ([message.body isKindOfClass:[NSString class]]) {
         if ([message.name isEqualToString:kSYScriptEnvMsgName]) {
             NSString *router = message.body;
+            if (self.routerIsValidBlock) {
+                // can not deal with router
+                if (!self.routerIsValidBlock(router)) {
+                    return;;
+                }
+            }
             SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
             if (!syMsg) {
                 return;
             }
-            NSString *selName = [NSString stringWithFormat:@"%@:", syMsg.action];
+            NSString *selName = [NSString stringWithFormat:@"%@:callback:", syMsg.action];
             if ([self respondsToSelector:NSSelectorFromString(selName)]) {
+                SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
+                    [self excuteCallback:info message:msg];
+                };
                #pragma clang diagnostic push
                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-               [self performSelector:NSSelectorFromString(selName) withObject:syMsg];
+               [self performSelector:NSSelectorFromString(selName) withObject:syMsg withObject:callback];
                #pragma clang diagnostic pop;
             }
         }
     }
 }
 
-- (void)setEnv:(SYBridgeMessage *)msg {
+- (void)setEnv:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
     // set the webview`s object on the window
     if (msg.paramDict[@"namespace"]) {
         self.namespace = msg.paramDict[@"namespace"];
+        if (callback) {
+            callback(@{
+                kSYCallbackType: kSYCallbackSuccess
+            }, msg);
+        }
     }
 }
 

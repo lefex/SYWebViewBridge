@@ -43,6 +43,13 @@
              [scheme]://[bundle id] / [module] / [action] ? [param] & [callback] & [other param]
              */
             NSString *router = message.body;
+            
+            if (self.routerIsValidBlock) {
+                // can not deal with router
+                if (!self.routerIsValidBlock(router)) {
+                    return;;
+                }
+            }
             SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
             // router is invalid
             if (!syMsg || ![syMsg isValidMessage]) {

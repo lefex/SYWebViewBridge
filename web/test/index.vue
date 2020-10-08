@@ -2,6 +2,10 @@
     <div id="app">
         <Header></Header>
         <SyncMsg></SyncMsg>
+        <!-- lifeCycle -->
+        <h1 class="title">Test LifeCycle message</h1>
+        <p class="des">the webview lifecycle</p>
+        <div v-for="title in lifecycles">{{ title }}</div>
     </div>
 </template>
 
@@ -19,7 +23,8 @@ export default {
     },
     data() {
         return {
-            title: 'SYWebViewBridge1'
+            title: 'SYWebViewBridge1',
+            lifecycles: []
         };
     },
     mounted() {
@@ -36,18 +41,19 @@ export default {
         let requestPlugin = new NetworkPlugin(sy.core, 'network');
         sy.registerPlugin(requestPlugin);
         // observe webview lifecycle
+        let that = this;
         sy.lifecycle = {
             onLoad() {
-                console.log('on load');
+                that.lifecycles.push('onLoadd');
             },
             onShow() {
-                console.log('on show');
+                that.lifecycles.push('onShow');
             },
             onHide() {
-                console.log('on hide');
+                that.lifecycles.push('onHide');
             },
             onUnload() {
-                console.log('on unload');
+                that.lifecycles.push('onUnload');
             }
         };
     }

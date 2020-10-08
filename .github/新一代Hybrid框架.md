@@ -256,5 +256,81 @@ SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.boun
 
 ## 原理说明
 
+#### 通信基准 - 路由
+
+SYWebViewBridge 以路由作用通信标准，以达到多端事件分发统一，iOS 和 Android 只需关注路由的本身即可，比如下面是一条路由：
+
+```js
+suyan://com.sy.bridge/debug/showModal?params={key: value}&callback=js_callback
+```
+
+1、suyan：scheme 类似于 H5 以 scheme 的方式跳转 App，保证路由的统一；
+2、com.sy.bridge：bundle id，与 scheme 可唯一标识一个 App，可通过 schem 和 bundle id 对路由做鉴权处理，在底层接口设计时对外暴露了一个 blcok（iOS）routerIsValidBlock，所有的路由执行之前可以通过这个 block 做鉴权处理；
+3、debug：plugin，一个模块，事件定义的模块；
+4、showModal：action，事件，模块中对应的事件；
+5、params：事件对应的参数，在参数内部提供了一个 _sycallbackId 用来处理 app 给 webview 的回调，业务方避免使用 _sycallbackId 这个参数；
+6、在 window 下挂载的回调函数；
+
+#### H5 给 App 发消息，有无回调均可
+
+以 H5 想 iOS app 发送一个事件并接收回调为例来说明整个通信过程，以弹窗为例：
+
+1、H5 页面中触发 bridge 事件，执行下面代码：
+
+```js
+let options = {
+    title: 'SYWebViewBridge',
+    content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
+    showCancel: true,
+    cancelText: 'Cancel',
+    confirmText: 'OK',
+    // 用户点击了 ok 或 cancel 按钮后的回调
+    success: function(res) {},
+    fail: function(res) {},
+    complete: function(res) {}
+};
+sy.system.showModal(options);
+```
+其中：
+sy： 为挂载到 window 下的 SYBridge 实例；
+system： 为模块名，也称为 plugin，为内置插件；
+showModal：为事件名；
+options：为参数；
+
+scheme 和 bundleId 是由使用方根据自己的 app 进行配置的，默认为 suyan 和 com.gzh.sy
+
+当调用 `system` 插件的 `showModal` 方法时会生成一条路由（对参数 params 进行了编码处理）：
+
+```js
+suyan://com.gzh.sy/system/showModal?params=%7B%22title%22%3A%22SYWebViewBridge%22%2C%22content%22%3A%22An%20iOS%20modern%20bridge%20for%20sending%20messages%20between%20Objective-C%20and%20JavaScript%20in%20WKWebView.%22%2C%22showCancel%22%3Atrue%2C%22cancelText%22%3A%22Cancel%22%2C%22confirmText%22%3A%22OK%22%2C%22_sycallbackId%22%3A2%7D
+```
+
+2、把路由发送给 app
+
+在 iOS 中使用 postMessage 进行发送消息：
+
+```js
+window.webkit.messageHandlers.SYJSBridge.postMessage(router);
+```
+
+Android 使用 `prompt` 进行发送消息。
+
+3、通过路由执行 App 中的方法
+
+iOS App 接收到路由后，会把路由解析成 SYMessage，通过路由找到对应的插件和事件进行调用，当事件执行完成后以回调的方式告诉 webview。有兴趣的朋友可看 `SYBridgeSystemPlugin.m`。
+
+4、把回调告诉 webview 就算是一次通信结束。如果在通信过程中不需要回调，在参数中不带 `success`、`fail` 和 `complete`即可。
 
 
+
+#### App 给 H5 发消息，不支持回调
+
+这种使用场景为 app 想要告诉 H5 某件事情发生了，基本上不需要回调，比如生命周期。不过也可以支持回调，只是我们我没有想到那些场景可以用到这种情况，索性就忽略了这个需求。
+
+这个原理和 H5 给 App 发送消息的原理一致，也是以路由为通信基准，不再赘述。
+
+
+
+## 最后
+
+`SYHybridWebView` 是我开源的第一个项目，是我多年对 iOS 与前端一些经验总结。由于能力有限，难免会有考虑不妥的地方，若有问题可提 issue，或微信沟通（相信你能找到我）。

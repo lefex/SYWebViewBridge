@@ -32,4 +32,6 @@ static NSString *kSYCallbackComplete = @"complete";
 
 typedef void(^SYPluginMessageCallBack)(NSDictionary *info, SYBridgeMessage *msg);
 
+typedef BOOL(^SYCheckRouteBlock)(NSString *router);
+
 #endif /* SYConstant_h */

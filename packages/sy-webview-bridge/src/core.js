@@ -74,18 +74,18 @@ export default class SYCore {
                 params[key] = options[key];
             }
         });
-        params.callbackId = callbackId;
+        params._sycallbackId = callbackId;
         return params;
     }
     // the default callback function, app will call this
     sendCallback(options) {
-        if (!options || !options.callbackId) {
+        if (!options || !options._sycallbackId) {
             if (__SYDEV__) {
-                console.error('[sybridge] options must contain a callbackId');
+                console.error('[sybridge] options must contain a _sycallbackId');
             }
             return;
         }
-        const callbackId = options.callbackId;
+        const callbackId = options._sycallbackId;
         const callbackObj = this.callbackMap[callbackId];
         if (!callbackObj) {
             // can not found callback fun

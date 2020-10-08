@@ -28,7 +28,7 @@
     [self.view addSubview:self.tableView];
     
     _datas = @[
-        @{@"title": @"SYHybridWebViewController", @"sel": @"toHrbridViewControll"},
+        @{@"title": @"Demo", @"sel": @"toHrbridViewControll"},
         @{@"title": @"Test", @"sel": @"toTestViewControll"}
     ];
 }
