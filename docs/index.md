@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://upload-images.jianshu.io/upload_images/1664496-1471f633bfc7d877.png
+heroImage: https://s1.ax1x.com/2020/10/10/06VvOx.png
 heroText: Subcribe My WeChat Account
 tagline: An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView. Include FE and iOS.
 actionText: Quick Start →
