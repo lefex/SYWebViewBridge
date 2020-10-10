@@ -57,18 +57,19 @@
 }
 
 - (void)toHrbridViewControll {
-    [self toHybridControllerForSrc:@"http://localhost:9000/home.html"];
+    [self toHybridControllerForSrc:@"http://localhost:9000/home.html" title:@"demo"];
 }
 
 - (void)toTestViewControll {
-    [self toHybridControllerForSrc:@"http://localhost:9000/test.html"];
+    [self toHybridControllerForSrc:@"http://localhost:9000/test.html" title:@"test"];
 }
 
-- (void)toHybridControllerForSrc:(NSString *)src {
+- (void)toHybridControllerForSrc:(NSString *)src title:(NSString *)title {
     SYHybridWebViewController *viewController = [[SYHybridWebViewController alloc] init];
     SYNetworkPlugin *networkPlugin = [[SYNetworkPlugin alloc] init];
     [viewController.webview syRegisterPlugin:networkPlugin forModuleName:@"network"];
     [viewController loadUrl:src];
+    viewController.title = title;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

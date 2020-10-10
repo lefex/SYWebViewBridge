@@ -86,695 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../packages/sy-webview-bridge/dist/index.js":
-/*!***************************************************!*\
-  !*** ../packages/sy-webview-bridge/dist/index.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else { var i, a; }
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ "./src/constant.js":
-/*!*************************!*\
-  !*** ./src/constant.js ***!
-  \*************************/
-/*! exports provided: SYDefaultScheme, SYDefaultIdentifier, SYCommonBridgeName, SYEnvBridgeName */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYDefaultScheme", function() { return SYDefaultScheme; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYDefaultIdentifier", function() { return SYDefaultIdentifier; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYCommonBridgeName", function() { return SYCommonBridgeName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYEnvBridgeName", function() { return SYEnvBridgeName; });
-/**
- * @description constant property
- * @file constant.js
- * @author suyan
-*/
-
-const SYDefaultScheme = 'suyan';
-const SYDefaultIdentifier = 'com.gzh.sy';
-const SYCommonBridgeName = 'SYBridge';
-const SYEnvBridgeName = 'SYJSBridgeEnv';
-
-
-/***/ }),
-
-/***/ "./src/core.js":
-/*!*********************!*\
-  !*** ./src/core.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYCore; });
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constant */ "./src/constant.js");
-/**
- * @description send message
- * @file core.js
- * @author suyan
-*/
-
-/* global __SYDEV__*/
-
-class SYCore {
-    constructor(context) {
-        // save callback id and function
-        this.callbackMap = {};
-        // current callback id
-        this.curId = 1;
-        // isIOS\isAndroid\isNA
-        this.context = context;
-    }
-    // suyan://gzh.fe/debug/showAlert?param={key: value}&callback=js_callback
-    sendMsg(router, options) {
-        const params = this.generateParams(options);
-        // all param neeed to be a json string
-        const paramJson = JSON.stringify(params);
-        // generate a router
-        let jumpRouter = `${router}?params=${encodeURIComponent(paramJson)}`;
-        if (this.context.isAndroid) {
-             // use prompt to send message in Android
-            prompt(jumpRouter);
-        }
-        else {
-             // use postMessage to send message in iOS
-            this.callPostMessage(jumpRouter, params.bridgeName);
-        }
-        // need to change callback id(due to not repeat)
-        this.curId += 1;
-    }
-    callPostMessage(router, bridgeName) {
-        if (!window.webkit || !window.webkit.messageHandlers) {
-            if (__SYDEV__) {
-                console.warn('window.webkit.messageHandlers can not nil');
-            }
-            return;
-        }
-        if (bridgeName === _constant__WEBPACK_IMPORTED_MODULE_0__["SYEnvBridgeName"]) {
-            window.webkit.messageHandlers.SYJSBridgeEnv.postMessage(router);
-        }
-        else {
-            window.webkit.messageHandlers.SYJSBridge.postMessage(router);
-        }
-    }
-    callIframe(router) {
-        let iframe = document.createElement('iframe');
-        iframe.src = router;
-        document.body.appendChild(iframe);
-        document.body.removeChild(iframe);
-    }
-    callLocation(router) {
-        window.location.href = router;
-    }
-    generateParams(options) {
-        // send NA params
-        let params = {};
-        let callbackId = this.curId;
-        Object.keys(options).forEach(key => {
-            if (typeof options[key] === 'function') {
-                let callback = this.callbackMap[callbackId];
-                if (!callback) {
-                    callback = {};
-                    this.callbackMap[callbackId] = callback;
-                }
-                // success fail complete
-                callback[key] = options[key];
-            }
-            else {
-                params[key] = options[key];
-            }
-        });
-        params.callbackId = callbackId;
-        return params;
-    }
-    // the default callback function, app will call this
-    sendCallback(options) {
-        if (!options || !options.callbackId) {
-            if (__SYDEV__) {
-                console.error('[sybridge] options must contain a callbackId');
-            }
-            return;
-        }
-        const callbackId = options.callbackId;
-        const callbackObj = this.callbackMap[callbackId];
-        if (!callbackObj) {
-            // can not found callback fun
-            if (__SYDEV__) {
-                console.error('[sybridge] callbackId invalid');
-            }
-            return;
-        }
-        const cbIsValid = ['success', 'fail', 'complete'].indexOf(options.cbtype) !== -1;
-        if (!options.cbtype || !cbIsValid) {
-            if (__SYDEV__) {
-                console.error('[sybridge] cbtype only support success、fail and complete');
-            }
-        }
-        const cbFun = callbackObj[options.cbtype];
-        if (!cbFun || typeof cbFun !== 'function') {
-            // not have callback function
-            return;
-        }
-        cbFun(options);
-        // call complete function
-        const completeFun = callbackObj['complete'];
-        if (completeFun && typeof completeFun === 'function') {
-            // need call complete function no matter success or fail
-            completeFun(options);
-        }
-        // callback end need delete map cache
-        delete this.callbackMap[callbackId];
-        if (this.callbackMap || Object.keys(this.callbackMap).length === 0) {
-            this.curId = 1;
-        }
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! exports provided: default, SYPlugin */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYBridge; });
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/core.js");
-/* harmony import */ var _plugins_system__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/system */ "./src/plugins/system.js");
-/* harmony import */ var _plugins_debug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/debug */ "./src/plugins/debug.js");
-/* harmony import */ var _plugins_lifecycle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/lifecycle */ "./src/plugins/lifecycle.js");
-/* harmony import */ var _plugins_env__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/env */ "./src/plugins/env.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constant */ "./src/constant.js");
-/* harmony import */ var _plugins_plugin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./plugins/plugin */ "./src/plugins/plugin.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SYPlugin", function() { return _plugins_plugin__WEBPACK_IMPORTED_MODULE_6__["SYPlugin"]; });
-
-/**
- * @file index.js
- * @description main
- * @author suyan
-*/
-
-/* global __SYDEV__ */
-
-// send message between webview and app
-
-// system plugin
-
-// debug plugin
-
-// lifecycle plugin
-
-// environment plugin
-
-
-// bridge will log some useful messages when in devlopment environment
-window.__SYDEV__ = false;
-
-// change router to SYMessage Class
-class SYMessage {
-    constructor(router) {
-        // orgin router like suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb
-        this.router = router;
-        // eg. router is: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb
-        // router scheme, eg: suyann
-        this.scheme = null;
-        // can you app bundle id, eg: com.sy.bridge
-        this.identifier = null;
-        // bridge in which moduleName, eg: debug
-        this.moduleName = null;
-        // bridge in which action, eg: showModal
-        this.action = null;
-        // the action method param
-        this.param = null;
-        // parse router to SYMessage Object
-        let isValid = this.parseRouter(router);
-        if (!isValid) {
-            if (__SYDEV__) {
-                console.log('right router such as: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb');
-            }
-            throw 'the router is invalid: ' + router;
-        }
-    }
-    // suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_callback
-    parseRouter(router) {
-        try {
-            let components = router.split('?');
-            if (components.length > 2) {
-                // router can only have one ?
-                return false;
-            }
-            let first = components[0];
-            let hostComponents = first.split('://');
-            this.scheme = hostComponents[0];
-            let pathComponents = hostComponents[1].split('/');
-            this.identifier = pathComponents[0];
-            this.moduleName = pathComponents[1];
-            this.action = pathComponents[2];
-            if (components.length < 2) {
-                // have no query
-                return true;
-            }
-            let second = components[1];
-            let queryComponents = second.split('&');
-            let params = {};
-            queryComponents.forEach(element => {
-                let es = element.split('=');
-                if (es[0] === 'params') {
-                    let decodeStr = decodeURIComponent(es[1]);
-                    let jsonObj = JSON.parse(decodeStr);
-                    params[es[0]] = jsonObj;
-                }
-                else {
-                    params[es[0]] = es[1];
-                }
-            });
-            this.param = params;
-            return true;
-        }
-        catch (error) {
-            return false;
-        }
-    }
-}
-
-// The main class to deal with bridge message
-class SYBridge {
-    constructor(options = {}) {
-        // init webview context
-        this.context = this.initContext(null, options);
-        // send message core
-        this.core = new _core__WEBPACK_IMPORTED_MODULE_0__["default"](this.context);
-        // system plugin, the module moduleName is system
-        this.system = new _plugins_system__WEBPACK_IMPORTED_MODULE_1__["default"](this.core, 'system');
-        // debug plugin
-        this.debug = new _plugins_debug__WEBPACK_IMPORTED_MODULE_2__["default"](this.core, 'debug');
-        // environment plugin
-        this.env = new _plugins_env__WEBPACK_IMPORTED_MODULE_4__["default"](this.core, 'env');
-        // lifecycle object to receive lifecycle message
-        this.lifecycle = null;
-        // private
-        this._lifecycle = new _plugins_lifecycle__WEBPACK_IMPORTED_MODULE_3__["default"](this.core, '_lifecycle', this.lifecycle);
-    }
-    initContext(ua, options) {
-        if (!ua) {
-            ua = navigator && navigator.userAgent;
-        }
-        if (!ua) {
-            return;
-        }
-        const {
-            scheme = _constant__WEBPACK_IMPORTED_MODULE_5__["SYDefaultScheme"],
-            bundleId = _constant__WEBPACK_IMPORTED_MODULE_5__["SYDefaultIdentifier"]
-        } = options;
-        const env = {
-            isAndroid: /(Android);?[\s/]+([\d.]+)?/.test(ua),
-            isIOS: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-            inNA: /-SYBridge-/i.test(ua),
-            scheme,
-            bundleId
-        };
-        return env;
-    }
-    set lifecycle(value) {
-        if (value) {
-            // set the lifecycle proxy to receive message
-            this._lifecycle.proxy = value;
-        }
-    }
-    // add a custom plugin to SYBridge
-    registerPlugin(plugin, options = {}) {
-        if (!plugin) {
-            if (__SYDEV__) {
-                console.error('[sybridge] plugin can not be undefined');
-            }
-            return;
-        }
-        let pluginName = options.moduleName;
-        if (!pluginName) {
-            // use plguin moduleName when provide
-            pluginName = plugin.moduleName;
-        }
-        // add the plugin to bridge instance
-        this[pluginName] = plugin;
-    }
-    // app send message to webview through this method
-    syBridgeMessage(router) {
-        // the router like below (the webview lifecycle method):
-        // suyan://com.sy.bridge/_lifecycle/onShow
-        let message = new SYMessage(router);
-        if (!message || !message.moduleName || !message.action) {
-            return;
-        }
-        // get the bridge method
-        let actionFn = this[message.moduleName][message.action];
-        if (actionFn && typeof actionFn === 'function') {
-            actionFn.call(this[message.moduleName], message);
-        }
-        else {
-            if (__SYDEV__) {
-                console.log('can not get action function: ', actionFn);
-            }
-        }
-    }
-}
-
-
-
-
-/***/ }),
-
-/***/ "./src/plugins/debug.js":
-/*!******************************!*\
-  !*** ./src/plugins/debug.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYDebug; });
-/* harmony import */ var _plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugin */ "./src/plugins/plugin.js");
-/**
- * @description debug message
- * @file debug.js
- * @author suyan
-*/
-
-
-
-// debug plugin
-class SYDebug extends _plugin__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
-    // show a toast in app
-    alert(msg) {
-        this.core.sendMsg(this.router('alert'), {
-            title: 'debug message',
-            content: this.debugMsg(msg)
-        });
-    }
-    // log msg in app log pannel
-    log(msg) {
-        this.core.sendMsg(this.router('log'), {
-            msg: this.debugMsg(msg)
-        });
-    }
-    // generate a debug msg
-    debugMsg(msg) {
-        let logInfo;
-        if (typeof msg === 'string') {
-            logInfo = msg;
-        }
-        else {
-            try {
-                logInfo = JSON.stringify(msg);
-            }
-            catch (error) {
-                logInfo = 'the msg invalid, can not use';
-            }
-        }
-        return logInfo;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/plugins/env.js":
-/*!****************************!*\
-  !*** ./src/plugins/env.js ***!
-  \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYEnv; });
-/* harmony import */ var _plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugin */ "./src/plugins/plugin.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constant */ "./src/constant.js");
-/**
- * @description environment message
- * @file env.js
- * @author suyan
-*/
-
-
-
-
-class SYEnv extends _plugin__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
-    setEnvironment(options) {
-        options.bridgeName = _constant__WEBPACK_IMPORTED_MODULE_1__["SYEnvBridgeName"];
-        this.core.sendMsg(this.router('setEnv'), options);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/plugins/lifecycle.js":
-/*!**********************************!*\
-  !*** ./src/plugins/lifecycle.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYLifeCycle; });
-/* harmony import */ var _plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugin */ "./src/plugins/plugin.js");
-/**
- * @description lifecycle message
- * @file debug.js
- * @author suyan
-*/
-
-
-
-class SYLifeCycle extends _plugin__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
-    constructor(core, moduleName, proxy) {
-        super(core, moduleName);
-        this.proxy = proxy;
-    }
-    // page on load, before onShow (viewDidLoad in iOS)
-    onLoad(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onLoad')) {
-            this.proxy.onLoad.call(this.proxy, msg);
-        }
-    }
-    // page on show (viewDidAppear in iOS)
-    onShow(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onShow')) {
-            this.proxy.onShow.call(this.proxy, msg);
-        }
-    }
-    // app enter background
-    onHide(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onHide')) {
-            this.proxy.onHide.call(this.proxy, msg);
-        }
-    }
-    // page destory (dealloc in iOS)
-    onUnload(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onUnload')) {
-            this.proxy.onUnload.call(this.proxy, msg);
-        }
-    }
-    // page scroll
-    onPageScroll(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onPageScroll')) {
-            this.proxy.onPageScroll.call(this.proxy, msg);
-        }
-    }
-    // page scroll to bottom
-    onReachBottom(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onReachBottom')) {
-            this.proxy.onReachBottom.call(this.proxy, msg);
-        }
-    }
-    // if the proxy is valid
-    isValid(method) {
-        if (this.proxy && this.proxy[method] && typeof this.proxy[method] === 'function') {
-            return true;
-        }
-        return false;
-    }
-}
-
-/***/ }),
-
-/***/ "./src/plugins/plugin.js":
-/*!*******************************!*\
-  !*** ./src/plugins/plugin.js ***!
-  \*******************************/
-/*! exports provided: SYPlugin */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYPlugin", function() { return SYPlugin; });
-/**
- * @description the plugin
- * @file plugin.js
- * @author suyan
-*/
-
-// plugin base class
-class SYPlugin {
-    constructor(core, moduleName) {
-        this.core = core;
-        this.moduleName = moduleName;
-    }
-    // generate a router
-    router(action) {
-        let env = this.core.context;
-        // a router like below
-        // suyan://gzh.fe/debug/showAlert?param={key: value}&callback=js_callback
-        let aRouter = `${env.scheme}://${env.bundleId}/${this.moduleName}/${action}`;
-        return aRouter;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/plugins/system.js":
-/*!*******************************!*\
-  !*** ./src/plugins/system.js ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SYSystem; });
-/* harmony import */ var _plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugin */ "./src/plugins/plugin.js");
-/**
- * @description system message
- * @file debug.js
- * @author suyan
-*/
-
-
-
-class SYSystem extends _plugin__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
-    showModal(options) {
-        this.core.sendMsg(this.router('showModal'), options);
-    }
-}
-
-
-/***/ })
-
-/******/ });
-});
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/components/header.vue?vue&type=style&index=0&id=0e40fdf7&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./test/components/header.vue?vue&type=style&index=0&id=0e40fdf7&scoped=true&lang=css& ***!
@@ -790,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "\n.title[data-v-0e40fdf7] {\n    font-size: 30px;\n    font-weight: 700;\n}\n.des[data-v-0e40fdf7] {\n    font-size: 16px;\n}\n", "",{"version":3,"sources":["webpack://test/components/header.vue"],"names":[],"mappings":";AAoBA;IACA,eAAA;IACA,gBAAA;AACA;AACA;IACA,eAAA;AACA","sourcesContent":["<template>\n    <div class=\"header-wrap\">\n        <h1 class=\"title\">{{ title }}</h1>\n        <p class=\"des\">{{ description }}</p>\n    </div>\n</template>\n\n<script>\nexport default {\n    data() {\n        return {\n            title: 'SYWebViewBridge Test Case',\n            description: 'The app and webview should be tested at same time. You must test'\n                + 'manuly'\n        };\n    }\n};\n</script>\n\n<style scoped>\n.title {\n    font-size: 30px;\n    font-weight: 700;\n}\n.des {\n    font-size: 16px;\n}\n</style>"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "\n.title[data-v-0e40fdf7] {\n    font-size: 30px;\n    font-weight: 700;\n}\n.des[data-v-0e40fdf7] {\n    font-size: 16px;\n}\n", "",{"version":3,"sources":["webpack://test/components/header.vue"],"names":[],"mappings":";AAoBA;IACA,eAAA;IACA,gBAAA;AACA;AACA;IACA,eAAA;AACA","sourcesContent":["<template>\n    <div class=\"header-wrap\">\n        <h1 class=\"title\">{{ title }}</h1>\n        <p class=\"des\">{{ description }}</p>\n    </div>\n</template>\n\n<script>\nexport default {\n    data() {\n        return {\n            title: 'Test Case',\n            description: 'The app and webview should be tested at same time. You must test'\n                + 'manuly'\n        };\n    }\n};\n</script>\n\n<style scoped>\n.title {\n    font-size: 30px;\n    font-weight: 700;\n}\n.des {\n    font-size: 16px;\n}\n</style>"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -812,7 +123,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "\n.sync-msg-wrap[data-v-64298d6c] {\n    border-bottom: 1px solid #eee;\n}\n.title[data-v-64298d6c] {\n    font-size: 24px;\n    font-weight: 700;\n}\n.des[data-v-64298d6c] {\n    font-size: 16px;\n}\n.result[data-v-64298d6c] {\n    border: 1px solid #eee;\n    padding: 8px;\n}\n.button[data-v-64298d6c] {\n    height: 44px;\n    border: 1px solid #eee;\n    background-color: #0091FF;\n    color: #fff;\n    text-align: center;\n    font-size: 18px;\n    line-height: 44px;\n    font-weight: 700;\n    border-radius: 8px;\n    margin: 16px 0;\n    cursor: pointer;\n}\n.button[data-v-64298d6c]:hover {\n    background-color: #1191FF;\n}\n", "",{"version":3,"sources":["webpack://home/components/syncMsg.vue"],"names":[],"mappings":";AAoGA;IACA,6BAAA;AACA;AACA;IACA,eAAA;IACA,gBAAA;AACA;AACA;IACA,eAAA;AACA;AACA;IACA,sBAAA;IACA,YAAA;AACA;AACA;IACA,YAAA;IACA,sBAAA;IACA,yBAAA;IACA,WAAA;IACA,kBAAA;IACA,eAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,cAAA;IACA,eAAA;AACA;AACA;IACA,yBAAA;AACA","sourcesContent":["<template>\n    <div class=\"sync-msg-wrap\">\n        <!-- lifeCycle -->\n        <h1 class=\"title\">Set Environment</h1>\n        <p class=\"des\">send some messages to app before bridge work</p>\n        <div class=\"button\" v-on:click=\"setEnvironment\">Set Environment</div>\n        <!-- showModal -->\n        <h1 class=\"title\">Use showModal</h1>\n        <p class=\"des\">the demo of showModal</p>\n        <div class=\"button\" v-on:click=\"showModal\">ShowModal</div>\n        <!-- lifeCycle -->\n        <h1 class=\"title\">LifeCycle message</h1>\n        <p class=\"des\">the webview lifecycle</p>\n        <!-- network request -->\n        <h1 class=\"title\">Network Request</h1>\n        <p class=\"des\">send network request in app</p>\n        <div class=\"button\" v-on:click=\"sendRequest\">Send Network Request</div>\n        <!-- debug -->\n        <h1 class=\"title\">Debug</h1>\n        <p class=\"des\">send debug msg between app and webview</p>\n        <div class=\"button\" v-on:click=\"alert\">Send Debug Alert</div>\n        <div class=\"button\" v-on:click=\"log\">Log msg in app</div>\n        <div class=\"button\" v-on:click=\"webAlert\">Use Web Alert</div>\n    </div>\n</template>\n\n<script>\n/* global sy */\nexport default {\n    data() {\n        return {\n            title: 'Sync msg to Obj-C',\n            description: 'WebView send msg to Obj-C and get a return value.',\n            result: ''\n        };\n    },\n    methods: {\n        setEnvironment() {\n            sy.env.setEnvironment({\n                namespace: 'wsy'\n            });\n        },\n        alert() {\n            sy.debug.alert('receive a debug msg');\n        },\n        webAlert() {\n            alert('webview alert');\n        },\n        log() {\n            sy.debug.log('I am log msg from webview');\n        },\n        showModal() {\n            sy.system.showModal({\n                title: 'SYWebViewBridge',\n                content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',\n                showCancel: true,\n                cancelText: 'Cancel',\n                confirmText: 'OK',\n                success(res) {\n                    if (res.confirm) {\n                        sy.debug.alert('click OK button');\n                    }\n                    else {\n                        sy.debug.alert('click Cancel button');\n                    }\n                },\n                fail(err) {\n                    console.log(err);\n                },\n                complete(res) {\n                    console.log(res);\n                }\n            });\n        },\n        sendRequest() {\n            sy.network.request({\n                url: 'https://www.igetget.com/api/wap/footer',\n                method: 'get',\n                data: {\n                    from: 'SYWebViewBridge'\n                },\n                header: {\n                    'content-type': 'application/json'\n                },\n                success(res) {\n                    sy.debug.alert(res.data);\n                },\n                fail(err) {\n                    sy.debug.alert('network error');\n                },\n                complete(res) {\n                    console.log('request complete');\n                }\n            });\n        }\n    }\n};\n</script>\n\n<style scoped>\n.sync-msg-wrap {\n    border-bottom: 1px solid #eee;\n}\n.title {\n    font-size: 24px;\n    font-weight: 700;\n}\n.des {\n    font-size: 16px;\n}\n.result {\n    border: 1px solid #eee;\n    padding: 8px;\n}\n.button {\n    height: 44px;\n    border: 1px solid #eee;\n    background-color: #0091FF;\n    color: #fff;\n    text-align: center;\n    font-size: 18px;\n    line-height: 44px;\n    font-weight: 700;\n    border-radius: 8px;\n    margin: 16px 0;\n    cursor: pointer;\n}\n.button:hover {\n    background-color: #1191FF;\n}\n</style>"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "\n.line[data-v-64298d6c] {\n    height: 1px;\n    background-color: #eee;\n    margin-top: 10px;\n}\n.sync-msg-wrap[data-v-64298d6c] {\n    border-bottom: 1px solid #eee;\n}\n.title[data-v-64298d6c] {\n    font-size: 24px;\n    font-weight: 700;\n}\n.des[data-v-64298d6c] {\n    font-size: 16px;\n}\n.result[data-v-64298d6c] {\n    border: 1px solid #eee;\n    padding: 8px;\n}\n.button[data-v-64298d6c] {\n    height: 44px;\n    border: 1px solid #eee;\n    background-color: #0091FF;\n    color: #fff;\n    text-align: center;\n    font-size: 18px;\n    line-height: 44px;\n    font-weight: 700;\n    border-radius: 8px;\n    margin: 16px 0;\n    cursor: pointer;\n}\n.button[data-v-64298d6c]:hover {\n    background-color: #1191FF;\n}\n", "",{"version":3,"sources":["webpack://test/components/syncMsg.vue"],"names":[],"mappings":";AAuIA;IACA,WAAA;IACA,sBAAA;IACA,gBAAA;AACA;AACA;IACA,6BAAA;AACA;AACA;IACA,eAAA;IACA,gBAAA;AACA;AACA;IACA,eAAA;AACA;AACA;IACA,sBAAA;IACA,YAAA;AACA;AAEA;IACA,YAAA;IACA,sBAAA;IACA,yBAAA;IACA,WAAA;IACA,kBAAA;IACA,eAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,cAAA;IACA,eAAA;AACA;AACA;IACA,yBAAA;AACA","sourcesContent":["<template>\n    <div class=\"sync-msg-wrap\">\n        <!-- Set Environment -->\n        <h1 class=\"title\">Test Set Environment</h1>\n        <p class=\"des\">send to app and get a success callback</p>\n        <div class=\"button\" v-on:click=\"setEnvironment\">Set Environment</div>\n        <test-result :status=\"setEnvStatus\"></test-result>\n        <div class=\"line\"></div>\n        <!-- showModal -->\n        <h1 class=\"title\">Test Use showModal</h1>\n        <p class=\"des\">test showModal and get a callback when user click OK or Cancel button</p>\n        <div class=\"button\" v-on:click=\"showModal\">ShowModal</div>\n        <test-result :status=\"showModalStatus\"></test-result>\n        <div class=\"line\"></div>\n        <!-- network request -->\n        <h1 class=\"title\">Test Network Request</h1>\n        <p class=\"des\">send network request in app</p>\n        <div class=\"button\" v-on:click=\"sendRequest\">Send Network Request</div>\n        <test-result :status=\"networkStatus\"></test-result>\n        <div class=\"line\"></div>\n        <!-- debug -->\n        <h1 class=\"title\">Test Debug</h1>\n        <p class=\"des\">send debug msg between app and webview</p>\n        <p class=\"des\">Make sure have a debug alert</p>\n        <div class=\"button\" v-on:click=\"alert\">Send Debug Alert</div>\n        <p class=\"des\">Make sure have a log message in app</p>\n        <div class=\"button\" v-on:click=\"log\">Log msg in app</div>\n        <p class=\"des\">Make sure have a debug alert</p>\n        <div class=\"button\" v-on:click=\"webAlert\">Use Web Alert</div>\n    </div>\n</template>\n\n<script>\n/* global sy */\nimport TestResult from './testResult.vue';\n\nexport default {\n    components: {\n        TestResult\n    },\n    data() {\n        return {\n            setEnvStatus: '0',\n            showModalStatus: '0',\n            networkStatus: '0'\n        };\n    },\n    methods: {\n        setEnvironment() {\n            this.setEnvStatus = '0';\n            sy.env.setEnvironment({\n                namespace: 'sy',\n                success: () => {\n                    this.setEnvStatus = '1';\n                },\n                fail: () => {\n                    this.setEnvStatus = '2';\n                }\n            });\n            setTimeout(() => {\n                if (this.setEnvStatus === '0') {\n                    this.setEnvStatus = '2';\n                }\n            }, 1000);\n        },\n        alert() {\n            sy.debug.alert('receive a debug msg');\n        },\n        webAlert() {\n            alert('webview alert');\n        },\n        log() {\n            sy.debug.log('I am log msg from webview');\n        },\n        showModal() {\n            this.showModalStatus = '0';\n            sy.system.showModal({\n                title: 'SYWebViewBridge',\n                content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',\n                showCancel: true,\n                cancelText: 'Cancel',\n                confirmText: 'OK',\n                success: res => {\n                    if (res.confirm) {\n                        sy.debug.alert('click OK button');\n                    }\n                    else {\n                        sy.debug.alert('click Cancel button');\n                    }\n                    this.showModalStatus = '1';\n                },\n                fail: err => {\n                    this.showModalStatus = '2';\n                }\n            });\n            setTimeout(() => {\n                if (this.showModalStatus === '0') {\n                    this.showModalStatus = '2';\n                }\n            }, 10000);\n        },\n        sendRequest() {\n            this.networkStatus = '0';\n            sy.network.request({\n                url: 'https://www.igetget.com/api/wap/footer',\n                method: 'get',\n                data: {\n                    from: 'SYWebViewBridge'\n                },\n                header: {\n                    'content-type': 'application/json'\n                },\n                success: res => {\n                    sy.debug.alert(res.data);\n                    this.networkStatus = '1';\n                },\n                fail: err => {\n                    sy.debug.alert('network error');\n                    this.networkStatus = '1';\n                },\n                complete(res) {\n                    this.networkStatus = '1';\n                }\n            });\n            setTimeout(() => {\n                if (this.networkStatus === '0') {\n                    this.networkStatus = '2';\n                }\n            }, 5000);\n        }\n    }\n};\n</script>\n\n<style scoped>\n.line {\n    height: 1px;\n    background-color: #eee;\n    margin-top: 10px;\n}\n.sync-msg-wrap {\n    border-bottom: 1px solid #eee;\n}\n.title {\n    font-size: 24px;\n    font-weight: 700;\n}\n.des {\n    font-size: 16px;\n}\n.result {\n    border: 1px solid #eee;\n    padding: 8px;\n}\n\n.button {\n    height: 44px;\n    border: 1px solid #eee;\n    background-color: #0091FF;\n    color: #fff;\n    text-align: center;\n    font-size: 18px;\n    line-height: 44px;\n    font-weight: 700;\n    border-radius: 8px;\n    margin: 16px 0;\n    cursor: pointer;\n}\n.button:hover {\n    background-color: #1191FF;\n}\n</style>"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "\n.text[data-v-6badb4b9] {\n    font-family: PingFangSC-Medium;\n    font-size: 30px;\n}\n.untest[data-v-6badb4b9] {\n    color: #5B83FD;\n}\n.success[data-v-6badb4b9] {\n    color: #2BC942;\n}\n.fail[data-v-6badb4b9] {\n    color: #d0021b;\n}\n", "",{"version":3,"sources":["webpack://test/components/testResult.vue"],"names":[],"mappings":";AAoBA;IACA,8BAAA;IACA,eAAA;AACA;AACA;IACA,cAAA;AACA;AACA;IACA,cAAA;AACA;AACA;IACA,cAAA;AACA","sourcesContent":["<template>\n    <div>\n        <div v-if=\"status === '0' || !status\" class=\"text untest\">Waiting Test</div>\n        <div v-else-if=\"status === '1'\" class=\"text success\">Test Successful</div>\n        <div v-else class=\"text fail\">Test Failed</div>\n    </div>\n</template>\n\n<script>\nexport default {\n    props: {\n        status: {\n            type: String,\n            value: '0'\n        }\n    }\n};\n</script>\n\n<style scoped>\n.text {\n    font-family: PingFangSC-Medium;\n    font-size: 30px;\n}\n.untest {\n    color: #5B83FD;\n}\n.success {\n    color: #2BC942;\n}\n.fail {\n    color: #d0021b;\n}\n</style>"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -834,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "\n#app[data-v-36d0faba] {\n    padding: 16px;\n}\n", "",{"version":3,"sources":["webpack://home/index.vue"],"names":[],"mappings":";AAyDA;IACA,aAAA;AACA","sourcesContent":["<template>\n    <div id=\"app\">\n        <Header></Header>\n        <SyncMsg></SyncMsg>\n    </div>\n</template>\n\n<script>\n/* global sy */\nimport Header from './components/header.vue';\nimport SyncMsg from './components/syncMsg.vue';\nimport SYBridge from '../../packages/sy-webview-bridge/dist/index.js';\nimport NetworkPlugin from './networkPlugin';\n\nexport default {\n    components: {\n        Header,\n        SyncMsg\n    },\n    data() {\n        return {\n            title: 'SYWebViewBridge1'\n        };\n    },\n    mounted() {\n        // set the namespace sy\n        const namespace = 'sy';\n        // add bride object to window\n        const sy = new SYBridge();\n        window[namespace] = sy;\n        // tell app that my namespace is sy\n        sy.env.setEnvironment({\n            namespace\n        });\n        // add custom plugin\n        let requestPlugin = new NetworkPlugin(sy.core, 'network');\n        sy.registerPlugin(requestPlugin);\n        // observe webview lifecycle\n        sy.lifecycle = {\n            onLoad() {\n                console.log('on load');\n            },\n            onShow() {\n                console.log('on show');\n            },\n            onHide() {\n                console.log('on hide');\n            },\n            onUnload() {\n                console.log('on unload');\n            }\n        };\n    }\n};\n</script>\n\n<style scoped>\n#app {\n    padding: 16px;\n}\n</style>"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "\n#app[data-v-36d0faba] {\n    padding: 16px;\n}\n", "",{"version":3,"sources":["webpack://test/index.vue"],"names":[],"mappings":";AA+DA;IACA,aAAA;AACA","sourcesContent":["<template>\n    <div id=\"app\">\n        <Header></Header>\n        <SyncMsg></SyncMsg>\n        <!-- lifeCycle -->\n        <h1 class=\"title\">Test LifeCycle message</h1>\n        <p class=\"des\">the webview lifecycle</p>\n        <div v-for=\"title in lifecycles\">{{ title }}</div>\n    </div>\n</template>\n\n<script>\n/* global sy */\nimport Header from './components/header.vue';\nimport SyncMsg from './components/syncMsg.vue';\nimport SYBridge from '../../packages/sy-webview-bridge/dist/index.js';\nimport NetworkPlugin from './networkPlugin';\n\nexport default {\n    components: {\n        Header,\n        SyncMsg\n    },\n    data() {\n        return {\n            title: 'SYWebViewBridge1',\n            lifecycles: []\n        };\n    },\n    mounted() {\n        // set the namespace sy\n        const namespace = 'sy';\n        // add bride object to window\n        const sy = new SYBridge();\n        window[namespace] = sy;\n        // tell app that my namespace is sy\n        sy.env.setEnvironment({\n            namespace\n        });\n        // add custom plugin\n        let requestPlugin = new NetworkPlugin(sy.core, 'network');\n        sy.registerPlugin(requestPlugin);\n        // observe webview lifecycle\n        let that = this;\n        sy.lifecycle = {\n            onLoad() {\n                that.lifecycles.push('onLoadd');\n            },\n            onShow() {\n                that.lifecycles.push('onShow');\n            },\n            onHide() {\n                that.lifecycles.push('onHide');\n            },\n            onUnload() {\n                that.lifecycles.push('onUnload');\n            }\n        };\n    }\n};\n</script>\n\n<style scoped>\n#app {\n    padding: 16px;\n}\n</style>"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1397,6 +730,35 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/index.vue?vue&type=style&index=0&id=36d0faba&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./test/index.vue?vue&type=style&index=0&id=36d0faba&scoped=true&lang=css& ***!
@@ -1801,7 +1163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
     data() {
         return {
-            title: 'SYWebViewBridge Test Case',
+            title: 'Test Case',
             description: 'The app and webview should be tested at same time. You must test'
                 + 'manuly'
         };
@@ -1820,6 +1182,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _testResult_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./testResult.vue */ "./test/components/testResult.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1848,19 +1217,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* global sy */
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        TestResult: _testResult_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    },
     data() {
         return {
-            title: 'Sync msg to Obj-C',
-            description: 'WebView send msg to Obj-C and get a return value.',
-            result: ''
+            setEnvStatus: '0',
+            showModalStatus: '0',
+            networkStatus: '0'
         };
     },
     methods: {
         setEnvironment() {
+            this.setEnvStatus = '0';
             sy.env.setEnvironment({
-                namespace: 'wsy'
+                namespace: 'sy',
+                success: () => {
+                    this.setEnvStatus = '1';
+                },
+                fail: () => {
+                    this.setEnvStatus = '2';
+                }
             });
+            setTimeout(() => {
+                if (this.setEnvStatus === '0') {
+                    this.setEnvStatus = '2';
+                }
+            }, 1000);
         },
         alert() {
             sy.debug.alert('receive a debug msg');
@@ -1872,29 +1258,34 @@ __webpack_require__.r(__webpack_exports__);
             sy.debug.log('I am log msg from webview');
         },
         showModal() {
+            this.showModalStatus = '0';
             sy.system.showModal({
                 title: 'SYWebViewBridge',
                 content: 'An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView.',
                 showCancel: true,
                 cancelText: 'Cancel',
                 confirmText: 'OK',
-                success(res) {
+                success: res => {
                     if (res.confirm) {
                         sy.debug.alert('click OK button');
                     }
                     else {
                         sy.debug.alert('click Cancel button');
                     }
+                    this.showModalStatus = '1';
                 },
-                fail(err) {
-                    console.log(err);
-                },
-                complete(res) {
-                    console.log(res);
+                fail: err => {
+                    this.showModalStatus = '2';
                 }
             });
+            setTimeout(() => {
+                if (this.showModalStatus === '0') {
+                    this.showModalStatus = '2';
+                }
+            }, 10000);
         },
         sendRequest() {
+            this.networkStatus = '0';
             sy.network.request({
                 url: 'https://www.igetget.com/api/wap/footer',
                 method: 'get',
@@ -1904,16 +1295,53 @@ __webpack_require__.r(__webpack_exports__);
                 header: {
                     'content-type': 'application/json'
                 },
-                success(res) {
+                success: res => {
                     sy.debug.alert(res.data);
+                    this.networkStatus = '1';
                 },
-                fail(err) {
+                fail: err => {
                     sy.debug.alert('network error');
+                    this.networkStatus = '1';
                 },
                 complete(res) {
-                    console.log('request complete');
+                    this.networkStatus = '1';
                 }
             });
+            setTimeout(() => {
+                if (this.networkStatus === '0') {
+                    this.networkStatus = '2';
+                }
+            }, 5000);
+        }
+    }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./test/components/testResult.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        status: {
+            type: String,
+            value: '0'
         }
     }
 });
@@ -1932,9 +1360,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/header.vue */ "./test/components/header.vue");
 /* harmony import */ var _components_syncMsg_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/syncMsg.vue */ "./test/components/syncMsg.vue");
-/* harmony import */ var _packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../packages/sy-webview-bridge/dist/index.js */ "../packages/sy-webview-bridge/dist/index.js");
-/* harmony import */ var _packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _networkPlugin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./networkPlugin */ "./test/networkPlugin.js");
+//
+//
+//
+//
 //
 //
 //
@@ -1956,14 +1387,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     data() {
         return {
-            title: 'SYWebViewBridge1'
+            title: 'SYWebViewBridge1',
+            lifecycles: []
         };
     },
     mounted() {
         // set the namespace sy
         const namespace = 'sy';
         // add bride object to window
-        const sy = new _packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2___default.a();
+        const sy = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())();
         window[namespace] = sy;
         // tell app that my namespace is sy
         sy.env.setEnvironment({
@@ -1973,18 +1405,19 @@ __webpack_require__.r(__webpack_exports__);
         let requestPlugin = new _networkPlugin__WEBPACK_IMPORTED_MODULE_3__["default"](sy.core, 'network');
         sy.registerPlugin(requestPlugin);
         // observe webview lifecycle
+        let that = this;
         sy.lifecycle = {
             onLoad() {
-                console.log('on load');
+                that.lifecycles.push('onLoadd');
             },
             onShow() {
-                console.log('on show');
+                that.lifecycles.push('onShow');
             },
             onHide() {
-                console.log('on hide');
+                that.lifecycles.push('onHide');
             },
             onUnload() {
-                console.log('on unload');
+                that.lifecycles.push('onUnload');
             }
         };
     }
@@ -2036,54 +1469,109 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sync-msg-wrap" }, [
-    _c("h1", { staticClass: "title" }, [_vm._v("Set Environment")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "des" }, [
-      _vm._v("send some messages to app before bridge work")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.setEnvironment } }, [
-      _vm._v("Set Environment")
-    ]),
-    _vm._v(" "),
-    _c("h1", { staticClass: "title" }, [_vm._v("Use showModal")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "des" }, [_vm._v("the demo of showModal")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.showModal } }, [
-      _vm._v("ShowModal")
-    ]),
-    _vm._v(" "),
-    _c("h1", { staticClass: "title" }, [_vm._v("LifeCycle message")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "des" }, [_vm._v("the webview lifecycle")]),
-    _vm._v(" "),
-    _c("h1", { staticClass: "title" }, [_vm._v("Network Request")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "des" }, [_vm._v("send network request in app")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.sendRequest } }, [
-      _vm._v("Send Network Request")
-    ]),
-    _vm._v(" "),
-    _c("h1", { staticClass: "title" }, [_vm._v("Debug")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "des" }, [
-      _vm._v("send debug msg between app and webview")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.alert } }, [
-      _vm._v("Send Debug Alert")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.log } }, [
-      _vm._v("Log msg in app")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button", on: { click: _vm.webAlert } }, [
-      _vm._v("Use Web Alert")
-    ])
+  return _c(
+    "div",
+    { staticClass: "sync-msg-wrap" },
+    [
+      _c("h1", { staticClass: "title" }, [_vm._v("Test Set Environment")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [
+        _vm._v("send to app and get a success callback")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.setEnvironment } }, [
+        _vm._v("Set Environment")
+      ]),
+      _vm._v(" "),
+      _c("test-result", { attrs: { status: _vm.setEnvStatus } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "line" }),
+      _vm._v(" "),
+      _c("h1", { staticClass: "title" }, [_vm._v("Test Use showModal")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [
+        _vm._v(
+          "test showModal and get a callback when user click OK or Cancel button"
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.showModal } }, [
+        _vm._v("ShowModal")
+      ]),
+      _vm._v(" "),
+      _c("test-result", { attrs: { status: _vm.showModalStatus } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "line" }),
+      _vm._v(" "),
+      _c("h1", { staticClass: "title" }, [_vm._v("Test Network Request")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [_vm._v("send network request in app")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.sendRequest } }, [
+        _vm._v("Send Network Request")
+      ]),
+      _vm._v(" "),
+      _c("test-result", { attrs: { status: _vm.networkStatus } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "line" }),
+      _vm._v(" "),
+      _c("h1", { staticClass: "title" }, [_vm._v("Test Debug")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [
+        _vm._v("send debug msg between app and webview")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [_vm._v("Make sure have a debug alert")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.alert } }, [
+        _vm._v("Send Debug Alert")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [
+        _vm._v("Make sure have a log message in app")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.log } }, [
+        _vm._v("Log msg in app")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [_vm._v("Make sure have a debug alert")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "button", on: { click: _vm.webAlert } }, [
+        _vm._v("Use Web Alert")
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.status === "0" || !_vm.status
+      ? _c("div", { staticClass: "text untest" }, [_vm._v("Waiting Test")])
+      : _vm.status === "1"
+      ? _c("div", { staticClass: "text success" }, [_vm._v("Test Successful")])
+      : _c("div", { staticClass: "text fail" }, [_vm._v("Test Failed")])
   ])
 }
 var staticRenderFns = []
@@ -2111,8 +1599,20 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "app" } },
-    [_c("Header"), _vm._v(" "), _c("SyncMsg")],
-    1
+    [
+      _c("Header"),
+      _vm._v(" "),
+      _c("SyncMsg"),
+      _vm._v(" "),
+      _c("h1", { staticClass: "title" }, [_vm._v("Test LifeCycle message")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "des" }, [_vm._v("the webview lifecycle")]),
+      _vm._v(" "),
+      _vm._l(_vm.lifecycles, function(title) {
+        return _c("div", [_vm._v(_vm._s(title))])
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -10891,6 +10391,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./test/components/testResult.vue":
+/*!****************************************!*\
+  !*** ./test/components/testResult.vue ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./testResult.vue?vue&type=template&id=6badb4b9&scoped=true& */ "./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true&");
+/* harmony import */ var _testResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./testResult.vue?vue&type=script&lang=js& */ "./test/components/testResult.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& */ "./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _testResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6badb4b9",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "test/components/testResult.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./test/components/testResult.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./test/components/testResult.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./testResult.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&":
+/*!*************************************************************************************************!*\
+  !*** ./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/style-loader/dist/cjs.js!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=style&index=0&id=6badb4b9&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_style_index_0_id_6badb4b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true&":
+/*!***********************************************************************************!*\
+  !*** ./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./testResult.vue?vue&type=template&id=6badb4b9&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./test/components/testResult.vue?vue&type=template&id=6badb4b9&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_testResult_vue_vue_type_template_id_6badb4b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./test/index.js":
 /*!***********************!*\
   !*** ./test/index.js ***!
@@ -11010,8 +10597,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NetworkPlugin; });
-/* harmony import */ var _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../packages/sy-webview-bridge/dist/index */ "../packages/sy-webview-bridge/dist/index.js");
-/* harmony import */ var _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /**
  * @description network request
  * @file requestPlugin.js
@@ -11020,7 +10606,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class NetworkPlugin extends _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
+class NetworkPlugin extends !(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()) {
     request(options) {
         this.core.sendMsg(this.router('request'), options);
     }
