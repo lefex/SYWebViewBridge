@@ -15,4 +15,4 @@ export default class SYPlugin {
         let aRouter = `${env.scheme}://${env.bundleId}/${this.module}/${action}`;
         return aRouter;
     }
-}
+}˜

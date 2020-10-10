@@ -13,6 +13,7 @@
 
 @interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 @property (nonatomic, strong) SYMessageHandler *msgHandler;
+// the bridge object name in window
 @property (nonatomic, copy) NSString *namespace;
 @end
 
