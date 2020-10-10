@@ -39,10 +39,6 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'Config',
-        link: '/config/'
-      },
-      {
         text: 'GitHub',
         link: 'https://github.com/lefex/SYWebViewBridge'
       }
@@ -54,7 +50,8 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'using',
+            'using-fe',
+            'using-iOS'
           ]
         }
       ],
