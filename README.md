@@ -32,6 +32,11 @@ An iOS *modern bridge* for sending messages between Objective-C and JavaScript i
 
 [Docs Detail](https://lefex.github.io/SYWebViewBridge/)
 
+```js
+npm run docs
+npm run docs:dev
+```
+
 ### Use in FE
 
 `sy-webview-bridge` provide a system plugin that can show a modal alert in App. This code to show a modal alert and will receive a success callback when user click OK or Cancel button.
@@ -82,7 +87,7 @@ SYHybridWebView *webview = [[SYHybridWebView alloc] initWithFrame:self.view.boun
 [self.view addSubview:webview];
 ```
 
-### custom plugin
+### Custom plugin
 
 Custom a plugin to deal with network request. The plugin must extend from `SYBridgeBasePlugin`.
 
@@ -131,10 +136,6 @@ Custom a plugin to deal with network request. The plugin must extend from `SYBri
 If you have any questions, you can pay attention to my wechat official account 素燕. 
 
 ![](https://s1.ax1x.com/2020/10/10/06VvOx.png)
-
-## Issues
-
-You can submit an question if you hava problem.
 
 ## Contribution
 
