@@ -37,7 +37,7 @@ export default {
     methods: {
         setEnvironment() {
             sy.env.setEnvironment({
-                namespace: 'wsy'
+                namespace: 'sy'
             });
         },
         alert() {
