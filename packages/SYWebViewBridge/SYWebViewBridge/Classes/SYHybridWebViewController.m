@@ -18,7 +18,6 @@
     self = [super init];
     if (self) {
         [self.view addSubview:self.webview];
-        [self.webview syOnLoad];
     }
     return self;
 }

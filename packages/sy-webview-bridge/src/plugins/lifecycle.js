@@ -11,13 +11,6 @@ export default class SYLifeCycle extends SYPlugin {
         super(core, moduleName);
         this.proxy = proxy;
     }
-    // page on load, before onShow (viewDidLoad in iOS)
-    onLoad(msg) {
-        // NA need send message to webview through this function
-        if (this.isValid('onLoad')) {
-            this.proxy.onLoad.call(this.proxy, msg);
-        }
-    }
     // page on show (viewDidAppear in iOS)
     onShow(msg) {
         // NA need send message to webview through this function

@@ -12,13 +12,6 @@ static NSString *kSYLifeCycle = @"_lifecycle";
 
 @implementation SYHybridWebView (LifeCycle)
 
-- (void)syOnLoad {
-    SYBridgeMessage *msg = [self messageForAction:@"onLoad"];
-    [self sySendMessage:msg completionHandler:^(id msg, NSError *error) {
-        // the js callback
-    }];
-}
-
 - (void)syOnShow {
     SYBridgeMessage *msg = [self messageForAction:@"onShow"];
     [self sySendMessage:msg completionHandler:^(id msg, NSError *error) {

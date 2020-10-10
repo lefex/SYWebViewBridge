@@ -27,9 +27,6 @@ You can observe the H5 page lifecycle.
 
 ```js
 sy.lifecycle = {
-    onLoad() {
-        // page load
-    },
     onShow() {
         // web page appear
     },

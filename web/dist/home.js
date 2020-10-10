@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "../packages/sy-webview-bridge/dist/index.js":
+/*!***************************************************!*\
+  !*** ../packages/sy-webview-bridge/dist/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){if(true)module.exports=t();else { var s, o; }}(window,(function(){return function(e){var t={};function o(s){if(t[s])return t[s].exports;var n=t[s]={i:s,l:!1,exports:{}};return e[s].call(n.exports,n,n.exports,o),n.l=!0,n.exports}return o.m=e,o.c=t,o.d=function(e,t,s){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:s})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var s=Object.create(null);if(o.r(s),Object.defineProperty(s,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)o.d(s,n,function(t){return e[t]}.bind(null,n));return s},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="",o(o.s=0)}([function(e,t,o){"use strict";o.r(t),o.d(t,"default",(function(){return h})),o.d(t,"SYPlugin",(function(){return r}));const s="suyan",n="com.gzh.sy";class i{constructor(e){this.callbackMap={},this.curId=1,this.context=e}sendMsg(e,t){const o=this.generateParams(t),s=JSON.stringify(o);let n=`${e}?params=${encodeURIComponent(s)}`;this.context.isAndroid?prompt(n):this.callPostMessage(n,o.bridgeName),this.curId+=1}callPostMessage(e,t){window.webkit&&window.webkit.messageHandlers?"SYJSBridgeEnv"===t?window.webkit.messageHandlers.SYJSBridgeEnv.postMessage(e):window.webkit.messageHandlers.SYJSBridge.postMessage(e):__SYDEV__&&console.warn("window.webkit.messageHandlers can not nil")}callIframe(e){let t=document.createElement("iframe");t.src=e,document.body.appendChild(t),document.body.removeChild(t)}callLocation(e){window.location.href=e}generateParams(e){let t={},o=this.curId;return Object.keys(e).forEach(s=>{if("function"==typeof e[s]){let t=this.callbackMap[o];t||(t={},this.callbackMap[o]=t),t[s]=e[s]}else t[s]=e[s]}),t._sycallbackId=o,t}sendCallback(e){if(!e||!e._sycallbackId)return void(__SYDEV__&&console.error("[sybridge] options must contain a _sycallbackId"));const t=e._sycallbackId,o=this.callbackMap[t];if(!o)return void(__SYDEV__&&console.error("[sybridge] callbackId invalid"));const s=-1!==["success","fail","complete"].indexOf(e.cbtype);e.cbtype&&s||__SYDEV__&&console.error("[sybridge] cbtype only support success、fail and complete");const n=o[e.cbtype];if(!n||"function"!=typeof n)return;n(e);const i=o.complete;i&&"function"==typeof i&&i(e),delete this.callbackMap[t],(this.callbackMap||0===Object.keys(this.callbackMap).length)&&(this.curId=1)}}class r{constructor(e,t){this.core=e,this.moduleName=t}router(e){let t=this.core.context;return`${t.scheme}://${t.bundleId}/${this.moduleName}/${e}`}}class l extends r{showModal(e){this.core.sendMsg(this.router("showModal"),e)}}class c extends r{alert(e){this.core.sendMsg(this.router("alert"),{title:"debug message",content:this.debugMsg(e)})}log(e){this.core.sendMsg(this.router("log"),{msg:this.debugMsg(e)})}debugMsg(e){let t;if("string"==typeof e)t=e;else try{t=JSON.stringify(e)}catch(e){t="the msg invalid, can not use"}return t}}class a extends r{constructor(e,t,o){super(e,t),this.proxy=o}onLoad(e){this.isValid("onLoad")&&this.proxy.onLoad.call(this.proxy,e)}onShow(e){this.isValid("onShow")&&this.proxy.onShow.call(this.proxy,e)}onHide(e){this.isValid("onHide")&&this.proxy.onHide.call(this.proxy,e)}onUnload(e){this.isValid("onUnload")&&this.proxy.onUnload.call(this.proxy,e)}onPageScroll(e){this.isValid("onPageScroll")&&this.proxy.onPageScroll.call(this.proxy,e)}onReachBottom(e){this.isValid("onReachBottom")&&this.proxy.onReachBottom.call(this.proxy,e)}isValid(e){return!(!this.proxy||!this.proxy[e]||"function"!=typeof this.proxy[e])}}class d extends r{setEnvironment(e){e.bridgeName="SYJSBridgeEnv",this.core.sendMsg(this.router("setEnv"),e)}}window.__SYDEV__=!1;class u{constructor(e){if(this.router=e,this.scheme=null,this.identifier=null,this.moduleName=null,this.action=null,this.param=null,!this.parseRouter(e))throw __SYDEV__&&console.log("right router such as: suyan://com.sy.bridge/debug/showModal?param={key: value}&callback=js_cb"),"the router is invalid: "+e}parseRouter(e){try{let t=e.split("?");if(t.length>2)return!1;let o=t[0].split("://");this.scheme=o[0];let s=o[1].split("/");if(this.identifier=s[0],this.moduleName=s[1],this.action=s[2],t.length<2)return!0;let n=t[1].split("&"),i={};return n.forEach(e=>{let t=e.split("=");if("params"===t[0]){let e=decodeURIComponent(t[1]),o=JSON.parse(e);i[t[0]]=o}else i[t[0]]=t[1]}),this.param=i,!0}catch(e){return!1}}}class h{constructor(e={}){this.context=this.initContext(null,e),this.core=new i(this.context),this.system=new l(this.core,"system"),this.debug=new c(this.core,"debug"),this.env=new d(this.core,"env"),this.lifecycle=null,this._lifecycle=new a(this.core,"_lifecycle",this.lifecycle)}initContext(e,t){if(e||(e=navigator&&navigator.userAgent),!e)return;const{scheme:o=s,bundleId:i=n}=t;return{isAndroid:/(Android);?[\s/]+([\d.]+)?/.test(e),isIOS:!!e.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),inNA:/-SYBridge-/i.test(e),scheme:o,bundleId:i}}set lifecycle(e){e&&(this._lifecycle.proxy=e)}registerPlugin(e,t={}){if(!e)return void(__SYDEV__&&console.error("[sybridge] plugin can not be undefined"));let o=t.moduleName;o||(o=e.moduleName),this[o]=e}syBridgeMessage(e){let t=new u(e);if(!t||!t.moduleName||!t.action)return;let o=this[t.moduleName][t.action];o&&"function"==typeof o?o.call(this[t.moduleName],t):__SYDEV__&&console.log("can not get action function: ",o)}}}])}));
+
+/***/ }),
+
 /***/ "./home/components/header.vue":
 /*!************************************!*\
   !*** ./home/components/header.vue ***!
@@ -379,7 +390,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NetworkPlugin; });
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../packages/sy-webview-bridge/dist/index */ "../packages/sy-webview-bridge/dist/index.js");
+/* harmony import */ var _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * @description network request
  * @file requestPlugin.js
@@ -388,7 +400,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class NetworkPlugin extends !(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()) {
+class NetworkPlugin extends _packages_sy_webview_bridge_dist_index__WEBPACK_IMPORTED_MODULE_0__["SYPlugin"] {
     request(options) {
         this.core.sendMsg(this.router('request'), options);
     }
@@ -456,7 +468,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "\n#app[data-v-908012a0] {\n    padding: 16px;\n}\n", "",{"version":3,"sources":["webpack://home/index.vue"],"names":[],"mappings":";AAyDA;IACA,aAAA;AACA","sourcesContent":["<template>\n    <div id=\"app\">\n        <Header></Header>\n        <SyncMsg></SyncMsg>\n    </div>\n</template>\n\n<script>\n/* global sy */\nimport Header from './components/header.vue';\nimport SyncMsg from './components/syncMsg.vue';\nimport SYBridge from '../../packages/sy-webview-bridge/dist/index.js';\nimport NetworkPlugin from './networkPlugin';\n\nexport default {\n    components: {\n        Header,\n        SyncMsg\n    },\n    data() {\n        return {\n            title: 'SYWebViewBridge1'\n        };\n    },\n    mounted() {\n        // set the namespace sy\n        const namespace = 'sy';\n        // add bride object to window\n        const sy = new SYBridge();\n        window[namespace] = sy;\n        // tell app that my namespace is sy\n        sy.env.setEnvironment({\n            namespace\n        });\n        // add custom plugin\n        let requestPlugin = new NetworkPlugin(sy.core, 'network');\n        sy.registerPlugin(requestPlugin);\n        // observe webview lifecycle\n        sy.lifecycle = {\n            onLoad() {\n                console.log('on load');\n            },\n            onShow() {\n                console.log('on show');\n            },\n            onHide() {\n                console.log('on hide');\n            },\n            onUnload() {\n                console.log('on unload');\n            }\n        };\n    }\n};\n</script>\n\n<style scoped>\n#app {\n    padding: 16px;\n}\n</style>"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "\n#app[data-v-908012a0] {\n    padding: 16px;\n}\n", "",{"version":3,"sources":["webpack://home/index.vue"],"names":[],"mappings":";AA4BA;IACA,aAAA;AACA","sourcesContent":["<template>\n    <div id=\"app\">\n        <Header></Header>\n        <SyncMsg></SyncMsg>\n    </div>\n</template>\n\n<script>\n/* global sy */\nimport Header from './components/header.vue';\nimport SyncMsg from './components/syncMsg.vue';\nimport SYBridge from '../../packages/sy-webview-bridge/dist/index.js';\nimport NetworkPlugin from './networkPlugin';\n\nexport default {\n    components: {\n        Header,\n        SyncMsg\n    },\n    data() {\n        return {\n            title: 'SYWebViewBridge1'\n        };\n    }\n};\n</script>\n\n<style scoped>\n#app {\n    padding: 16px;\n}\n</style>"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1553,7 +1565,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/header.vue */ "./home/components/header.vue");
 /* harmony import */ var _components_syncMsg_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/syncMsg.vue */ "./home/components/syncMsg.vue");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../packages/sy-webview-bridge/dist/index.js */ "../packages/sy-webview-bridge/dist/index.js");
+/* harmony import */ var _packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_packages_sy_webview_bridge_dist_index_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _networkPlugin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./networkPlugin */ "./home/networkPlugin.js");
 //
 //
@@ -1577,35 +1590,6 @@ __webpack_require__.r(__webpack_exports__);
     data() {
         return {
             title: 'SYWebViewBridge1'
-        };
-    },
-    mounted() {
-        // set the namespace sy
-        const namespace = 'sy';
-        // add bride object to window
-        const sy = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../packages/sy-webview-bridge/dist/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())();
-        window[namespace] = sy;
-        // tell app that my namespace is sy
-        sy.env.setEnvironment({
-            namespace
-        });
-        // add custom plugin
-        let requestPlugin = new _networkPlugin__WEBPACK_IMPORTED_MODULE_3__["default"](sy.core, 'network');
-        sy.registerPlugin(requestPlugin);
-        // observe webview lifecycle
-        sy.lifecycle = {
-            onLoad() {
-                console.log('on load');
-            },
-            onShow() {
-                console.log('on show');
-            },
-            onHide() {
-                console.log('on hide');
-            },
-            onUnload() {
-                console.log('on unload');
-            }
         };
     }
 });

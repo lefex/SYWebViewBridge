@@ -16,6 +16,7 @@
   "author": "Suyan Wang",
   "license": "MIT",
   "devDependencies": {
+    "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.2.2",
     "html-webpack-plugin": "^4.3.0",
     "style-loader": "^1.2.1",

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // entry
 const entry = {
@@ -50,7 +51,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: 'hybrid.js', to: 'hybrid.js' }
+            ],
+        })
     ].concat(plugins),
     devtool: 'source-map',
     devServer: {

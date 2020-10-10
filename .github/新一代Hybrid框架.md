@@ -72,10 +72,6 @@ sy.env.setEnvironment({
 
 ```js
 sy.lifecycle = {
-    // 页面开始加载，viewDidLoad
-    onLoad() {
-        console.log('on load');
-    },
     // 页面显示，viewDidAppear
     onShow() {
         console.log('on show');

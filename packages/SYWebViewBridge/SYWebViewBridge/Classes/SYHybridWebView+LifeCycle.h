@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SYHybridWebView (LifeCycle)
 
-- (void)syOnLoad;
 - (void)syOnShow;
 - (void)syOnHide;
 - (void)syOnUnload;
