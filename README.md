@@ -3,43 +3,14 @@ An iOS *modern bridge* for sending messages between Objective-C and JavaScript i
 
 ![logo](https://s1.ax1x.com/2020/10/10/06u4dP.md.png)
 
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
-
-## Project Catagory
-
-```js
-├── LICENSE
-├── README.md
-├── deploy.sh
-├── docs // docs site
-│   ├── README.md
-│   ├── config
-│   ├── guide
-│   └── index.md
-├── package-lock.json
-├── package.json
-├── packages
-│   ├── SYWebViewBridge // iOS project
-│   └── sy-webview-bridge // fe project
-└── web // the fe pages demo
-    ├── home
-    ├── index.tpl.html
-    ├── package-lock.json
-    ├── package.json
-    └── webpack.config.js
-```
-
 ## Documentation
 
 [Docs Detail](https://lefex.github.io/SYWebViewBridge/)
 
-```js
-npm run docs
-npm run docs:dev
-```
 
 ### Use in FE
+
+You need to download the project [SYJSBridge](https://github.com/lefex/SYJSBridge) to use in web page。
 
 `sy-webview-bridge` provide a system plugin that can show a modal alert in App. This code to show a modal alert and will receive a success callback when user click OK or Cancel button.
 
@@ -69,6 +40,8 @@ sy.system.showModal({
     }
 });
 ```
+
+[more docs](https://lefex.github.io/SYWebViewBridge/)
 
 ### Use in iOS
 You can use `SYHybridWebViewController` or `SYHybridWebView`.
@@ -132,6 +105,7 @@ Custom a plugin to deal with network request. The plugin must extend from `SYBri
 @end
 ```
 
+[more docs](https://lefex.github.io/SYWebViewBridge/)
 
 ## Questions
 

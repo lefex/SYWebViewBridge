@@ -30,7 +30,7 @@ An iOS modern bridge for sending messages between Objective-C and JavaScript in 
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = './SYWebViewBridge/Classes/**/*'
+  s.source_files = 'SYWebViewBridge/Classes/**/*'
   
   # s.resource_bundles = {
   #   'SYWebViewBridge' => ['SYWebViewBridge/Assets/*.png']
