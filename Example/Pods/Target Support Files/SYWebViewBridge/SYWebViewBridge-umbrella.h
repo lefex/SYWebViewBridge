@@ -13,15 +13,14 @@
 #import "NSObject+SYBridge.h"
 #import "SYBridgeBasePlugin.h"
 #import "SYBridgeDebugPlugin.h"
-#import "SYBridgeDebugViewController.h"
 #import "SYBridgeMessage.h"
 #import "SYBridgeSystemPlugin.h"
 #import "SYConstant.h"
 #import "SYHybridWebView+LifeCycle.h"
 #import "SYHybridWebView.h"
 #import "SYHybridWebViewController.h"
+#import "SYMessageDispatcher.h"
 #import "SYMessageHandler.h"
-#import "SYMsgDispatcherCenter.h"
 
 FOUNDATION_EXPORT double SYWebViewBridgeVersionNumber;
 FOUNDATION_EXPORT const unsigned char SYWebViewBridgeVersionString[];

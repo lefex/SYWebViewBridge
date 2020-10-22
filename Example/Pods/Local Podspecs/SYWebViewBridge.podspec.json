@@ -1,9 +1,9 @@
 {
   "name": "SYWebViewBridge",
   "version": "0.1.0",
-  "summary": "A short description of SYWebViewBridge.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/wsy/SYWebViewBridge",
+  "summary": "A bridge between iOS and WKWebView.",
+  "description": "An iOS modern bridge for sending messages between Objective-C and JavaScript in WKWebView. Include FE and iOS.",
+  "homepage": "https://github.com/lefex/SYWebViewBridge",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,11 @@
     "wsy": "wsyxyxs@126.com"
   },
   "source": {
-    "git": "https://github.com/wsy/SYWebViewBridge.git",
+    "git": "https://github.com/lefex/SYWebViewBridge.git",
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "SYWebViewBridge/Classes/**/*"
 }
