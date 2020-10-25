@@ -25,6 +25,8 @@
 #pragma mark - LifeCycle
 - (void)dealloc {
     [_webview syOnUnload];
+    // If not removed, it will cause a memory leak
+    [_webview syDestoryed];
 }
 
 - (void)viewDidLoad {

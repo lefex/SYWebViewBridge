@@ -21,6 +21,10 @@
 @implementation SYHybridWebView
 
 #pragma mark - Init
+- (void)dealloc {
+    _msgHandler = nil;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {
@@ -86,6 +90,12 @@
         _sourceUrl = sourceUrl;
         [self syReload];
     }
+}
+
+- (void)syDestoryed {
+    // you must call removeScriptMessageHandlerForName, Otherwise, it will cause memory leak
+    [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptEnvMsgName];
+    [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptMsgName];
 }
 
 - (void)syReload {
