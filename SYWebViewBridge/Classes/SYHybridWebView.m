@@ -6,26 +6,24 @@
 //
 
 #import "SYHybridWebView.h"
-#import "SYMessageHandler.h"
 #import "SYConstant.h"
 #import "SYBridgeMessage.h"
+#import "SYMessageDispatcher.h"
+#import "SYBridgeBasePlugin.h"
 #import "NSObject+SYBridge.h"
 #import "SYWeakProxy.h"
 
-@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate>
-@property (nonatomic, strong) SYMessageHandler *msgHandler;
+@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 // the bridge object name in window
 @property (nonatomic, copy) NSString *namespace;
 @property (nonatomic, assign) NSInteger retryCount;
+// the class to dispatch event through plugin
+@property (nonatomic, strong) SYMessageDispatcher *dispatcher;
 @end
 
 @implementation SYHybridWebView
 
 #pragma mark - Init
-- (void)dealloc {
-    _msgHandler = nil;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {
@@ -53,32 +51,8 @@
     self.configuration.preferences = [WKPreferences new];
     self.navigationDelegate = self;
     self.UIDelegate = self;
-    
-    SYMessageHandler *messageHandler = [[SYMessageHandler alloc] init];
-    messageHandler.routerIsValidBlock = self.routerIsValidBlock;
-    __weak __typeof(self) weakSelf = self;
-    messageHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf excuteCallback:info message:msg];
-    };
-    messageHandler.handleMessageBlock = ^BOOL(SYBridgeMessage *msg) {
-        if ([msg isWebViewMessage]) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            NSString *selName = [NSString stringWithFormat:@"%@:callback:", msg.action];
-            SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
-                [strongSelf excuteCallback:info message:msg];
-            };
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [strongSelf performSelector:NSSelectorFromString(selName) withObject:msg withObject:callback];
-            #pragma clang diagnostic pop;
-            return YES;
-        }
-        return NO;
-    };
 
-    [self.configuration.userContentController addScriptMessageHandler:(id <WKScriptMessageHandler>)[SYWeakProxy proxyWithTarget:self.msgHandler] name:kSYScriptMsgName];
-    self.msgHandler = messageHandler;
+    [self.configuration.userContentController addScriptMessageHandler:(id <WKScriptMessageHandler>)[SYWeakProxy proxyWithTarget:self] name:kSYScriptMsgName];
 }
 
 - (void)excuteCallback:(NSDictionary *)info message:(SYBridgeMessage *)msg {
@@ -131,10 +105,57 @@
 }
 
 - (BOOL)syRegisterPlugin:(SYBridgeBasePlugin *)plugin forModuleName:(NSString *)moduleName {
-    return [self.msgHandler registerPlugin:plugin forModuleName:moduleName];
+     if (!plugin || !moduleName) {
+           return NO;
+       }
+       return [self.dispatcher setPlugin:plugin forModuleName:moduleName];
 }
 
-# pragma mark - handle webview message
+# pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.body isKindOfClass:[NSString class]]) {
+        // only support router that must a string
+        if ([message.name isEqualToString:kSYScriptMsgName]) {
+            /*
+             router like below:
+             suyan://com.sy.bridge/debug:submodule/showAlert?params={key: value}&callback=js_callback
+             [scheme]://[bundle id] / [module] / [action] ? [param] & [callback] & [other param]
+             */
+            NSString *router = message.body;
+            
+            if (self.routerIsValidBlock) {
+                // can not deal with router
+                if (!self.routerIsValidBlock(router)) {
+                    return;;
+                }
+            }
+
+            SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
+            // router is invalid
+            if (!syMsg || ![syMsg isValidMessage]) {
+                return;
+            }
+            
+            SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
+                [self excuteCallback:info message:msg];
+            };
+            if ([syMsg isWebViewMessage]) {
+                // message handle by webview
+                NSString *selName = [NSString stringWithFormat:@"%@:callback:", syMsg.action];
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [self performSelector:NSSelectorFromString(selName) withObject:syMsg withObject:callback];
+                #pragma clang diagnostic pop;
+            }
+            else {
+                // dispatch message to plugin
+                [self.dispatcher dispatchMessage:syMsg callback:callback];
+            }
+        }
+    }
+}
+
 - (void)setEnv:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
     // set the webview`s object on the window
     if (msg.paramDict[@"namespace"]) {
@@ -166,5 +187,13 @@
         _retryCount += 1;
     }
 }
+
+- (SYMessageDispatcher *)dispatcher {
+    if (!_dispatcher) {
+        _dispatcher = [[SYMessageDispatcher alloc] init];
+    }
+    return _dispatcher;
+}
+
 
 @end
