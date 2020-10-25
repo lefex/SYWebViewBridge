@@ -30,9 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 // reload webview
 - (void)syReload;
 
-// remove all script message handler
-- (void)syDestoryed;
-
 /// send message to webview
 /// @param msg the message that will send
 /// @param handler callback

@@ -12,8 +12,6 @@
 
 // the common messge handler for window.webkit.messageHandlers.xxx.postMessage
 static NSString *kSYScriptMsgName = @"SYJSBridge";
-// the environment messge handler for window.webkit.messageHandlers.xxx.postMessage
-static NSString *kSYScriptEnvMsgName = @"SYJSBridgeEnv";
 // the default js callback
 static NSString *kSYDefaultCallback = @"core.sendCallback";
 // the default namespcae
@@ -33,5 +31,7 @@ static NSString *kSYCallbackComplete = @"complete";
 typedef void(^SYPluginMessageCallBack)(NSDictionary *info, SYBridgeMessage *msg);
 
 typedef BOOL(^SYCheckRouteBlock)(NSString *router);
+
+typedef BOOL(^SYHandleMessageBlock)(SYBridgeMessage *msg);
 
 #endif /* SYConstant_h */

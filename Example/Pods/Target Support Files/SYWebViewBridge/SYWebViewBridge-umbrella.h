@@ -21,6 +21,7 @@
 #import "SYHybridWebViewController.h"
 #import "SYMessageDispatcher.h"
 #import "SYMessageHandler.h"
+#import "SYWeakProxy.h"
 
 FOUNDATION_EXPORT double SYWebViewBridgeVersionNumber;
 FOUNDATION_EXPORT const unsigned char SYWebViewBridgeVersionString[];

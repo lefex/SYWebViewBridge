@@ -32,4 +32,7 @@
 // message must have module and action
 - (BOOL)isValidMessage;
 
+// this message will handle by webview
+- (BOOL)isWebViewMessage;
+
 @end

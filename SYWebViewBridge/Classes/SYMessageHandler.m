@@ -55,6 +55,13 @@
             if (!syMsg || ![syMsg isValidMessage]) {
                 return;
             }
+            // message handle by outer
+            if (self.handleMessageBlock) {
+                BOOL isHandled = self.handleMessageBlock(syMsg);
+                if (isHandled) {
+                    return;
+                }
+            }
             // dispatch message to plugin
             [self.dispatcher dispatchMessage:syMsg callback:self.actionComplete];
         }

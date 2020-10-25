@@ -103,4 +103,11 @@
     return NO;
 }
 
+- (BOOL)isWebViewMessage {
+    if ([self.moduleName isEqualToString:@"webview"]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

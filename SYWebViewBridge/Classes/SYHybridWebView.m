@@ -10,8 +10,9 @@
 #import "SYConstant.h"
 #import "SYBridgeMessage.h"
 #import "NSObject+SYBridge.h"
+#import "SYWeakProxy.h"
 
-@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
+@interface SYHybridWebView ()<WKUIDelegate, WKNavigationDelegate>
 @property (nonatomic, strong) SYMessageHandler *msgHandler;
 // the bridge object name in window
 @property (nonatomic, copy) NSString *namespace;
@@ -53,17 +54,31 @@
     self.navigationDelegate = self;
     self.UIDelegate = self;
     
-    self.msgHandler = [[SYMessageHandler alloc] init];
-    self.msgHandler.routerIsValidBlock = self.routerIsValidBlock;
+    SYMessageHandler *messageHandler = [[SYMessageHandler alloc] init];
+    messageHandler.routerIsValidBlock = self.routerIsValidBlock;
     __weak __typeof(self) weakSelf = self;
-    self.msgHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
+    messageHandler.actionComplete = ^(NSDictionary * info, SYBridgeMessage *msg) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf excuteCallback:info message:msg];
     };
-    // deal with environment message
-    [self.configuration.userContentController addScriptMessageHandler:self name:kSYScriptEnvMsgName];
-    // deal with common message
-    [self.configuration.userContentController addScriptMessageHandler:self.msgHandler name:kSYScriptMsgName];
+    messageHandler.handleMessageBlock = ^BOOL(SYBridgeMessage *msg) {
+        if ([msg isWebViewMessage]) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            NSString *selName = [NSString stringWithFormat:@"%@:callback:", msg.action];
+            SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
+                [strongSelf excuteCallback:info message:msg];
+            };
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [strongSelf performSelector:NSSelectorFromString(selName) withObject:msg withObject:callback];
+            #pragma clang diagnostic pop;
+            return YES;
+        }
+        return NO;
+    };
+
+    [self.configuration.userContentController addScriptMessageHandler:(id <WKScriptMessageHandler>)[SYWeakProxy proxyWithTarget:self.msgHandler] name:kSYScriptMsgName];
+    self.msgHandler = messageHandler;
 }
 
 - (void)excuteCallback:(NSDictionary *)info message:(SYBridgeMessage *)msg {
@@ -84,29 +99,12 @@
     }];
 }
 
-// add or remove
-- (void)willMoveToSuperview:(nullable UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
-    // call syDestoryed when newSuperview is null. Otherwise, it will cause memory leak
-    // issue #1
-    if (!newSuperview) {
-         [self syDestoryed];
-    }
-}
-
 #pragma mark public method
 - (void)setSourceUrl:(NSString *)sourceUrl {
     if (![_sourceUrl isEqualToString:sourceUrl]) {
         _sourceUrl = sourceUrl;
         [self syReload];
     }
-}
-
-// If not removed, it will cause a memory leak, must call this method when no use webview
-// very important
-- (void)syDestoryed {
-    [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptEnvMsgName];
-    [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptMsgName];
 }
 
 - (void)syReload {
@@ -136,35 +134,7 @@
     return [self.msgHandler registerPlugin:plugin forModuleName:moduleName];
 }
 
-#pragma mark - WKScriptMessageHandler
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    if ([message.body isKindOfClass:[NSString class]]) {
-        if ([message.name isEqualToString:kSYScriptEnvMsgName]) {
-            NSString *router = message.body;
-            if (self.routerIsValidBlock) {
-                // can not deal with router
-                if (!self.routerIsValidBlock(router)) {
-                    return;;
-                }
-            }
-            SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:router];
-            if (!syMsg) {
-                return;
-            }
-            NSString *selName = [NSString stringWithFormat:@"%@:callback:", syMsg.action];
-            if ([self respondsToSelector:NSSelectorFromString(selName)]) {
-                SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
-                    [self excuteCallback:info message:msg];
-                };
-               #pragma clang diagnostic push
-               #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-               [self performSelector:NSSelectorFromString(selName) withObject:syMsg withObject:callback];
-               #pragma clang diagnostic pop;
-            }
-        }
-    }
-}
-
+# pragma mark - handle webview message
 - (void)setEnv:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
     // set the webview`s object on the window
     if (msg.paramDict[@"namespace"]) {
