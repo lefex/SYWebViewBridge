@@ -80,8 +80,18 @@
         jscode = [NSString stringWithFormat:@"%@.%@(%@)", self.namespace, kSYDefaultCallback, jsonInfo];
     }
     [self syEvaluateJS:jscode completionHandler:^(id  _Nonnull msg, NSError * _Nonnull error) {
-        // TODO: no use, if you have problem, give me an issue
+        // no use, if you have problem, give me an issue
     }];
+}
+
+// add or remove
+- (void)willMoveToSuperview:(nullable UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    // call syDestoryed when newSuperview is null. Otherwise, it will cause memory leak
+    // issue #1
+    if (!newSuperview) {
+         [self syDestoryed];
+    }
 }
 
 #pragma mark public method
@@ -92,8 +102,9 @@
     }
 }
 
+// If not removed, it will cause a memory leak, must call this method when no use webview
+// very important
 - (void)syDestoryed {
-    // you must call removeScriptMessageHandlerForName, Otherwise, it will cause memory leak
     [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptEnvMsgName];
     [self.configuration.userContentController removeScriptMessageHandlerForName:kSYScriptMsgName];
 }

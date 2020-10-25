@@ -30,8 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 // reload webview
 - (void)syReload;
 
-// If not removed, it will cause a memory leak, you must call this method when no use webview
-// very important
+// remove all script message handler
 - (void)syDestoryed;
 
 /// send message to webview
