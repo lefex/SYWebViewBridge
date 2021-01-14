@@ -42,4 +42,15 @@
     [rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)isLoginSync:(SYBridgeMessage *)msg callback:(SYPluginMessageCallBack)callback {
+    NSLog(@"isLoginSync %@", msg);
+    if (callback) {
+        callback(@{
+            @"status" : @(0),
+            @"message" : @"success",
+            @"data" : @{@"isLogin" : @(YES)}
+        }, msg);
+    }
+}
+
 @end

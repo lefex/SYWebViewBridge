@@ -180,6 +180,28 @@
     completionHandler();
 }
 
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler {
+    if (!prompt) {
+        if (completionHandler) {
+            completionHandler(NULL);
+        }
+        return;
+    }
+    SYBridgeMessage *syMsg = [[SYBridgeMessage alloc] initWithRouter:prompt];
+    // router is invalid
+    if (!syMsg || ![syMsg isValidMessage]) {
+        return;
+    }
+    
+    SYPluginMessageCallBack callback = ^(NSDictionary * info, SYBridgeMessage *msg) {
+        if (completionHandler) {
+            completionHandler([NSObject sy_dicionaryToJson:info]);
+        }
+    };
+    // dispatch message to plugin
+    [self.dispatcher dispatchMessage:syMsg callback:callback];
+}
+
 #pragma mark - WKNavigationDelegate
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     if (_retryWhenTerminate && _retryCount <= 0) {
