@@ -113,8 +113,6 @@ Custom a plugin to deal with network request. The plugin must extend from `SYBri
 
 If you have any questions, you can pay attention to my wechat official account 素燕. 
 
-![](https://s1.ax1x.com/2020/10/10/06VvOx.png)
-
 ## Contribution
 
 Please make sure to read the [Contributing Guide](https://github.com/lefex/SYWebViewBridge/blob/master/.github/contributing.md) before making a pull request.
